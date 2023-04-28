@@ -3,19 +3,19 @@ using Parameters.Domain.Repository.PaymentType;
 
 namespace Parameters.Application.Request.Handler.PaymentType;
 
-public class GetRequestCommandHandler : IRequestHandler<GetRequestCommand, IEnumerable<PaymentTypeEntity>>
+public class GetPaymentTypeRequestCommandHandler : IRequestHandler<GetPaymentTypeGetRequestCommand, IEnumerable<PaymentTypeEntity>>
 {
-    private readonly ILogger<GetRequestCommandHandler> _logger;
+    private readonly ILogger<GetPaymentTypeRequestCommandHandler> _logger;
     private readonly IPaymentTypeGetRepository _paymentTypeGetRepository;
 
-    public GetRequestCommandHandler(IPaymentTypeGetRepository paymentTypeGetRepository,
-        ILogger<GetRequestCommandHandler> logger)
+    public GetPaymentTypeRequestCommandHandler(IPaymentTypeGetRepository paymentTypeGetRepository,
+        ILogger<GetPaymentTypeRequestCommandHandler> logger)
     {
         _paymentTypeGetRepository = paymentTypeGetRepository;
         _logger = logger;
     }
 
-    public async Task<IEnumerable<PaymentTypeEntity>> Handle(GetRequestCommand request,
+    public async Task<IEnumerable<PaymentTypeEntity>> Handle(GetPaymentTypeGetRequestCommand paymentTypeGetRequest,
         CancellationToken cancellationToken)
     {
         try

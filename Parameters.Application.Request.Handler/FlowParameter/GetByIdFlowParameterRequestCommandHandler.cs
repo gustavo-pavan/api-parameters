@@ -3,25 +3,25 @@ using Parameters.Domain.Repository.FlowParameter;
 
 namespace Parameters.Application.Request.Handler.FlowParameter;
 
-public class GetByIdRequestCommandHandler : IRequestHandler<GetByIdRequestCommand, FlowParameterEntity?>
+public class GetByIdFlowParameterRequestCommandHandler : IRequestHandler<GetByIdFlowParameterRequestCommand, FlowParameterEntity?>
 {
     private readonly IFlowParameterGetByIdRepository _flowParameterGetByIdRepository;
-    private readonly ILogger<GetByIdRequestCommandHandler> _logger;
+    private readonly ILogger<GetByIdFlowParameterRequestCommandHandler> _logger;
 
-    public GetByIdRequestCommandHandler(IFlowParameterGetByIdRepository flowParameterGetByIdRepository,
-        ILogger<GetByIdRequestCommandHandler> logger)
+    public GetByIdFlowParameterRequestCommandHandler(IFlowParameterGetByIdRepository flowParameterGetByIdRepository,
+        ILogger<GetByIdFlowParameterRequestCommandHandler> logger)
     {
         _flowParameterGetByIdRepository = flowParameterGetByIdRepository;
         _logger = logger;
     }
 
-    public async Task<FlowParameterEntity?> Handle(GetByIdRequestCommand request, CancellationToken cancellationToken)
+    public async Task<FlowParameterEntity?> Handle(GetByIdFlowParameterRequestCommand flowParameterRequest, CancellationToken cancellationToken)
     {
         try
         {
             _logger.LogInformation("Start handler to get flow");
             _logger.LogInformation("Execute transaction with database");
-            var result = await _flowParameterGetByIdRepository.Execute(request.Id);
+            var result = await _flowParameterGetByIdRepository.Execute(flowParameterRequest.Id);
 
             _logger.LogInformation("Get flow with success");
             return result;

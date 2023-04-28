@@ -11,20 +11,20 @@ public class DeleteCommandHandlerTest
     [Fact]
     public async Task Should_Delete_Account()
     {
-        var mockLogger = new Mock<ILogger<DeleteRequestCommandHandler>>();
+        var mockLogger = new Mock<ILogger<DeleteBankAccountRequestCommandHandler>>();
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity>());
 
         BaseAccountDeleteRepository repository = new(mongoContextMock.Object);
 
-        DeleteRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
+        DeleteBankAccountRequestCommandHandler bankAccountRequestCommand = new(repository, mockLogger.Object);
 
-        DeleteRequestCommand command = new()
+        DeleteBankAccountRequestCommand command = new()
         {
             Id = _faker.Random.Guid()
         };
 
-        var result = await requestCommand.Handle(command, CancellationToken.None);
+        var result = await bankAccountRequestCommand.Handle(command, CancellationToken.None);
 
         result.Should().BeTrue();
     }
@@ -32,17 +32,17 @@ public class DeleteCommandHandlerTest
     [Fact]
     public void Should_Throw_Exception_Update_Account()
     {
-        var mockLogger = new Mock<ILogger<DeleteRequestCommandHandler>>();
+        var mockLogger = new Mock<ILogger<DeleteBankAccountRequestCommandHandler>>();
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity>());
 
         BaseAccountDeleteRepository repository = new(mongoContextMock.Object);
 
-        DeleteRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
+        DeleteBankAccountRequestCommandHandler bankAccountRequestCommand = new(repository, mockLogger.Object);
 
-        DeleteRequestCommand command = new();
+        DeleteBankAccountRequestCommand command = new();
 
-        Func<Task> func = () => requestCommand.Handle(command, CancellationToken.None);
+        Func<Task> func = () => bankAccountRequestCommand.Handle(command, CancellationToken.None);
         func.Should().ThrowAsync<ArgumentException>();
     }
 }

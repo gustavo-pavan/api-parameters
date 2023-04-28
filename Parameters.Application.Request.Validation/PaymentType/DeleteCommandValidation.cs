@@ -2,7 +2,7 @@
 
 namespace Parameters.Application.Request.Validation.PaymentType;
 
-public class DeleteCommandValidation : AbstractValidator<DeleteRequestCommand>
+public class DeleteCommandValidation : AbstractValidator<DeletePaymentTypeRequestCommand>
 {
     public DeleteCommandValidation()
     {

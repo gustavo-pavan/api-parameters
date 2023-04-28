@@ -2,7 +2,7 @@
 
 namespace Parameters.Application.Request.Validation.FlowParameter;
 
-public class GetByIdCommandValidation : AbstractValidator<GetByIdRequestCommand>
+public class GetByIdCommandValidation : AbstractValidator<GetByIdFlowParameterRequestCommand>
 {
     public GetByIdCommandValidation()
     {

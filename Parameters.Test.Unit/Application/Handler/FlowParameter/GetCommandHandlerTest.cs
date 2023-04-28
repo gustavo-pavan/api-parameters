@@ -12,7 +12,7 @@ public class GetCommandHandlerTest
     [Fact]
     public void Should_Get_All_Account()
     {
-        var mockLogger = new Mock<ILogger<GetRequestCommandHandler>>();
+        var mockLogger = new Mock<ILogger<GetRequestFlowParameterCommandHandler>>();
 
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity>
         {
@@ -22,9 +22,9 @@ public class GetCommandHandlerTest
 
         FlowParameterGetRepository repository = new(mongoContextMock.Object);
 
-        GetRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
+        GetRequestFlowParameterCommandHandler requestFlowParameterCommand = new(repository, mockLogger.Object);
 
-        var result = requestCommand.Handle(new GetRequestCommand(), CancellationToken.None).Result?.ToArray();
+        var result = requestFlowParameterCommand.Handle(new GetFlowParameterRequestCommand(), CancellationToken.None).Result?.ToArray();
 
         result?.Should().NotBeNull();
         result?.Count().Should().Be(1);

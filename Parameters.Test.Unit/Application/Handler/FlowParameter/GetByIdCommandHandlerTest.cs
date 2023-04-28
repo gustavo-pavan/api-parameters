@@ -12,7 +12,7 @@ public class GetByIdCommandHandlerTest
     [Fact]
     public async Task Should_Get_All_Account()
     {
-        var mockLogger = new Mock<ILogger<GetByIdRequestCommandHandler>>();
+        var mockLogger = new Mock<ILogger<GetByIdFlowParameterRequestCommandHandler>>();
         FlowParameterEntity flowParameter = new(Guid.NewGuid(), _faker.Name.FullName(),
             FlowEnumeration.FromValue<FlowType>(_faker.Random.Int(1, 2)),
             _faker.Random.AlphaNumeric(400));
@@ -20,10 +20,10 @@ public class GetByIdCommandHandlerTest
 
         FlowParameterGetByIdRepository repository = new(mongoContextMock.Object);
 
-        GetByIdRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
+        GetByIdFlowParameterRequestCommandHandler flowParameterRequestCommand = new(repository, mockLogger.Object);
 
         var result =
-            await requestCommand.Handle(new GetByIdRequestCommand { Id = Guid.NewGuid() }, CancellationToken.None);
+            await flowParameterRequestCommand.Handle(new GetByIdFlowParameterRequestCommand { Id = Guid.NewGuid() }, CancellationToken.None);
 
         result?.Should().NotBeNull();
         result?.Should().Be(flowParameter);

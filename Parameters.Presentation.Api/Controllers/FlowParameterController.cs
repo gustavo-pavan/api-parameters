@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Parameters.Application.Request.Command.BankAccount;
+using Parameters.Application.Request.Command.FlowParameter;
 
 namespace Parameters.Presentation.Api.Controllers;
 
@@ -10,13 +10,13 @@ namespace Parameters.Presentation.Api.Controllers;
 [ProducesResponseType(StatusCodes.Status409Conflict)]
 [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
 [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-[Route("api/bank-account")]
+[Route("api/flow-parameter")]
 [ApiController]
-public class BankAccountController : ControllerBase
+public class FlowParameterController : ControllerBase
 {
     private readonly IMediator _mediator;
 
-    public BankAccountController(IMediator mediator)
+    public FlowParameterController(IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -24,7 +24,7 @@ public class BankAccountController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        var result = await _mediator.Send(new GetBankAccountRequestCommand());
+        var result = await _mediator.Send(new GetFlowParameterRequestCommand());
 
         if (result?.Count() == default)
             return NoContent();
@@ -35,7 +35,7 @@ public class BankAccountController : ControllerBase
     [HttpGet("{id}")]
     public async Task<IActionResult> Get(Guid id)
     {
-        var result = await _mediator.Send(new GetByIdBankAccountRequestCommand { Id = id });
+        var result = await _mediator.Send(new GetByIdFlowParameterRequestCommand { Id = id });
         if (result is not null)
             return Ok(result);
 
@@ -43,23 +43,23 @@ public class BankAccountController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] CreateBankAccountRequestCommand bankAccountRequest)
+    public async Task<IActionResult> Post([FromBody] CreateFlowParameterRequestCommand request)
     {
-        var result = await _mediator.Send(bankAccountRequest);
+        var result = await _mediator.Send(request);
         return Ok(result);
     }
 
     [HttpPut]
-    public async Task<IActionResult> Put([FromBody] UpdateBankAccountRequestCommand bankAccountRequest)
+    public async Task<IActionResult> Put([FromBody] UpdateFlowParameterUpdateRequestCommand flowParameterUpdateRequest)
     {
-        var result = await _mediator.Send(bankAccountRequest);
+        var result = await _mediator.Send(flowParameterUpdateRequest);
         return Ok(result);
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        var result = await _mediator.Send(new DeleteBankAccountRequestCommand { Id = id });
+        var result = await _mediator.Send(new DeleteFlowParameterRequestCommand { Id = id });
         return Ok(result);
     }
 }

@@ -4,25 +4,25 @@ using Parameters.Domain.Repository.FlowParameter;
 
 namespace Parameters.Application.Request.Handler.FlowParameter;
 
-public class CreateRequestCommandHandler : IRequestHandler<CreateRequestCommand, FlowParameterEntity>
+public class CreateFlowParameterRequestCommandHandler : IRequestHandler<CreateFlowParameterRequestCommand, FlowParameterEntity>
 {
     private readonly IFlowParameterCreateRepository _flowParameterCreateRepository;
-    private readonly ILogger<CreateRequestCommandHandler> _logger;
+    private readonly ILogger<CreateFlowParameterRequestCommandHandler> _logger;
 
-    public CreateRequestCommandHandler(IFlowParameterCreateRepository flowParameterCreateRepository,
-        ILogger<CreateRequestCommandHandler> logger)
+    public CreateFlowParameterRequestCommandHandler(IFlowParameterCreateRepository flowParameterCreateRepository,
+        ILogger<CreateFlowParameterRequestCommandHandler> logger)
     {
         _flowParameterCreateRepository = flowParameterCreateRepository;
         _logger = logger;
     }
 
-    public async Task<FlowParameterEntity> Handle(CreateRequestCommand request, CancellationToken cancellationToken)
+    public async Task<FlowParameterEntity> Handle(CreateFlowParameterRequestCommand flowParameterRequest, CancellationToken cancellationToken)
     {
         try
         {
             _logger.LogInformation("Start handler to create new flow");
-            var flowParameter = new FlowParameterEntity(request.Name,
-                FlowEnumeration.FromValue<FlowType>(request.FlowType), request.Description);
+            var flowParameter = new FlowParameterEntity(flowParameterRequest.Name,
+                FlowEnumeration.FromValue<FlowType>(flowParameterRequest.FlowType), flowParameterRequest.Description);
 
             _logger.LogInformation("Execute transaction with database");
             await _flowParameterCreateRepository.Execute(flowParameter);

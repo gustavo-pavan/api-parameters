@@ -1,6 +1,6 @@
 ﻿namespace Parameters.Application.Request.Command.BankAccount;
 
-public class DeleteRequestCommand : IRequest<bool>
+public class GetByIdBankAccountRequestCommand : IRequest<BankAccountEntity?>
 {
     public Guid Id { get; set; }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Parameters.Application.Request.Command.PaymentType;
 
-public class UpdateRequestCommand : IRequest<PaymentTypeEntity>
+public class UpdatePaymentTypeRequestCommand : IRequest<PaymentTypeEntity>
 {
     public Guid Id { get; set; }
     public string Name { get; set; }

@@ -2,7 +2,7 @@
 
 namespace Parameters.Application.Request.Validation.BankAccount;
 
-public class GetByIdCommandValidation : AbstractValidator<GetByIdRequestCommand>
+public class GetByIdCommandValidation : AbstractValidator<GetByIdBankAccountRequestCommand>
 {
     public GetByIdCommandValidation()
     {

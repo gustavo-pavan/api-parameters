@@ -3,24 +3,24 @@ using Parameters.Domain.Repository.BankAccount;
 
 namespace Parameters.Application.Request.Handler.BankAccount;
 
-public class UpdateRequestCommandHandler : IRequestHandler<UpdateRequestCommand, BankAccountEntity>
+public class UpdateBankAccountRequestCommandHandler : IRequestHandler<UpdateBankAccountRequestCommand, BankAccountEntity>
 {
     private readonly IBaseAccountUpdateRepository _baseAccountUpdateRepository;
-    private readonly ILogger<CreateRequestCommandHandler> _logger;
+    private readonly ILogger<CreateBankAccountRequestCommandHandler> _logger;
 
-    public UpdateRequestCommandHandler(IBaseAccountUpdateRepository baseAccountUpdateRepository,
-        ILogger<CreateRequestCommandHandler> logger)
+    public UpdateBankAccountRequestCommandHandler(IBaseAccountUpdateRepository baseAccountUpdateRepository,
+        ILogger<CreateBankAccountRequestCommandHandler> logger)
     {
         _baseAccountUpdateRepository = baseAccountUpdateRepository;
         _logger = logger;
     }
 
-    public async Task<BankAccountEntity> Handle(UpdateRequestCommand request, CancellationToken cancellationToken)
+    public async Task<BankAccountEntity> Handle(UpdateBankAccountRequestCommand bankAccountRequest, CancellationToken cancellationToken)
     {
         try
         {
             _logger.LogInformation("Start handler to update account bank");
-            var account = new BankAccountEntity(request.Id, request.Name, request.Balance, request.Description);
+            var account = new BankAccountEntity(bankAccountRequest.Id, bankAccountRequest.Name, bankAccountRequest.Balance, bankAccountRequest.Description);
 
             _logger.LogInformation("Execute transaction with database");
             await _baseAccountUpdateRepository.Execute(account);

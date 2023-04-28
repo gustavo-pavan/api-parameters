@@ -2,7 +2,7 @@
 
 namespace Parameters.Application.Request.Validation.BankAccount;
 
-public class UpdateCommandValidation : AbstractValidator<UpdateRequestCommand>
+public class UpdateCommandValidation : AbstractValidator<UpdateBankAccountRequestCommand>
 {
     public UpdateCommandValidation()
     {

@@ -3,19 +3,19 @@ using Parameters.Domain.Repository.BankAccount;
 
 namespace Parameters.Application.Request.Handler.BankAccount;
 
-public class GetRequestCommandHandler : IRequestHandler<GetRequestCommand, IEnumerable<BankAccountEntity>>
+public class GetBankAccountRequestCommandHandler : IRequestHandler<GetBankAccountRequestCommand, IEnumerable<BankAccountEntity>>
 {
     private readonly IBaseAccountGetRepository _baseAccountGetRepository;
-    private readonly ILogger<GetRequestCommandHandler> _logger;
+    private readonly ILogger<GetBankAccountRequestCommandHandler> _logger;
 
-    public GetRequestCommandHandler(IBaseAccountGetRepository baseAccountGetRepository,
-        ILogger<GetRequestCommandHandler> logger)
+    public GetBankAccountRequestCommandHandler(IBaseAccountGetRepository baseAccountGetRepository,
+        ILogger<GetBankAccountRequestCommandHandler> logger)
     {
         _baseAccountGetRepository = baseAccountGetRepository;
         _logger = logger;
     }
 
-    public async Task<IEnumerable<BankAccountEntity>> Handle(GetRequestCommand request,
+    public async Task<IEnumerable<BankAccountEntity>> Handle(GetBankAccountRequestCommand bankAccountRequest,
         CancellationToken cancellationToken)
     {
         try

@@ -2,7 +2,7 @@
 
 namespace Parameters.Application.Request.Validation.BankAccount;
 
-public class DeleteCommandValidation : AbstractValidator<DeleteRequestCommand>
+public class DeleteCommandValidation : AbstractValidator<DeleteBankAccountRequestCommand>
 {
     public DeleteCommandValidation()
     {

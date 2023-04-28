@@ -2,7 +2,7 @@
 
 namespace Parameters.Application.Request.Validation.PaymentType;
 
-public class UpdateCommandValidation : AbstractValidator<UpdateRequestCommand>
+public class UpdateCommandValidation : AbstractValidator<UpdatePaymentTypeRequestCommand>
 {
     public UpdateCommandValidation()
     {

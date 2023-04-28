@@ -3,25 +3,25 @@ using Parameters.Domain.Repository.BankAccount;
 
 namespace Parameters.Application.Request.Handler.BankAccount;
 
-public class DeleteRequestCommandHandler : IRequestHandler<DeleteRequestCommand, bool>
+public class DeleteBankAccountRequestCommandHandler : IRequestHandler<DeleteBankAccountRequestCommand, bool>
 {
     private readonly IBaseAccountDeleteRepository _baseAccountDeleteRepository;
-    private readonly ILogger<DeleteRequestCommandHandler> _logger;
+    private readonly ILogger<DeleteBankAccountRequestCommandHandler> _logger;
 
-    public DeleteRequestCommandHandler(IBaseAccountDeleteRepository baseAccountDeleteRepository,
-        ILogger<DeleteRequestCommandHandler> logger)
+    public DeleteBankAccountRequestCommandHandler(IBaseAccountDeleteRepository baseAccountDeleteRepository,
+        ILogger<DeleteBankAccountRequestCommandHandler> logger)
     {
         _baseAccountDeleteRepository = baseAccountDeleteRepository;
         _logger = logger;
     }
 
-    public async Task<bool> Handle(DeleteRequestCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteBankAccountRequestCommand bankAccountRequest, CancellationToken cancellationToken)
     {
         try
         {
             _logger.LogInformation("Start handler to delete account bank");
             _logger.LogInformation("Execute transaction with database");
-            await _baseAccountDeleteRepository.Execute(request.Id);
+            await _baseAccountDeleteRepository.Execute(bankAccountRequest.Id);
 
             _logger.LogInformation("Delete account with success");
             return true;

@@ -3,19 +3,19 @@ using Parameters.Domain.Repository.FlowParameter;
 
 namespace Parameters.Application.Request.Handler.FlowParameter;
 
-public class GetRequestCommandHandler : IRequestHandler<GetRequestCommand, IEnumerable<FlowParameterEntity>>
+public class GetRequestFlowParameterCommandHandler : IRequestHandler<GetFlowParameterRequestCommand, IEnumerable<FlowParameterEntity>>
 {
     private readonly IFlowParameterGetRepository _flowParameterGetRepository;
-    private readonly ILogger<GetRequestCommandHandler> _logger;
+    private readonly ILogger<GetRequestFlowParameterCommandHandler> _logger;
 
-    public GetRequestCommandHandler(IFlowParameterGetRepository flowParameterGetRepository,
-        ILogger<GetRequestCommandHandler> logger)
+    public GetRequestFlowParameterCommandHandler(IFlowParameterGetRepository flowParameterGetRepository,
+        ILogger<GetRequestFlowParameterCommandHandler> logger)
     {
         _flowParameterGetRepository = flowParameterGetRepository;
         _logger = logger;
     }
 
-    public async Task<IEnumerable<FlowParameterEntity>> Handle(GetRequestCommand request,
+    public async Task<IEnumerable<FlowParameterEntity>> Handle(GetFlowParameterRequestCommand flowParameterRequest,
         CancellationToken cancellationToken)
     {
         try

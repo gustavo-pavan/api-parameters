@@ -2,7 +2,7 @@
 
 namespace Parameters.Application.Request.Validation.PaymentType;
 
-public class CreateCommandValidation : AbstractValidator<CreateRequestCommand>
+public class CreateCommandValidation : AbstractValidator<CreatePaymentTypeRequestCommand>
 {
     public CreateCommandValidation()
     {

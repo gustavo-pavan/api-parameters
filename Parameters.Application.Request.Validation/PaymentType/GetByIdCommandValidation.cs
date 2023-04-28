@@ -2,7 +2,7 @@
 
 namespace Parameters.Application.Request.Validation.PaymentType;
 
-public class GetByIdCommandValidation : AbstractValidator<GetByIdRequestCommand>
+public class GetByIdCommandValidation : AbstractValidator<GetByIdPaymentTypeRequestCommand>
 {
     public GetByIdCommandValidation()
     {

@@ -11,7 +11,7 @@ public class GetCommandHandlerTest
     [Fact]
     public void Should_Get_All_Account()
     {
-        var mockLogger = new Mock<ILogger<GetRequestCommandHandler>>();
+        var mockLogger = new Mock<ILogger<GetPaymentTypeRequestCommandHandler>>();
 
         var mongoContextMock = MongoContextMock.Mock(new List<PaymentTypeEntity>
         {
@@ -20,9 +20,9 @@ public class GetCommandHandlerTest
 
         PaymentTypeGetRepository repository = new(mongoContextMock.Object);
 
-        GetRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
+        GetPaymentTypeRequestCommandHandler paymentTypeRequestCommand = new(repository, mockLogger.Object);
 
-        var result = requestCommand.Handle(new GetRequestCommand(), CancellationToken.None).Result?.ToArray();
+        var result = paymentTypeRequestCommand.Handle(new GetPaymentTypeGetRequestCommand(), CancellationToken.None).Result?.ToArray();
 
         result?.Should().NotBeNull();
         result?.Count().Should().Be(1);

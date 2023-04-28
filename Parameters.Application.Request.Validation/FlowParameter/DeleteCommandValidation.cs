@@ -2,7 +2,7 @@
 
 namespace Parameters.Application.Request.Validation.FlowParameter;
 
-public class DeleteCommandValidation : AbstractValidator<DeleteRequestCommand>
+public class DeleteCommandValidation : AbstractValidator<DeleteFlowParameterRequestCommand>
 {
     public DeleteCommandValidation()
     {

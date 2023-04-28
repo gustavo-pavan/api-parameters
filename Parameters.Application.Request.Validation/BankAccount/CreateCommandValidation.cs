@@ -2,7 +2,7 @@
 
 namespace Parameters.Application.Request.Validation.BankAccount;
 
-public class CreateCommandValidation : AbstractValidator<CreateRequestCommand>
+public class CreateCommandValidation : AbstractValidator<CreateBankAccountRequestCommand>
 {
     public CreateCommandValidation()
     {

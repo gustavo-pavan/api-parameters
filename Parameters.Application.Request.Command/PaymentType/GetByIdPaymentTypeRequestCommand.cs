@@ -1,6 +1,6 @@
 ﻿namespace Parameters.Application.Request.Command.PaymentType;
 
-public class DeleteRequestCommand : IRequest<bool>
+public class GetByIdPaymentTypeRequestCommand : IRequest<PaymentTypeEntity?>
 {
     public Guid Id { get; set; }
 }

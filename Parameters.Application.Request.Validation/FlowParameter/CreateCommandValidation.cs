@@ -2,7 +2,7 @@
 
 namespace Parameters.Application.Request.Validation.FlowParameter;
 
-public class CreateCommandValidation : AbstractValidator<CreateRequestCommand>
+public class CreateCommandValidation : AbstractValidator<CreateFlowParameterRequestCommand>
 {
     public CreateCommandValidation()
     {

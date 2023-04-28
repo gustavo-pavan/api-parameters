@@ -11,7 +11,7 @@ public class GetCommandHandlerTest
     [Fact]
     public void Should_Get_All_Account()
     {
-        var mockLogger = new Mock<ILogger<GetRequestCommandHandler>>();
+        var mockLogger = new Mock<ILogger<GetBankAccountRequestCommandHandler>>();
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity>
         {
@@ -20,9 +20,9 @@ public class GetCommandHandlerTest
 
         BaseAccountGetRepository repository = new(mongoContextMock.Object);
 
-        GetRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
+        GetBankAccountRequestCommandHandler bankAccountRequestCommand = new(repository, mockLogger.Object);
 
-        var result = requestCommand.Handle(new GetRequestCommand(), CancellationToken.None).Result?.ToArray();
+        var result = bankAccountRequestCommand.Handle(new GetBankAccountRequestCommand(), CancellationToken.None).Result?.ToArray();
 
         result?.Should().NotBeNull();
         result?.Count().Should().Be(1);

@@ -3,24 +3,24 @@ using Parameters.Domain.Repository.BankAccount;
 
 namespace Parameters.Application.Request.Handler.BankAccount;
 
-public class CreateRequestCommandHandler : IRequestHandler<CreateRequestCommand, BankAccountEntity>
+public class CreateBankAccountRequestCommandHandler : IRequestHandler<CreateBankAccountRequestCommand, BankAccountEntity>
 {
     private readonly IBaseAccountCreateRepository _baseAccountCreateRepository;
-    private readonly ILogger<CreateRequestCommandHandler> _logger;
+    private readonly ILogger<CreateBankAccountRequestCommandHandler> _logger;
 
-    public CreateRequestCommandHandler(IBaseAccountCreateRepository baseAccountCreateRepository,
-        ILogger<CreateRequestCommandHandler> logger)
+    public CreateBankAccountRequestCommandHandler(IBaseAccountCreateRepository baseAccountCreateRepository,
+        ILogger<CreateBankAccountRequestCommandHandler> logger)
     {
         _baseAccountCreateRepository = baseAccountCreateRepository;
         _logger = logger;
     }
 
-    public async Task<BankAccountEntity> Handle(CreateRequestCommand request, CancellationToken cancellationToken)
+    public async Task<BankAccountEntity> Handle(CreateBankAccountRequestCommand bankAccountRequest, CancellationToken cancellationToken)
     {
         try
         {
             _logger.LogInformation("Start handler to create new account bank");
-            var account = new BankAccountEntity(request.Name, request.Balance, request.Description);
+            var account = new BankAccountEntity(bankAccountRequest.Name, bankAccountRequest.Balance, bankAccountRequest.Description);
 
             _logger.LogInformation("Execute transaction with database");
             await _baseAccountCreateRepository.Execute(account);

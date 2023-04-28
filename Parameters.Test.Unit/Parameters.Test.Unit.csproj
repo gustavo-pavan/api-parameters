@@ -26,7 +26,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Parameters.Domain.Entity\Parameters.Domain.Entity.csproj" />
-    <ProjectReference Include="..\Parametes.Domain.Entity\Parameters.Domain.Entity.csproj" />
   </ItemGroup>
 
 </Project>

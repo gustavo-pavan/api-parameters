@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Parameters.Domain.Entity\Parameters.Domain.Entity.csproj" />
+    <ProjectReference Include="..\Parameters.Domain.Repository\Parameters.Domain.Repository.csproj" />
+    <ProjectReference Include="..\Parameters.Infra.Context\Parameters.Infra.Context.csproj" />
+  </ItemGroup>
+
+</Project>

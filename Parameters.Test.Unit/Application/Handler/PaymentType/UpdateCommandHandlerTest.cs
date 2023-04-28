@@ -1,8 +1,8 @@
-﻿using Parameters.Application.Request.Command.FlowParameter;
-using Parameters.Application.Request.Handler.FlowParameter;
-using Parameters.Infra.Repository.FlowParameter;
+﻿using Parameters.Application.Request.Command.PaymentType;
+using Parameters.Application.Request.Handler.PaymentType;
+using Parameters.Infra.Repository.PaymentType;
 
-namespace Parameters.Test.Unit.Application.Handler.FlowParameter;
+namespace Parameters.Test.Unit.Application.Handler.PaymentType;
 
 public class UpdateCommandHandlerTest
 {
@@ -13,7 +13,7 @@ public class UpdateCommandHandlerTest
     {
         var mockLogger = new Mock<ILogger<UpdateRequestCommandHandler>>();
 
-        var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity>());
+        var mongoContextMock = MongoContextMock.Mock(new List<PaymentTypeEntity>());
 
         UpdateRepository repository = new(mongoContextMock.Object);
 
@@ -22,7 +22,6 @@ public class UpdateCommandHandlerTest
         UpdateRequestCommand command = new()
         {
             Id = _faker.Random.Guid(),
-            FlowType = _faker.Random.Int(1,2),
             Description = _faker.Random.AlphaNumeric(400),
             Name = _faker.Name.FullName()
         };
@@ -37,7 +36,7 @@ public class UpdateCommandHandlerTest
     {
         var mockLogger = new Mock<ILogger<UpdateRequestCommandHandler>>();
 
-        var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity>());
+        var mongoContextMock = MongoContextMock.Mock(new List<PaymentTypeEntity>());
 
         UpdateRepository repository = new(mongoContextMock.Object);
 
@@ -45,7 +44,6 @@ public class UpdateCommandHandlerTest
 
         UpdateRequestCommand command = new()
         {
-            FlowType = _faker.Random.Int(1, 2),
             Description = _faker.Random.AlphaNumeric(400),
             Name = _faker.Name.FullName()
         };

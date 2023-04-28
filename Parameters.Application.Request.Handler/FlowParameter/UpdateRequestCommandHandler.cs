@@ -6,11 +6,11 @@ namespace Parameters.Application.Request.Handler.FlowParameter;
 
 public class UpdateRequestCommandHandler : IRequestHandler<UpdateRequestCommand, FlowParameterEntity>
 {
-    private readonly ILogger<BankAccount.CreateRequestCommandHandler> _logger;
+    private readonly ILogger<UpdateRequestCommandHandler> _logger;
     private readonly IUpdateRepository _updateRepository;
 
     public UpdateRequestCommandHandler(IUpdateRepository updateRepository,
-        ILogger<BankAccount.CreateRequestCommandHandler> logger)
+        ILogger<UpdateRequestCommandHandler> logger)
     {
         _updateRepository = updateRepository;
         _logger = logger;

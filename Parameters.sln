@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Test.Unit", "Par
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{51226E48-CF0C-4431-B2BB-2FE883A2B4B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Domain.Entity", "Parametes.Domain.Entity\Parameters.Domain.Entity.csproj", "{0A54FECC-3A30-4CD5-8DE2-B7481F0DFE33}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Domain.Entity", "Parameters.Domain.Entity\Parameters.Domain.Entity.csproj", "{0A54FECC-3A30-4CD5-8DE2-B7481F0DFE33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

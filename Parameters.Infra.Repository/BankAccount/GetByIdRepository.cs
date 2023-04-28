@@ -2,7 +2,7 @@
 
 namespace Parameters.Infra.Repository.BankAccount;
 
-public class GetByIdRepository: GetByIdBaseRepository<BankAccountEntity>, IGetByIdRepository
+public class GetByIdRepository : GetByIdBaseRepository<BankAccountEntity>, IGetByIdRepository
 {
     public GetByIdRepository(IMongoContext mongoContext) : base(mongoContext)
     {

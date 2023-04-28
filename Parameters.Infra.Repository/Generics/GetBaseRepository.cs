@@ -1,4 +1,5 @@
 ﻿namespace Parameters.Infra.Repository.Generics;
+
 public class GetBaseRepository<TBaseEntity> : IGetBaseRepository<TBaseEntity> where TBaseEntity : BaseEntity
 {
     private readonly IMongoContext _mongoContext;

@@ -3,6 +3,8 @@ global using FluentAssertions;
 global using Parameters.Domain.Entity;
 global using Xunit;
 global using BankAccountEntity = Parameters.Domain.Entity.BankAccount;
+global using FlowParameterEntity = Parameters.Domain.Entity.FlowParameter;
+global using PaymentTypeEntity = Parameters.Domain.Entity.PaymentType;
 global using MongoDB.Driver;
 global using Moq;
 global using Parameters.Infra.Context;

@@ -1,6 +1,6 @@
-﻿using Parameters.Application.Request.Command.FlowParameter;
+﻿using Parameters.Application.Request.Command.PaymentType;
 
-namespace Parameters.Application.Request.Validation.FlowParameter;
+namespace Parameters.Application.Request.Validation.PaymentType;
 
 public class CreateCommandValidation : AbstractValidator<CreateRequestCommand>
 {

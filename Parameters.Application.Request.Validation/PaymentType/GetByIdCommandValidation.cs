@@ -1,6 +1,6 @@
-﻿using Parameters.Application.Request.Command.BankAccount;
+﻿using Parameters.Application.Request.Command.PaymentType;
 
-namespace Parameters.Application.Request.Validation.BankAccount;
+namespace Parameters.Application.Request.Validation.PaymentType;
 
 public class GetByIdCommandValidation : AbstractValidator<GetByIdRequestCommand>
 {

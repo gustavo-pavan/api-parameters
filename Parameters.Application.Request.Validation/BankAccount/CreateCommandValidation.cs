@@ -1,5 +1,4 @@
-﻿using FluentValidation;
-using Parameters.Application.Request.Command.BankAccount;
+﻿using Parameters.Application.Request.Command.BankAccount;
 
 namespace Parameters.Application.Request.Validation.BankAccount;
 

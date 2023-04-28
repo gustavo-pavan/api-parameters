@@ -45,6 +45,7 @@ public class FlowParameterTest
     public void Should_Throw_Exception_When_Description_Is_Invalid()
     {
         var action = () => new FlowParameter(_dynamic?.Id, _dynamic?.Name, _dynamic?.FlowType, null);
-        action.Should().Throw<ArgumentException>().WithMessage($"{nameof(FlowParameter.Description)} can't be null or empty");
+        action.Should().Throw<ArgumentException>()
+            .WithMessage($"{nameof(FlowParameter.Description)} can't be null or empty");
     }
 }

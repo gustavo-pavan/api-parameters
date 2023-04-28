@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Parameters.Infra.Context.UoW;
+﻿using Parameters.Infra.Context.UoW;
 
 namespace Parameters.Test.Unit.Infra.UoW;
 

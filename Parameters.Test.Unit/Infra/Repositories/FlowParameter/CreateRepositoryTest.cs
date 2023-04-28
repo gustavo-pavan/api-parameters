@@ -10,7 +10,8 @@ public class CreateRepositoryTest
     [Fact]
     public async Task Should_Create_Account_And_Generate_Id()
     {
-        FlowParameterEntity flowParameter = new(_faker.Name.FullName(), FlowEnumeration.FromValue<FlowType>(_faker.Random.Int(1,2)), _faker.Random.AlphaNumeric(400));
+        FlowParameterEntity flowParameter = new(_faker.Name.FullName(),
+            FlowEnumeration.FromValue<FlowType>(_faker.Random.Int(1, 2)), _faker.Random.AlphaNumeric(400));
 
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity> { flowParameter });
 
@@ -23,7 +24,8 @@ public class CreateRepositoryTest
     [Fact]
     public void Should_Throw_Exception_When_Id_Is_Invalid_In_Create_Account()
     {
-        FlowParameterEntity account = new(_faker.Random.Guid(), _faker.Name.FullName(), FlowEnumeration.FromValue<FlowType>(_faker.Random.Int(1, 2)),_faker.Random.AlphaNumeric(400));
+        FlowParameterEntity account = new(_faker.Random.Guid(), _faker.Name.FullName(),
+            FlowEnumeration.FromValue<FlowType>(_faker.Random.Int(1, 2)), _faker.Random.AlphaNumeric(400));
 
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity> { account });
 

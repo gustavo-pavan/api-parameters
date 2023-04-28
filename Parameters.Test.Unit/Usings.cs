@@ -9,3 +9,4 @@ global using MongoDB.Driver;
 global using Moq;
 global using Parameters.Infra.Context;
 global using Parameters.Test.Unit.Mocks;
+global using Microsoft.Extensions.Logging;

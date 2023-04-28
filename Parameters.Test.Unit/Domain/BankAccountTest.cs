@@ -24,7 +24,7 @@ public class BankAccountTest
     [Fact]
     public void Should_Create_New_Instance_Equal_Object()
     {
-        BankAccount account = new(_dynamic?.Id, _dynamic?.Name, _dynamic?.Balance, _dynamic?.Description);
+        BankAccountEntity account = new(_dynamic?.Id, _dynamic?.Name, _dynamic?.Balance, _dynamic?.Description);
         (_dynamic as object).Should().BeEquivalentTo(account);
     }
 
@@ -34,7 +34,7 @@ public class BankAccountTest
     [InlineData(null)]
     public void Should_Throw_Exception_When_Name_Is_Invalid(string name)
     {
-        var action = () => new BankAccount(_dynamic?.Id, name, _dynamic?.Balance, _dynamic?.Description);
-        action.Should().Throw<ArgumentException>().WithMessage($"{nameof(BankAccount.Name)} can't be null or empty");
+        var action = () => new BankAccountEntity(_dynamic?.Id, name, _dynamic?.Balance, _dynamic?.Description);
+        action.Should().Throw<ArgumentException>().WithMessage($"{nameof(BankAccountEntity.Name)} can't be null or empty");
     }
 }

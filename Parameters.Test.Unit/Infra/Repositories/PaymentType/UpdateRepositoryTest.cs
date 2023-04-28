@@ -1,5 +1,4 @@
-﻿
-using Parameters.Infra.Repository.PaymentType;
+﻿using Parameters.Infra.Repository.PaymentType;
 
 namespace Parameters.Test.Unit.Infra.Repositories.PaymentType;
 

@@ -45,6 +45,7 @@ public class PaymentTypeTest
     public void Should_Throw_Exception_When_Description_Is_Invalid(string description)
     {
         var action = () => new PaymentType(_dynamic?.Id, _dynamic?.Name, description);
-        action.Should().Throw<ArgumentException>().WithMessage($"{nameof(PaymentType.Description)} can't be null or empty");
+        action.Should().Throw<ArgumentException>()
+            .WithMessage($"{nameof(PaymentType.Description)} can't be null or empty");
     }
 }

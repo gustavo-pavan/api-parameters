@@ -22,7 +22,8 @@ public class CreateRepositoryTest
     [Fact]
     public void Should_Throw_Exception_When_Id_Is_Invalid_In_Create_Account()
     {
-        PaymentTypeEntity paymentType = new(_faker.Random.Guid(), _faker.Name.FullName(), _faker.Random.AlphaNumeric(400));
+        PaymentTypeEntity paymentType =
+            new(_faker.Random.Guid(), _faker.Name.FullName(), _faker.Random.AlphaNumeric(400));
 
         var mongoContextMock = MongoContextMock.Mock(new List<PaymentTypeEntity> { paymentType });
 

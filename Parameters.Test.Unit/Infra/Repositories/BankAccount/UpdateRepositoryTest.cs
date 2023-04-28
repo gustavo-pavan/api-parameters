@@ -9,7 +9,8 @@ public class UpdateRepositoryTest
     [Fact]
     public void Should_Throw_Exception_When_Id_Is_Invalid_In_Update_Account()
     {
-        BankAccountEntity account = new(_faker.Name.FullName(), _faker.Random.Decimal(0, 100), _faker.Random.AlphaNumeric(400));
+        BankAccountEntity account = new(_faker.Name.FullName(), _faker.Random.Decimal(0, 100),
+            _faker.Random.AlphaNumeric(400));
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity> { account });
 

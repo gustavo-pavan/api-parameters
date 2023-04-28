@@ -15,7 +15,7 @@ public class CreateCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity>());
 
-        CreateRepository repository = new(mongoContextMock.Object);
+        BaseAccountCreateRepository repository = new(mongoContextMock.Object);
 
         CreateRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
 
@@ -38,7 +38,7 @@ public class CreateCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity>());
 
-        CreateRepository repository = new(mongoContextMock.Object);
+        BaseAccountCreateRepository repository = new(mongoContextMock.Object);
 
         CreateRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
 

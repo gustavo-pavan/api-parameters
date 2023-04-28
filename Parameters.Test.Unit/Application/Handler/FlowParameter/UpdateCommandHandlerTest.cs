@@ -15,14 +15,14 @@ public class UpdateCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity>());
 
-        UpdateRepository repository = new(mongoContextMock.Object);
+        FlowParameterUpdateRepository repository = new(mongoContextMock.Object);
 
         UpdateRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
 
         UpdateRequestCommand command = new()
         {
             Id = _faker.Random.Guid(),
-            FlowType = _faker.Random.Int(1,2),
+            FlowType = _faker.Random.Int(1, 2),
             Description = _faker.Random.AlphaNumeric(400),
             Name = _faker.Name.FullName()
         };
@@ -39,7 +39,7 @@ public class UpdateCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity>());
 
-        UpdateRepository repository = new(mongoContextMock.Object);
+        FlowParameterUpdateRepository repository = new(mongoContextMock.Object);
 
         UpdateRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
 

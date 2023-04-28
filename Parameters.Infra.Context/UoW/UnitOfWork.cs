@@ -2,16 +2,24 @@
 
 public class UnitOfWork : IDisposable, IUnitOfWork
 {
+    private readonly ILogger<UnitOfWork> _logger;
     private readonly IMongoContext _mongoContext;
     private IClientSessionHandle? _session;
-    private readonly ILogger<UnitOfWork> _logger;
-    private bool Disposed { get; set; }
-    public bool HasActiveTransaction => _session != null;
 
     public UnitOfWork(IMongoContext mongoContext, ILogger<UnitOfWork> logger)
     {
         _mongoContext = mongoContext;
         _logger = logger;
+    }
+
+    private bool Disposed { get; set; }
+    public bool HasActiveTransaction => _session != null;
+
+    public void Dispose()
+    {
+        _logger.LogInformation("Dispose unit of work");
+        Dispose(true);
+        GC.SuppressFinalize(this);
     }
 
     public async Task BeginTransactionAsync()
@@ -50,6 +58,7 @@ public class UnitOfWork : IDisposable, IUnitOfWork
                 _session.Dispose();
                 _session = null;
             }
+
             _logger.LogInformation("Finish rollback");
         }
     }
@@ -61,7 +70,6 @@ public class UnitOfWork : IDisposable, IUnitOfWork
             _logger.LogInformation("Start commit");
             await _mongoContext.SaveChanges();
             _logger.LogInformation("Finish commit");
-
         }
         catch
         {
@@ -85,12 +93,4 @@ public class UnitOfWork : IDisposable, IUnitOfWork
 
         Disposed = true;
     }
-
-    public void Dispose()
-    {
-        _logger.LogInformation("Dispose unit of work");
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
-
 }

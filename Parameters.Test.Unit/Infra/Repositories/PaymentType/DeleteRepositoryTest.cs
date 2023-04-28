@@ -9,7 +9,7 @@ public class DeleteRepositoryTest
     {
         var mongoContextMock = MongoContextMock.Mock(new List<PaymentTypeEntity>());
 
-        DeleteRepository repository = new(mongoContextMock.Object);
+        PaymentTypeDeleteRepository repository = new(mongoContextMock.Object);
 
         var func = async () => await repository.Execute(Guid.Empty);
 

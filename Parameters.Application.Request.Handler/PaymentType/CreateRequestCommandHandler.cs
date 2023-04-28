@@ -5,13 +5,13 @@ namespace Parameters.Application.Request.Handler.PaymentType;
 
 public class CreateRequestCommandHandler : IRequestHandler<CreateRequestCommand, PaymentTypeEntity>
 {
-    private readonly ICreateRepository _createRepository;
     private readonly ILogger<CreateRequestCommandHandler> _logger;
+    private readonly IPaymentTypeCreateRepository _paymentTypeCreateRepository;
 
-    public CreateRequestCommandHandler(ICreateRepository createRepository,
+    public CreateRequestCommandHandler(IPaymentTypeCreateRepository paymentTypeCreateRepository,
         ILogger<CreateRequestCommandHandler> logger)
     {
-        _createRepository = createRepository;
+        _paymentTypeCreateRepository = paymentTypeCreateRepository;
         _logger = logger;
     }
 
@@ -23,7 +23,7 @@ public class CreateRequestCommandHandler : IRequestHandler<CreateRequestCommand,
             var paymentType = new PaymentTypeEntity(request.Name, request.Description);
 
             _logger.LogInformation("Execute transaction with database");
-            await _createRepository.Execute(paymentType);
+            await _paymentTypeCreateRepository.Execute(paymentType);
 
             _logger.LogInformation("Create payment type with success");
             return paymentType;

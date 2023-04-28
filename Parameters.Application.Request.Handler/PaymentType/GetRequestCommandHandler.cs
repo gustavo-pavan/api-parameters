@@ -5,13 +5,13 @@ namespace Parameters.Application.Request.Handler.PaymentType;
 
 public class GetRequestCommandHandler : IRequestHandler<GetRequestCommand, IEnumerable<PaymentTypeEntity>>
 {
-    private readonly IGetRepository _getRepository;
     private readonly ILogger<GetRequestCommandHandler> _logger;
+    private readonly IPaymentTypeGetRepository _paymentTypeGetRepository;
 
-    public GetRequestCommandHandler(IGetRepository getRepository,
+    public GetRequestCommandHandler(IPaymentTypeGetRepository paymentTypeGetRepository,
         ILogger<GetRequestCommandHandler> logger)
     {
-        _getRepository = getRepository;
+        _paymentTypeGetRepository = paymentTypeGetRepository;
         _logger = logger;
     }
 
@@ -22,7 +22,7 @@ public class GetRequestCommandHandler : IRequestHandler<GetRequestCommand, IEnum
         {
             _logger.LogInformation("Start handler to get payment type");
             _logger.LogInformation("Execute transaction with database");
-            var result = await _getRepository.Execute();
+            var result = await _paymentTypeGetRepository.Execute();
 
             _logger.LogInformation("Get payments type lows with success");
             return result;

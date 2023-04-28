@@ -5,13 +5,13 @@ namespace Parameters.Application.Request.Handler.BankAccount;
 
 public class GetRequestCommandHandler : IRequestHandler<GetRequestCommand, IEnumerable<BankAccountEntity>>
 {
-    private readonly IGetRepository _getRepository;
+    private readonly IBaseAccountGetRepository _baseAccountGetRepository;
     private readonly ILogger<GetRequestCommandHandler> _logger;
 
-    public GetRequestCommandHandler(IGetRepository getRepository,
+    public GetRequestCommandHandler(IBaseAccountGetRepository baseAccountGetRepository,
         ILogger<GetRequestCommandHandler> logger)
     {
-        _getRepository = getRepository;
+        _baseAccountGetRepository = baseAccountGetRepository;
         _logger = logger;
     }
 
@@ -22,7 +22,7 @@ public class GetRequestCommandHandler : IRequestHandler<GetRequestCommand, IEnum
         {
             _logger.LogInformation("Start handler to get accounts");
             _logger.LogInformation("Execute transaction with database");
-            var result = await _getRepository.Execute();
+            var result = await _baseAccountGetRepository.Execute();
 
             _logger.LogInformation("Get accounts with success");
             return result;

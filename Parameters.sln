@@ -37,6 +37,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Presentation.Api", "Parameters.Presentation.Api\Parameters.Presentation.Api.csproj", "{68222721-82D5-4100-8878-BFE95F0E8170}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IoC", "IoC", "{2DE375C3-2D23-4AA3-A58A-A6FB32C519B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.IoC.DependencyInjection", "Parameters.IoC.DependencyInjection\Parameters.IoC.DependencyInjection.csproj", "{EDBFD2E8-B829-49FE-A378-1BD8F9B4675B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +91,10 @@ Global
 		{68222721-82D5-4100-8878-BFE95F0E8170}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68222721-82D5-4100-8878-BFE95F0E8170}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68222721-82D5-4100-8878-BFE95F0E8170}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDBFD2E8-B829-49FE-A378-1BD8F9B4675B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDBFD2E8-B829-49FE-A378-1BD8F9B4675B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDBFD2E8-B829-49FE-A378-1BD8F9B4675B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDBFD2E8-B829-49FE-A378-1BD8F9B4675B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -103,6 +111,7 @@ Global
 		{4E3A7DDB-6B8C-41BC-A234-F927640E1C66} = {3CA36035-E294-4E1D-BF48-2505A182CEA9}
 		{9417D982-8678-48AB-BE81-D15E4040B2AA} = {3CA36035-E294-4E1D-BF48-2505A182CEA9}
 		{68222721-82D5-4100-8878-BFE95F0E8170} = {D9C8434E-07BF-4267-9587-90D9CF57C84F}
+		{EDBFD2E8-B829-49FE-A378-1BD8F9B4675B} = {2DE375C3-2D23-4AA3-A58A-A6FB32C519B3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EFD85995-8D4F-489B-B48F-65C8E0791B6D}

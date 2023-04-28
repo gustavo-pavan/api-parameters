@@ -1,6 +1,5 @@
 ﻿using Parameters.Application.Request.Command.FlowParameter;
 using Parameters.Application.Request.Handler.FlowParameter;
-using Parameters.Domain.Entity.Enums;
 using Parameters.Infra.Repository.FlowParameter;
 
 namespace Parameters.Test.Unit.Application.Handler.FlowParameter;
@@ -16,13 +15,13 @@ public class CreateCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity>());
 
-        CreateRepository repository = new(mongoContextMock.Object);
+        FlowParameterCreateRepository repository = new(mongoContextMock.Object);
 
         CreateRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
 
         CreateRequestCommand command = new()
         {
-            FlowType = _faker.Random.Int(1,2),
+            FlowType = _faker.Random.Int(1, 2),
             Description = _faker.Random.AlphaNumeric(400),
             Name = _faker.Name.FullName()
         };
@@ -39,7 +38,7 @@ public class CreateCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity>());
 
-        CreateRepository repository = new(mongoContextMock.Object);
+        FlowParameterCreateRepository repository = new(mongoContextMock.Object);
 
         CreateRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
 

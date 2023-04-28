@@ -12,10 +12,10 @@ public class GetByIdCommandHandlerTest
     public async Task Should_Get_All_Account()
     {
         var mockLogger = new Mock<ILogger<GetByIdRequestCommandHandler>>();
-        PaymentTypeEntity paymentType = new(Guid.NewGuid(), _faker.Name.FullName(),_faker.Random.AlphaNumeric(400));
+        PaymentTypeEntity paymentType = new(Guid.NewGuid(), _faker.Name.FullName(), _faker.Random.AlphaNumeric(400));
         var mongoContextMock = MongoContextMock.Mock(new List<PaymentTypeEntity> { paymentType });
 
-        GetByIdRepository repository = new(mongoContextMock.Object);
+        PaymentTypeGetByIdRepository repository = new(mongoContextMock.Object);
 
         GetByIdRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
 

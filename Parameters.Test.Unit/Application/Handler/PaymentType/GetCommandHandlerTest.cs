@@ -18,7 +18,7 @@ public class GetCommandHandlerTest
             new(Guid.NewGuid(), _faker.Name.FullName(), _faker.Random.AlphaNumeric(400))
         });
 
-        GetRepository repository = new(mongoContextMock.Object);
+        PaymentTypeGetRepository repository = new(mongoContextMock.Object);
 
         GetRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
 

@@ -13,11 +13,12 @@ public class GetByIdCommandHandlerTest
     public async Task Should_Get_All_Account()
     {
         var mockLogger = new Mock<ILogger<GetByIdRequestCommandHandler>>();
-        FlowParameterEntity flowParameter = new(Guid.NewGuid(), _faker.Name.FullName(), FlowEnumeration.FromValue<FlowType>(_faker.Random.Int(1, 2)),
+        FlowParameterEntity flowParameter = new(Guid.NewGuid(), _faker.Name.FullName(),
+            FlowEnumeration.FromValue<FlowType>(_faker.Random.Int(1, 2)),
             _faker.Random.AlphaNumeric(400));
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity> { flowParameter });
 
-        GetByIdRepository repository = new(mongoContextMock.Object);
+        FlowParameterGetByIdRepository repository = new(mongoContextMock.Object);
 
         GetByIdRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
 

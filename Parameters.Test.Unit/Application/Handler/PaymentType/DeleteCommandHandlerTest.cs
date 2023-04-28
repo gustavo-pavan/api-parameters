@@ -15,7 +15,7 @@ public class DeleteCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<PaymentTypeEntity>());
 
-        DeleteRepository repository = new(mongoContextMock.Object);
+        PaymentTypeDeleteRepository repository = new(mongoContextMock.Object);
 
         DeleteRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
 
@@ -36,7 +36,7 @@ public class DeleteCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<PaymentTypeEntity>());
 
-        DeleteRepository repository = new(mongoContextMock.Object);
+        PaymentTypeDeleteRepository repository = new(mongoContextMock.Object);
 
         DeleteRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
 

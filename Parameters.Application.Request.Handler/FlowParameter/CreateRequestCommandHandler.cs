@@ -6,13 +6,13 @@ namespace Parameters.Application.Request.Handler.FlowParameter;
 
 public class CreateRequestCommandHandler : IRequestHandler<CreateRequestCommand, FlowParameterEntity>
 {
-    private readonly ICreateRepository _createRepository;
+    private readonly IFlowParameterCreateRepository _flowParameterCreateRepository;
     private readonly ILogger<CreateRequestCommandHandler> _logger;
 
-    public CreateRequestCommandHandler(ICreateRepository createRepository,
+    public CreateRequestCommandHandler(IFlowParameterCreateRepository flowParameterCreateRepository,
         ILogger<CreateRequestCommandHandler> logger)
     {
-        _createRepository = createRepository;
+        _flowParameterCreateRepository = flowParameterCreateRepository;
         _logger = logger;
     }
 
@@ -21,10 +21,11 @@ public class CreateRequestCommandHandler : IRequestHandler<CreateRequestCommand,
         try
         {
             _logger.LogInformation("Start handler to create new flow");
-            var flowParameter = new FlowParameterEntity(request.Name, FlowEnumeration.FromValue<FlowType>(request.FlowType), request.Description);
+            var flowParameter = new FlowParameterEntity(request.Name,
+                FlowEnumeration.FromValue<FlowType>(request.FlowType), request.Description);
 
             _logger.LogInformation("Execute transaction with database");
-            await _createRepository.Execute(flowParameter);
+            await _flowParameterCreateRepository.Execute(flowParameter);
 
             _logger.LogInformation("Create flow with success");
             return flowParameter;

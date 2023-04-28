@@ -5,13 +5,13 @@ namespace Parameters.Application.Request.Handler.FlowParameter;
 
 public class DeleteRequestCommandHandler : IRequestHandler<DeleteRequestCommand, bool>
 {
-    private readonly IDeleteRepository _deleteRepository;
+    private readonly IFlowParameterDeleteRepository _flowParameterDeleteRepository;
     private readonly ILogger<DeleteRequestCommandHandler> _logger;
 
-    public DeleteRequestCommandHandler(IDeleteRepository deleteRepository,
+    public DeleteRequestCommandHandler(IFlowParameterDeleteRepository flowParameterDeleteRepository,
         ILogger<DeleteRequestCommandHandler> logger)
     {
-        _deleteRepository = deleteRepository;
+        _flowParameterDeleteRepository = flowParameterDeleteRepository;
         _logger = logger;
     }
 
@@ -21,7 +21,7 @@ public class DeleteRequestCommandHandler : IRequestHandler<DeleteRequestCommand,
         {
             _logger.LogInformation("Start handler to delete flow");
             _logger.LogInformation("Execute transaction with database");
-            await _deleteRepository.Execute(request.Id);
+            await _flowParameterDeleteRepository.Execute(request.Id);
 
             _logger.LogInformation("Delete flow with success");
             return true;

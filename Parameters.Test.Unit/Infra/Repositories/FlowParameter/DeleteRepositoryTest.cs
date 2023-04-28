@@ -9,7 +9,7 @@ public class DeleteRepositoryTest
     {
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity>());
 
-        DeleteRepository repository = new(mongoContextMock.Object);
+        FlowParameterDeleteRepository repository = new(mongoContextMock.Object);
 
         var func = async () => await repository.Execute(Guid.Empty);
 

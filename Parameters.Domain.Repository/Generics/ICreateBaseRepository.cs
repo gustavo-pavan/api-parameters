@@ -1,6 +1,4 @@
-﻿using Parameters.Domain.Entity;
-
-namespace Parameters.Domain.Repository.Generics;
+﻿namespace Parameters.Domain.Repository.Generics;
 
 public interface ICreateBaseRepository<in TBaseEntity> : IDisposable where TBaseEntity : BaseEntity
 {

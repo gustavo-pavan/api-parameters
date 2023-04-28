@@ -6,13 +6,13 @@ namespace Parameters.Application.Request.Handler.FlowParameter;
 
 public class UpdateRequestCommandHandler : IRequestHandler<UpdateRequestCommand, FlowParameterEntity>
 {
+    private readonly IFlowParameterUpdateRepository _flowParameterUpdateRepository;
     private readonly ILogger<UpdateRequestCommandHandler> _logger;
-    private readonly IUpdateRepository _updateRepository;
 
-    public UpdateRequestCommandHandler(IUpdateRepository updateRepository,
+    public UpdateRequestCommandHandler(IFlowParameterUpdateRepository flowParameterUpdateRepository,
         ILogger<UpdateRequestCommandHandler> logger)
     {
-        _updateRepository = updateRepository;
+        _flowParameterUpdateRepository = flowParameterUpdateRepository;
         _logger = logger;
     }
 
@@ -21,9 +21,10 @@ public class UpdateRequestCommandHandler : IRequestHandler<UpdateRequestCommand,
         try
         {
             _logger.LogInformation("Start handler to update flow");
-            var flowParameter = new FlowParameterEntity(request.Id, request.Name, FlowEnumeration.FromValue<FlowType>(request.FlowType), request.Description);
+            var flowParameter = new FlowParameterEntity(request.Id, request.Name,
+                FlowEnumeration.FromValue<FlowType>(request.FlowType), request.Description);
             _logger.LogInformation("Execute transaction with database");
-            await _updateRepository.Execute(flowParameter);
+            await _flowParameterUpdateRepository.Execute(flowParameter);
 
             _logger.LogInformation("Update flow with success");
             return flowParameter;

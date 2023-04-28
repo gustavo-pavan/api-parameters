@@ -16,10 +16,11 @@ public class GetCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity>
         {
-            new(Guid.NewGuid(), _faker.Name.FullName(), FlowEnumeration.FromValue<FlowType>(_faker.Random.Int(1,2)), _faker.Random.AlphaNumeric(400))
+            new(Guid.NewGuid(), _faker.Name.FullName(), FlowEnumeration.FromValue<FlowType>(_faker.Random.Int(1, 2)),
+                _faker.Random.AlphaNumeric(400))
         });
 
-        GetRepository repository = new(mongoContextMock.Object);
+        FlowParameterGetRepository repository = new(mongoContextMock.Object);
 
         GetRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
 

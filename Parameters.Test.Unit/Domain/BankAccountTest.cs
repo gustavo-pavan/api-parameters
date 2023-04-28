@@ -35,6 +35,7 @@ public class BankAccountTest
     public void Should_Throw_Exception_When_Name_Is_Invalid(string name)
     {
         var action = () => new BankAccountEntity(_dynamic?.Id, name, _dynamic?.Balance, _dynamic?.Description);
-        action.Should().Throw<ArgumentException>().WithMessage($"{nameof(BankAccountEntity.Name)} can't be null or empty");
+        action.Should().Throw<ArgumentException>()
+            .WithMessage($"{nameof(BankAccountEntity.Name)} can't be null or empty");
     }
 }

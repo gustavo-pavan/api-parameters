@@ -5,13 +5,13 @@ namespace Parameters.Application.Request.Handler.BankAccount;
 
 public class CreateRequestCommandHandler : IRequestHandler<CreateRequestCommand, BankAccountEntity>
 {
-    private readonly ICreateRepository _createRepository;
+    private readonly IBaseAccountCreateRepository _baseAccountCreateRepository;
     private readonly ILogger<CreateRequestCommandHandler> _logger;
 
-    public CreateRequestCommandHandler(ICreateRepository createRepository,
+    public CreateRequestCommandHandler(IBaseAccountCreateRepository baseAccountCreateRepository,
         ILogger<CreateRequestCommandHandler> logger)
     {
-        _createRepository = createRepository;
+        _baseAccountCreateRepository = baseAccountCreateRepository;
         _logger = logger;
     }
 
@@ -23,7 +23,7 @@ public class CreateRequestCommandHandler : IRequestHandler<CreateRequestCommand,
             var account = new BankAccountEntity(request.Name, request.Balance, request.Description);
 
             _logger.LogInformation("Execute transaction with database");
-            await _createRepository.Execute(account);
+            await _baseAccountCreateRepository.Execute(account);
 
             _logger.LogInformation("Create account with success");
             return account;

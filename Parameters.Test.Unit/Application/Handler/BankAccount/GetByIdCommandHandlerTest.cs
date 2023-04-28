@@ -16,7 +16,7 @@ public class GetByIdCommandHandlerTest
             _faker.Random.AlphaNumeric(400));
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity> { account });
 
-        GetByIdRepository repository = new(mongoContextMock.Object);
+        BaseAccountGetByIdRepository repository = new(mongoContextMock.Object);
 
         GetByIdRequestCommandHandler requestCommand = new(repository, mockLogger.Object);
 

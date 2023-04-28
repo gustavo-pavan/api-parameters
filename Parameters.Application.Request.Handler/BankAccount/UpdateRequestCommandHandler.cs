@@ -5,13 +5,13 @@ namespace Parameters.Application.Request.Handler.BankAccount;
 
 public class UpdateRequestCommandHandler : IRequestHandler<UpdateRequestCommand, BankAccountEntity>
 {
+    private readonly IBaseAccountUpdateRepository _baseAccountUpdateRepository;
     private readonly ILogger<CreateRequestCommandHandler> _logger;
-    private readonly IUpdateRepository _updateRepository;
 
-    public UpdateRequestCommandHandler(IUpdateRepository updateRepository,
+    public UpdateRequestCommandHandler(IBaseAccountUpdateRepository baseAccountUpdateRepository,
         ILogger<CreateRequestCommandHandler> logger)
     {
-        _updateRepository = updateRepository;
+        _baseAccountUpdateRepository = baseAccountUpdateRepository;
         _logger = logger;
     }
 
@@ -23,7 +23,7 @@ public class UpdateRequestCommandHandler : IRequestHandler<UpdateRequestCommand,
             var account = new BankAccountEntity(request.Id, request.Name, request.Balance, request.Description);
 
             _logger.LogInformation("Execute transaction with database");
-            await _updateRepository.Execute(account);
+            await _baseAccountUpdateRepository.Execute(account);
 
             _logger.LogInformation("Update account with success");
             return account;

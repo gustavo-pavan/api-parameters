@@ -13,7 +13,7 @@ public class UpdateRepositoryTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<PaymentTypeEntity> { paymentType });
 
-        UpdateRepository repository = new(mongoContextMock.Object);
+        PaymentTypeUpdateRepository repository = new(mongoContextMock.Object);
 
         var func = async () => await repository.Execute(paymentType);
 

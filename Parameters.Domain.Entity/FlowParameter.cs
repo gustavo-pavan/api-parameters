@@ -17,7 +17,8 @@ public class FlowParameter : BaseEntity
         Description = description;
     }
 
-    public FlowParameter(Guid id, string name, FlowType flowType, string description) : this(name, flowType, description)
+    public FlowParameter(Guid id, string name, FlowType flowType, string description) : this(name, flowType,
+        description)
     {
         Id = id;
     }

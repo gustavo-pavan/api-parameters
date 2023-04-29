@@ -19,5 +19,7 @@ public class UnitOfWorkTest
         var loggerMock = new Mock<ILogger<UnitOfWork>>();
 
         UnitOfWork uow = new(contextMock.Object, loggerMock.Object);
+        await uow.BeginTransactionAsync();
+        uow.HasActiveTransaction.Should().BeTrue();
     }
 }

@@ -3,7 +3,8 @@ using Parameters.Domain.Repository.PaymentType;
 
 namespace Parameters.Application.Request.Handler.PaymentType;
 
-public class CreatePaymentTypeRequestCommandHandler : IRequestHandler<CreatePaymentTypeRequestCommand, PaymentTypeEntity>
+public class
+    CreatePaymentTypeRequestCommandHandler : IRequestHandler<CreatePaymentTypeRequestCommand, PaymentTypeEntity>
 {
     private readonly ILogger<CreatePaymentTypeRequestCommandHandler> _logger;
     private readonly IPaymentTypeCreateRepository _paymentTypeCreateRepository;
@@ -15,7 +16,8 @@ public class CreatePaymentTypeRequestCommandHandler : IRequestHandler<CreatePaym
         _logger = logger;
     }
 
-    public async Task<PaymentTypeEntity> Handle(CreatePaymentTypeRequestCommand paymentTypeRequest, CancellationToken cancellationToken)
+    public async Task<PaymentTypeEntity> Handle(CreatePaymentTypeRequestCommand paymentTypeRequest,
+        CancellationToken cancellationToken)
     {
         try
         {

@@ -3,7 +3,9 @@ using Parameters.Domain.Repository.FlowParameter;
 
 namespace Parameters.Application.Request.Handler.FlowParameter;
 
-public class GetRequestFlowParameterCommandHandler : IRequestHandler<GetFlowParameterRequestCommand, IEnumerable<FlowParameterEntity>>
+public class
+    GetRequestFlowParameterCommandHandler : IRequestHandler<GetFlowParameterRequestCommand,
+        IEnumerable<FlowParameterEntity>>
 {
     private readonly IFlowParameterGetRepository _flowParameterGetRepository;
     private readonly ILogger<GetRequestFlowParameterCommandHandler> _logger;

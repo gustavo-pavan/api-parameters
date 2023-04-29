@@ -24,7 +24,7 @@ public class PaymentTypeTest
     public void Should_Create_New_Instance_Equal_Object()
     {
         PaymentType flow = new(_dynamic?.Id, _dynamic?.Name, _dynamic?.Description);
-        (_dynamic as object).Should().BeEquivalentTo(flow);
+        (_dynamic as object).Should().BeEquivalentTo(flow, options => options.Excluding(o => o.DomainEvents));
     }
 
 

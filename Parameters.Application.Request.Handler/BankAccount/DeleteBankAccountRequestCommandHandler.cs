@@ -15,7 +15,8 @@ public class DeleteBankAccountRequestCommandHandler : IRequestHandler<DeleteBank
         _logger = logger;
     }
 
-    public async Task<bool> Handle(DeleteBankAccountRequestCommand bankAccountRequest, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteBankAccountRequestCommand bankAccountRequest,
+        CancellationToken cancellationToken)
     {
         try
         {

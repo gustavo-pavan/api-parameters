@@ -12,7 +12,9 @@ public class UnitOfWork : IDisposable, IUnitOfWork
     private readonly IParameterIntegrationEventService _parameterIntegrationEventService;
 
 
-    public UnitOfWork(IMongoContext mongoContext, ILogger<UnitOfWork> logger, IntegrationEventContext integrationEventContext, IParameterIntegrationEventService parameterIntegrationEventService)
+    public UnitOfWork(IMongoContext mongoContext, ILogger<UnitOfWork> logger,
+        IntegrationEventContext integrationEventContext,
+        IParameterIntegrationEventService parameterIntegrationEventService)
     {
         _mongoContext = mongoContext;
         _logger = logger;
@@ -22,7 +24,7 @@ public class UnitOfWork : IDisposable, IUnitOfWork
 
     private bool Disposed { get; set; }
     public bool HasActiveTransaction => _session != null;
-   
+
 
     public void Dispose()
     {
@@ -94,7 +96,8 @@ public class UnitOfWork : IDisposable, IUnitOfWork
             _logger.LogInformation("Dispose transaction");
             if (_session is not null)
             {
-                await _parameterIntegrationEventService.PublishEventsThroughEventBusAsync(SingletonTransaction.TransactionId);
+                await _parameterIntegrationEventService.PublishEventsThroughEventBusAsync(SingletonTransaction
+                    .TransactionId);
                 _session?.Dispose();
                 _mongoContext?.Dispose();
             }

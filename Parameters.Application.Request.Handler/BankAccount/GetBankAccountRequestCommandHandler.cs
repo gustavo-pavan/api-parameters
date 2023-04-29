@@ -3,7 +3,8 @@ using Parameters.Domain.Repository.BankAccount;
 
 namespace Parameters.Application.Request.Handler.BankAccount;
 
-public class GetBankAccountRequestCommandHandler : IRequestHandler<GetBankAccountRequestCommand, IEnumerable<BankAccountEntity>>
+public class
+    GetBankAccountRequestCommandHandler : IRequestHandler<GetBankAccountRequestCommand, IEnumerable<BankAccountEntity>>
 {
     private readonly IBaseAccountGetRepository _baseAccountGetRepository;
     private readonly ILogger<GetBankAccountRequestCommandHandler> _logger;

@@ -23,7 +23,8 @@ public class GetByIdCommandHandlerTest
         GetByIdFlowParameterRequestCommandHandler flowParameterRequestCommand = new(repository, mockLogger.Object);
 
         var result =
-            await flowParameterRequestCommand.Handle(new GetByIdFlowParameterRequestCommand { Id = Guid.NewGuid() }, CancellationToken.None);
+            await flowParameterRequestCommand.Handle(new GetByIdFlowParameterRequestCommand { Id = Guid.NewGuid() },
+                CancellationToken.None);
 
         result?.Should().NotBeNull();
         result?.Should().Be(flowParameter);

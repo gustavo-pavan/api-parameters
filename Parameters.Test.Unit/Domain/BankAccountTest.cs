@@ -25,7 +25,7 @@ public class BankAccountTest
     public void Should_Create_New_Instance_Equal_Object()
     {
         BankAccountEntity account = new(_dynamic?.Id, _dynamic?.Name, _dynamic?.Balance, _dynamic?.Description);
-        (_dynamic as object).Should().BeEquivalentTo(account);
+        (_dynamic as object).Should().BeEquivalentTo(account, options => options.Excluding(o => o.DomainEvents));
     }
 
     [Theory]

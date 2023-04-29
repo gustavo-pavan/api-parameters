@@ -21,7 +21,8 @@ public class GetByIdCommandHandlerTest
         GetByIdBankAccountRequestCommandHandler bankAccountRequestCommand = new(repository, mockLogger.Object);
 
         var result =
-            await bankAccountRequestCommand.Handle(new GetByIdBankAccountRequestCommand { Id = Guid.NewGuid() }, CancellationToken.None);
+            await bankAccountRequestCommand.Handle(new GetByIdBankAccountRequestCommand { Id = Guid.NewGuid() },
+                CancellationToken.None);
 
         result?.Should().NotBeNull();
         result?.Should().Be(account);

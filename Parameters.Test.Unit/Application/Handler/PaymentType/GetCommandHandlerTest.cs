@@ -22,7 +22,8 @@ public class GetCommandHandlerTest
 
         GetPaymentTypeRequestCommandHandler paymentTypeRequestCommand = new(repository, mockLogger.Object);
 
-        var result = paymentTypeRequestCommand.Handle(new GetPaymentTypeGetRequestCommand(), CancellationToken.None).Result?.ToArray();
+        var result = paymentTypeRequestCommand.Handle(new GetPaymentTypeGetRequestCommand(), CancellationToken.None)
+            .Result?.ToArray();
 
         result?.Should().NotBeNull();
         result?.Count().Should().Be(1);

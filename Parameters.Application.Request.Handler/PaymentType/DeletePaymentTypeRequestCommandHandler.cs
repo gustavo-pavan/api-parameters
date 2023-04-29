@@ -15,7 +15,8 @@ public class DeletePaymentTypeRequestCommandHandler : IRequestHandler<DeletePaym
         _logger = logger;
     }
 
-    public async Task<bool> Handle(DeletePaymentTypeRequestCommand paymentTypeRequest, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeletePaymentTypeRequestCommand paymentTypeRequest,
+        CancellationToken cancellationToken)
     {
         try
         {

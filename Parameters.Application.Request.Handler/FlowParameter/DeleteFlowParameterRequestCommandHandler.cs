@@ -15,7 +15,8 @@ public class DeleteFlowParameterRequestCommandHandler : IRequestHandler<DeleteFl
         _logger = logger;
     }
 
-    public async Task<bool> Handle(DeleteFlowParameterRequestCommand flowParameterRequest, CancellationToken cancellationToken)
+    public async Task<bool> Handle(DeleteFlowParameterRequestCommand flowParameterRequest,
+        CancellationToken cancellationToken)
     {
         try
         {

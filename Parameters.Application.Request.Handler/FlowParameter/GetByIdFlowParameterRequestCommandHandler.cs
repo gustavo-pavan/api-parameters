@@ -3,7 +3,9 @@ using Parameters.Domain.Repository.FlowParameter;
 
 namespace Parameters.Application.Request.Handler.FlowParameter;
 
-public class GetByIdFlowParameterRequestCommandHandler : IRequestHandler<GetByIdFlowParameterRequestCommand, FlowParameterEntity?>
+public class
+    GetByIdFlowParameterRequestCommandHandler : IRequestHandler<GetByIdFlowParameterRequestCommand, FlowParameterEntity
+        ?>
 {
     private readonly IFlowParameterGetByIdRepository _flowParameterGetByIdRepository;
     private readonly ILogger<GetByIdFlowParameterRequestCommandHandler> _logger;
@@ -15,7 +17,8 @@ public class GetByIdFlowParameterRequestCommandHandler : IRequestHandler<GetById
         _logger = logger;
     }
 
-    public async Task<FlowParameterEntity?> Handle(GetByIdFlowParameterRequestCommand flowParameterRequest, CancellationToken cancellationToken)
+    public async Task<FlowParameterEntity?> Handle(GetByIdFlowParameterRequestCommand flowParameterRequest,
+        CancellationToken cancellationToken)
     {
         try
         {

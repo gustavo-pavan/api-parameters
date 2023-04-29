@@ -22,7 +22,8 @@ public class GetCommandHandlerTest
 
         GetBankAccountRequestCommandHandler bankAccountRequestCommand = new(repository, mockLogger.Object);
 
-        var result = bankAccountRequestCommand.Handle(new GetBankAccountRequestCommand(), CancellationToken.None).Result?.ToArray();
+        var result = bankAccountRequestCommand.Handle(new GetBankAccountRequestCommand(), CancellationToken.None).Result
+            ?.ToArray();
 
         result?.Should().NotBeNull();
         result?.Count().Should().Be(1);

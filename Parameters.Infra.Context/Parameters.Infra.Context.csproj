@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Parameters.Helper.Events\Parameters.Helper.Events.csproj" />
+    <ProjectReference Include="..\Parameters.Helper.Events\Parameters.Helper.Events.csproj" />
   </ItemGroup>
 
 </Project>

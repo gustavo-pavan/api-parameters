@@ -3,7 +3,9 @@ using Parameters.Domain.Repository.PaymentType;
 
 namespace Parameters.Application.Request.Handler.PaymentType;
 
-public class GetPaymentTypeRequestCommandHandler : IRequestHandler<GetPaymentTypeGetRequestCommand, IEnumerable<PaymentTypeEntity>>
+public class
+    GetPaymentTypeRequestCommandHandler : IRequestHandler<GetPaymentTypeGetRequestCommand,
+        IEnumerable<PaymentTypeEntity>>
 {
     private readonly ILogger<GetPaymentTypeRequestCommandHandler> _logger;
     private readonly IPaymentTypeGetRepository _paymentTypeGetRepository;

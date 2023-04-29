@@ -24,7 +24,8 @@ public class GetCommandHandlerTest
 
         GetRequestFlowParameterCommandHandler requestFlowParameterCommand = new(repository, mockLogger.Object);
 
-        var result = requestFlowParameterCommand.Handle(new GetFlowParameterRequestCommand(), CancellationToken.None).Result?.ToArray();
+        var result = requestFlowParameterCommand.Handle(new GetFlowParameterRequestCommand(), CancellationToken.None)
+            .Result?.ToArray();
 
         result?.Should().NotBeNull();
         result?.Count().Should().Be(1);

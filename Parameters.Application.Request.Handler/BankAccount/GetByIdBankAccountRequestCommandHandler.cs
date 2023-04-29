@@ -3,7 +3,8 @@ using Parameters.Domain.Repository.BankAccount;
 
 namespace Parameters.Application.Request.Handler.BankAccount;
 
-public class GetByIdBankAccountRequestCommandHandler : IRequestHandler<GetByIdBankAccountRequestCommand, BankAccountEntity?>
+public class
+    GetByIdBankAccountRequestCommandHandler : IRequestHandler<GetByIdBankAccountRequestCommand, BankAccountEntity?>
 {
     private readonly IBaseAccountGetByIdRepository _baseAccountGetByIdRepository;
     private readonly ILogger<GetByIdBankAccountRequestCommandHandler> _logger;
@@ -15,7 +16,8 @@ public class GetByIdBankAccountRequestCommandHandler : IRequestHandler<GetByIdBa
         _logger = logger;
     }
 
-    public async Task<BankAccountEntity?> Handle(GetByIdBankAccountRequestCommand bankAccountRequest, CancellationToken cancellationToken)
+    public async Task<BankAccountEntity?> Handle(GetByIdBankAccountRequestCommand bankAccountRequest,
+        CancellationToken cancellationToken)
     {
         try
         {

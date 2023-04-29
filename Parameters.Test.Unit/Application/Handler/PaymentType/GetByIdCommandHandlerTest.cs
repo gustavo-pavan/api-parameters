@@ -20,7 +20,8 @@ public class GetByIdCommandHandlerTest
         GetByIdPaymentTypeRequestCommandHandler paymentTypeRequestCommand = new(repository, mockLogger.Object);
 
         var result =
-            await paymentTypeRequestCommand.Handle(new GetByIdPaymentTypeRequestCommand { Id = Guid.NewGuid() }, CancellationToken.None);
+            await paymentTypeRequestCommand.Handle(new GetByIdPaymentTypeRequestCommand { Id = Guid.NewGuid() },
+                CancellationToken.None);
 
         result?.Should().NotBeNull();
         result?.Should().Be(paymentType);

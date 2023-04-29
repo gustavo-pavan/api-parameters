@@ -8,7 +8,7 @@ public interface IIntegrationEventService
 {
     Task<IEnumerable<IntegrationEventEntity>> RetrieveEventLogsPendingToPublishAsync(Guid transactionId);
 
-    Task SaveEventAsync(EntityIntegration @event, IDbContextTransaction transaction);
+    Task SaveEventAsync(EntityIntegration @event, Guid transactionId);
 
     Task MarkEventAsPublishedAsync(Guid eventId);
 

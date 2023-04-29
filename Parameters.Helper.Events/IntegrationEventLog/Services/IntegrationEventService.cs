@@ -44,11 +44,11 @@ public class IntegrationEventService : IIntegrationEventService, IDisposable
         return new List<IntegrationEventEntity>();
     }
 
-    public Task SaveEventAsync(EntityIntegration @event, IDbContextTransaction transaction)
+    public Task SaveEventAsync(EntityIntegration @event, Guid transactionId)
     {
-        if (transaction == null) throw new ArgumentNullException(nameof(transaction));
+        if (Guid.Empty.Equals(transactionId)) throw new ArgumentNullException(nameof(transactionId));
 
-        var eventLog = new IntegrationEventEntity(@event, transaction.TransactionId);
+        var eventLog = new IntegrationEventEntity(@event, transactionId);
         _context.IntegrationEventLogs.Add(eventLog);
         return Task.CompletedTask;
     }

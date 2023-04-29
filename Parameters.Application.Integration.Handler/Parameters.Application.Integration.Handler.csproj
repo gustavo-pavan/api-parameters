@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -11,7 +11,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Parameters.Application.Integration.Command\Parameters.Application.Integration.Command.csproj" />
     <ProjectReference Include="..\Parameters.Helper.Events\Parameters.Helper.Events.csproj" />
+    <ProjectReference Include="..\Parameters.Infra.Context\Parameters.Infra.Context.csproj" />
   </ItemGroup>
 
 </Project>

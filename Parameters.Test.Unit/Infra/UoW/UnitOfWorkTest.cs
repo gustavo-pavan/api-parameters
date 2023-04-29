@@ -1,4 +1,8 @@
-﻿using Parameters.Infra.Context.UoW;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Parameters.Helper.Events.IntegrationEventLog.Context;
+using Parameters.Helper.Events.IntegrationEventLog.Services;
+using Parameters.Infra.Context.UoW;
 
 namespace Parameters.Test.Unit.Infra.UoW;
 
@@ -17,8 +21,10 @@ public class UnitOfWorkTest
             .ReturnsAsync(sessionMock.Object);
 
         var loggerMock = new Mock<ILogger<UnitOfWork>>();
+        
+        UnitOfWork uow = new(contextMock.Object, loggerMock.Object, ContextMemoryMock.Mock(),
+            new Mock<IParameterIntegrationEventService>().Object);
 
-        UnitOfWork uow = new(contextMock.Object, loggerMock.Object);
         await uow.BeginTransactionAsync();
         uow.HasActiveTransaction.Should().BeTrue();
     }

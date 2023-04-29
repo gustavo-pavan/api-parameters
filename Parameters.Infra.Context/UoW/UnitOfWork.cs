@@ -1,19 +1,28 @@
-﻿namespace Parameters.Infra.Context.UoW;
+﻿using Parameters.Helper.Events.IntegrationEventLog.Context;
+using Parameters.Helper.Events.IntegrationEventLog.Services;
+
+namespace Parameters.Infra.Context.UoW;
 
 public class UnitOfWork : IDisposable, IUnitOfWork
 {
     private readonly ILogger<UnitOfWork> _logger;
     private readonly IMongoContext _mongoContext;
     private IClientSessionHandle? _session;
+    private readonly IntegrationEventContext _integrationEventContext;
+    private readonly IParameterIntegrationEventService _parameterIntegrationEventService;
 
-    public UnitOfWork(IMongoContext mongoContext, ILogger<UnitOfWork> logger)
+
+    public UnitOfWork(IMongoContext mongoContext, ILogger<UnitOfWork> logger, IntegrationEventContext integrationEventContext, IParameterIntegrationEventService parameterIntegrationEventService)
     {
         _mongoContext = mongoContext;
         _logger = logger;
+        _integrationEventContext = integrationEventContext;
+        _parameterIntegrationEventService = parameterIntegrationEventService;
     }
 
     private bool Disposed { get; set; }
     public bool HasActiveTransaction => _session != null;
+   
 
     public void Dispose()
     {
@@ -68,7 +77,11 @@ public class UnitOfWork : IDisposable, IUnitOfWork
         try
         {
             _logger.LogInformation("Start commit");
-            await _mongoContext.SaveChanges();
+
+            var count = await _mongoContext.SaveChanges();
+
+            if (count > 0) await _integrationEventContext.SaveChangesAsync();
+
             _logger.LogInformation("Finish commit");
         }
         catch
@@ -79,8 +92,12 @@ public class UnitOfWork : IDisposable, IUnitOfWork
         finally
         {
             _logger.LogInformation("Dispose transaction");
-            _session?.Dispose();
-            _mongoContext?.Dispose();
+            if (_session is not null)
+            {
+                await _parameterIntegrationEventService.PublishEventsThroughEventBusAsync(SingletonTransaction.TransactionId);
+                _session?.Dispose();
+                _mongoContext?.Dispose();
+            }
         }
     }
 

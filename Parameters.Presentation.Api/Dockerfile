@@ -17,6 +17,7 @@ COPY ["Parameters.Application.Request.Validation/Parameters.Application.Request.
 COPY ["Parameters.Helper.Behavior/Parameters.Helper.Behavior.csproj", "Parameters.Helper.Behavior/"]
 COPY ["Parameters.Helper.Extensions/Parameters.Helper.Extensions.csproj", "Parameters.Helper.Extensions/"]
 COPY ["Parameters.Infra.Context/Parameters.Infra.Context.csproj", "Parameters.Infra.Context/"]
+COPY ["Parameters.Helper.Events/Parameters.Helper.Events.csproj", "Parameters.Helper.Events/"]
 COPY ["Parameters.Infra.Repository/Parameters.Infra.Repository.csproj", "Parameters.Infra.Repository/"]
 RUN dotnet restore "Parameters.Presentation.Api/Parameters.Presentation.Api.csproj"
 COPY . .

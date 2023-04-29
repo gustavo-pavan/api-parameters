@@ -45,9 +45,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Helper.Events", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Application.Integration.Command", "Parameters.Application.Integration.Command\Parameters.Application.Integration.Command.csproj", "{3511D84F-E04C-4024-A3C7-00AEBF64C74E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Application.Integration.Handler", "Parameters.Application.Integration.Handler\Parameters.Application.Integration.Handler.csproj", "{60B85846-D462-4878-B479-A011BE199EB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Application.Integration.Handler", "Parameters.Application.Integration.Handler\Parameters.Application.Integration.Handler.csproj", "{60B85846-D462-4878-B479-A011BE199EB8}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9A83BEF8-2D8A-460B-8581-EC892216BDAD}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C14F5EA8-232E-4A94-97D2-B1BCBFD36A87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,10 +115,10 @@ Global
 		{60B85846-D462-4878-B479-A011BE199EB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60B85846-D462-4878-B479-A011BE199EB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60B85846-D462-4878-B479-A011BE199EB8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9A83BEF8-2D8A-460B-8581-EC892216BDAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A83BEF8-2D8A-460B-8581-EC892216BDAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A83BEF8-2D8A-460B-8581-EC892216BDAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A83BEF8-2D8A-460B-8581-EC892216BDAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C14F5EA8-232E-4A94-97D2-B1BCBFD36A87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C14F5EA8-232E-4A94-97D2-B1BCBFD36A87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C14F5EA8-232E-4A94-97D2-B1BCBFD36A87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C14F5EA8-232E-4A94-97D2-B1BCBFD36A87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

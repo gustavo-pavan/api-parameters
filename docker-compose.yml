@@ -1,10 +1,8 @@
 version: '3.4'
-
 services:
-# api
   parameter-api:
     container_name: parameter-api
-    image: ${DOCKER_REGISTRY-}parameterspresentationapi
+    image: '${DOCKER_REGISTRY-}parameterspresentationapi'
     build:
       context: .
       dockerfile: Parameters.Presentation.Api/Dockerfile
@@ -13,7 +11,8 @@ services:
     environment:
       - MongoSettings_Connection=mongodb://root:password123@mongodb:27017
       - MongoSettings_DatabaseName=PARAMETERS
-      - ConnectionStrings:Integration=Server=mssql,1433;Initial Catalog=Catalog; User ID=sa;Password=mssql1Ipw;
+      - ConnectionStrings:Integration=Server=mssql,1433;Initial Catalog=Catalog;
+      - User ID=sa;Password=mssql1Ipw;
       - RabbitMQConfiguration:HostName=rabbitmq
       - RabbitMQConfiguration:UserName=mqadmin
       - RabbitMQConfiguration:Password=rmbt1L2
@@ -22,13 +21,10 @@ services:
       - RabbitMQConfiguration:BROKER_NAME=flow_broker
       - RabbitMQConfiguration:QUEUE_NAME=parameter_mqueue
     depends_on:
-        - mongodb
+      - mongodb
     links:
-        - mongodb
-        - mssql
-        - rabbitmq
+      - mongodb
 
-# database
   mongodb:
     container_name: mongo
     image: 'bitnami/mongodb:latest'
@@ -39,42 +35,40 @@ services:
       MONGODB_ROOT_PASSWORD: password123
       MONGODB_DATABASE: BANK_ACCOUNT
     ports:
-      - 27017:27017
+      - '27017:27017'
     volumes:
-      - ./Volumes/MongoDB:/data/db
-    networks:
-      - parameter-network
-  
-  mssql:
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: mssql
-    ports:
-      - 1433:1433
-    volumes:
-      - ./Volumes/mssql/data/:/var/lib/mssqlql/data
-    environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=mssql1Ipw
+      - './Volumes/MongoDB:/data/db'
     networks:
       - parameter-network
 
-# messaging
+  mssql:
+     image: 'mcr.microsoft.com/mssql/server:2019-latest'
+     container_name: mssql
+     ports:
+       - '1433:1433'
+     volumes:
+       - './Volumes/mssql/data/:/var/lib/mssqlql/data'
+     environment:
+       - ACCEPT_EULA=Y
+       - SA_PASSWORD=mssql1Ipw
+     networks:
+       - parameter-network
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: rabbitmq
     ports:
-        - 5672:5672
-        - 15672:15672
+       - 5672:5672
+       - 15672:15672
     environment:
-        - RABBITMQ_DEFAULT_USER=mqadmin
-        - RABBITMQ_DEFAULT_PASS=rmbt1L2
+       - RABBITMQ_DEFAULT_USER=mqadmin
+       - RABBITMQ_DEFAULT_PASS=rmbt1L2
     volumes:
-        - ./Volumes/rabbitmq/data/:/var/lib/rabbitmq
-        - ./Volumes/rabbitmq/log/:/var/log/rabbitmq
+       - ./Volumes/rabbitmq/data/:/var/lib/rabbitmq
+       - ./Volumes/rabbitmq/log/:/var/log/rabbitmq
     networks:
-        - parameter-network
+      - parameter-network
 
-# database management
   mongo-express:
     image: mongo-express
     container_name: mongo-express
@@ -94,7 +88,6 @@ services:
     networks:
       - parameter-network
 
-
-networks: 
-    parameter-network:
-      driver: bridge
+networks:
+  parameter-network:
+    driver: bridge

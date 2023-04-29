@@ -1,7 +1,7 @@
 ﻿using Parameters.Application.Request.Command.BankAccount;
 using Parameters.Domain.Repository.BankAccount;
 
-namespace Parameters.Application.Request.Handler.BankAccount;
+namespace Parameters.Application.Request.Query.BankAccount;
 
 public class
     GetByIdBankAccountRequestCommandHandler : IRequestHandler<GetByIdBankAccountRequestCommand, BankAccountEntity?>

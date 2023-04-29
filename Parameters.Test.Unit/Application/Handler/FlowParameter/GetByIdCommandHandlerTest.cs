@@ -1,5 +1,5 @@
 ﻿using Parameters.Application.Request.Command.FlowParameter;
-using Parameters.Application.Request.Handler.FlowParameter;
+using Parameters.Application.Request.Query.FlowParameter;
 using Parameters.Domain.Entity.Enums;
 using Parameters.Infra.Repository.FlowParameter;
 

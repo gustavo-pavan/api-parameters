@@ -1,7 +1,7 @@
 ﻿using Parameters.Application.Request.Command.FlowParameter;
 using Parameters.Domain.Repository.FlowParameter;
 
-namespace Parameters.Application.Request.Handler.FlowParameter;
+namespace Parameters.Application.Request.Query.FlowParameter;
 
 public class
     GetByIdFlowParameterRequestCommandHandler : IRequestHandler<GetByIdFlowParameterRequestCommand, FlowParameterEntity

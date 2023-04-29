@@ -30,6 +30,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Parameters.Application.Request.Command\Parameters.Application.Request.Command.csproj" />
 		<ProjectReference Include="..\Parameters.Application.Request.Handler\Parameters.Application.Request.Handler.csproj" />
+		<ProjectReference Include="..\Parameters.Application.Request.Query\Parameters.Application.Request.Query.csproj" />
 		<ProjectReference Include="..\Parameters.Domain.Entity\Parameters.Domain.Entity.csproj" />
 		<ProjectReference Include="..\Parameters.Infra.Context\Parameters.Infra.Context.csproj" />
 		<ProjectReference Include="..\Parameters.Infra.Repository\Parameters.Infra.Repository.csproj" />

@@ -1,7 +1,7 @@
 ﻿using Parameters.Application.Request.Command.PaymentType;
 using Parameters.Domain.Repository.PaymentType;
 
-namespace Parameters.Application.Request.Handler.PaymentType;
+namespace Parameters.Application.Request.Query.PaymentType;
 
 public class
     GetPaymentTypeRequestCommandHandler : IRequestHandler<GetPaymentTypeGetRequestCommand,

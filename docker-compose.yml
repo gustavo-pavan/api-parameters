@@ -13,10 +13,20 @@ services:
     environment:
       - MongoSettings_Connection=mongodb://root:password123@mongodb:27017
       - MongoSettings_DatabaseName=PARAMETERS
+      - ConnectionStrings:Integration=Server=mssql,1433;Initial Catalog=Catalog; User ID=sa;Password=mssql1Ipw;
+      - RabbitMQConfiguration:HostName=rabbitmq
+      - RabbitMQConfiguration:UserName=mqadmin
+      - RabbitMQConfiguration:Password=rmbt1L2
+      - RabbitMQConfiguration:RetryCount=2
+      - RabbitMQConfiguration:TYPE_EXCHANGE=direct
+      - RabbitMQConfiguration:BROKER_NAME=flow_broker
+      - RabbitMQConfiguration:QUEUE_NAME=parameter_mqueue
     depends_on:
         - mongodb
     links:
         - mongodb
+        - mssql
+        - rabbitmq
 
 # database
   mongodb:
@@ -34,6 +44,35 @@ services:
       - ./Volumes/MongoDB:/data/db
     networks:
       - parameter-network
+  
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    container_name: mssql
+    ports:
+      - 1433:1433
+    volumes:
+      - ./Volumes/mssql/data/:/var/lib/mssqlql/data
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=mssql1Ipw
+    networks:
+      - parameter-network
+
+# messaging
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    ports:
+        - 5672:5672
+        - 15672:15672
+    environment:
+        - RABBITMQ_DEFAULT_USER=mqadmin
+        - RABBITMQ_DEFAULT_PASS=rmbt1L2
+    volumes:
+        - ./Volumes/rabbitmq/data/:/var/lib/rabbitmq
+        - ./Volumes/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+        - parameter-network
 
 # database management
   mongo-express:

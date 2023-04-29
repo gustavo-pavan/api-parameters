@@ -1,7 +1,11 @@
 ﻿using System.Reflection;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.Configuration;
 using Parameters.Helper.Behavior;
+using Parameters.Helper.Events.EventRabbitMQ.Container;
+using Parameters.Helper.Events.IntegrationEventLog.Context;
+using Parameters.Helper.Events.IntegrationEventLog.Services;
 using Parameters.Infra.Context;
 using Parameters.Infra.Context.UoW;
 
@@ -29,5 +33,15 @@ public static class Container
         service.AddValidatorsFromAssembly(Assembly.Load("Parameters.Application.Request.Validation"));
 
         service.AddRepository();
+        service.RegisterIntegrationEvents();
+
+        service.RegisterRabbitMQ(service.BuildServiceProvider().GetService<IConfiguration>()!);
+    }
+
+    private static void RegisterIntegrationEvents(this IServiceCollection services)
+    {
+        services.AddDbContext<IntegrationEventContext>();
+        services.AddTransient(typeof(IParameterIntegrationEventService), typeof(ParameterIntegrationEventService));
+        services.AddTransient(typeof(IIntegrationEventService), typeof(IntegrationEventService));
     }
 }

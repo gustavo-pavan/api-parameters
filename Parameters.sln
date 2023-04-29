@@ -11,37 +11,39 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{51226E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Domain.Entity", "Parameters.Domain.Entity\Parameters.Domain.Entity.csproj", "{0A54FECC-3A30-4CD5-8DE2-B7481F0DFE33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Domain.Repository", "Parameters.Domain.Repository\Parameters.Domain.Repository.csproj", "{CE629D56-729D-4B8A-BC72-29BF65E0C9D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Domain.Repository", "Parameters.Domain.Repository\Parameters.Domain.Repository.csproj", "{CE629D56-729D-4B8A-BC72-29BF65E0C9D0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{DC6D4225-C68E-4516-B059-62C9D5B79957}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Infra.Context", "Parameters.Infra.Context\Parameters.Infra.Context.csproj", "{4423CD40-2DBF-4BF3-A961-0705E6CEBD12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Infra.Context", "Parameters.Infra.Context\Parameters.Infra.Context.csproj", "{4423CD40-2DBF-4BF3-A961-0705E6CEBD12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Infra.Repository", "Parameters.Infra.Repository\Parameters.Infra.Repository.csproj", "{49614A02-0055-430B-B70D-DDF5E6D606AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Infra.Repository", "Parameters.Infra.Repository\Parameters.Infra.Repository.csproj", "{49614A02-0055-430B-B70D-DDF5E6D606AC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{E6C7AE5A-503B-4DC7-AE0E-23FD57B05521}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Application.Request.Command", "Parameters.Application.Request.Command\Parameters.Application.Request.Command.csproj", "{78398712-140C-4916-A4FC-862B547FAF76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Application.Request.Command", "Parameters.Application.Request.Command\Parameters.Application.Request.Command.csproj", "{78398712-140C-4916-A4FC-862B547FAF76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Application.Request.Handler", "Parameters.Application.Request.Handler\Parameters.Application.Request.Handler.csproj", "{8499BAA7-8D24-4D8C-AE16-EAD79377130D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Application.Request.Handler", "Parameters.Application.Request.Handler\Parameters.Application.Request.Handler.csproj", "{8499BAA7-8D24-4D8C-AE16-EAD79377130D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Application.Request.Validation", "Parameters.Application.Request.Validation\Parameters.Application.Request.Validation.csproj", "{5F677E6D-7DB5-4662-92C2-B7AEAFE74311}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Application.Request.Validation", "Parameters.Application.Request.Validation\Parameters.Application.Request.Validation.csproj", "{5F677E6D-7DB5-4662-92C2-B7AEAFE74311}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helper", "Helper", "{3CA36035-E294-4E1D-BF48-2505A182CEA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Helper.Behavior", "Parameters.Helper.Behavior\Parameters.Helper.Behavior.csproj", "{4E3A7DDB-6B8C-41BC-A234-F927640E1C66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Helper.Behavior", "Parameters.Helper.Behavior\Parameters.Helper.Behavior.csproj", "{4E3A7DDB-6B8C-41BC-A234-F927640E1C66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Helper.Extensions", "Parameters.Helper.Extensions\Parameters.Helper.Extensions.csproj", "{9417D982-8678-48AB-BE81-D15E4040B2AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Helper.Extensions", "Parameters.Helper.Extensions\Parameters.Helper.Extensions.csproj", "{9417D982-8678-48AB-BE81-D15E4040B2AA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{D9C8434E-07BF-4267-9587-90D9CF57C84F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Presentation.Api", "Parameters.Presentation.Api\Parameters.Presentation.Api.csproj", "{68222721-82D5-4100-8878-BFE95F0E8170}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Presentation.Api", "Parameters.Presentation.Api\Parameters.Presentation.Api.csproj", "{68222721-82D5-4100-8878-BFE95F0E8170}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IoC", "IoC", "{2DE375C3-2D23-4AA3-A58A-A6FB32C519B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.IoC.DependencyInjection", "Parameters.IoC.DependencyInjection\Parameters.IoC.DependencyInjection.csproj", "{EDBFD2E8-B829-49FE-A378-1BD8F9B4675B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.IoC.DependencyInjection", "Parameters.IoC.DependencyInjection\Parameters.IoC.DependencyInjection.csproj", "{EDBFD2E8-B829-49FE-A378-1BD8F9B4675B}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9A83BEF8-2D8A-460B-8581-EC892216BDAD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Helper.Events", "..\Parameters.Helper.Events\Parameters.Helper.Events.csproj", "{F5B183B4-5B7C-47A6-80E5-8931B12BE4EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +103,10 @@ Global
 		{9A83BEF8-2D8A-460B-8581-EC892216BDAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A83BEF8-2D8A-460B-8581-EC892216BDAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A83BEF8-2D8A-460B-8581-EC892216BDAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5B183B4-5B7C-47A6-80E5-8931B12BE4EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5B183B4-5B7C-47A6-80E5-8931B12BE4EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5B183B4-5B7C-47A6-80E5-8931B12BE4EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5B183B4-5B7C-47A6-80E5-8931B12BE4EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -118,6 +124,7 @@ Global
 		{9417D982-8678-48AB-BE81-D15E4040B2AA} = {3CA36035-E294-4E1D-BF48-2505A182CEA9}
 		{68222721-82D5-4100-8878-BFE95F0E8170} = {D9C8434E-07BF-4267-9587-90D9CF57C84F}
 		{EDBFD2E8-B829-49FE-A378-1BD8F9B4675B} = {2DE375C3-2D23-4AA3-A58A-A6FB32C519B3}
+		{F5B183B4-5B7C-47A6-80E5-8931B12BE4EE} = {3CA36035-E294-4E1D-BF48-2505A182CEA9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EFD85995-8D4F-489B-B48F-65C8E0791B6D}

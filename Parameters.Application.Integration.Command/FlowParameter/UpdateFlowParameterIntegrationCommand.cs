@@ -1,6 +1,6 @@
 ﻿namespace Parameters.Application.Integration.Command.FlowParameter;
 
-public class CreateFlowParameterIntegrationCommand : IntegrationEvent
+public class UpdateFlowParameterIntegrationCommand : IntegrationEvent
 {
     public Guid Id { get; set; }
     public string Name { get; set; }

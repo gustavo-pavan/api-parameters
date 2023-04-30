@@ -1,4 +1,4 @@
-﻿using Parameters.Application.Notification.Command.BankAccount;
+﻿using Parameters.Applicaiton.Notification.Command.BankAccount;
 using Parameters.Application.Request.Command.BankAccount;
 using Parameters.Domain.Repository.BankAccount;
 
@@ -30,7 +30,7 @@ public class
             await _baseAccountCreateRepository.Execute(account);
 
             _logger.LogInformation("Send new notification to create account");
-            account.AddDomainEvent(new CreateFlowParameterNotificationCommand() { Id = account.Id, Name = account.Name });
+            account.AddDomainEvent(new CreateBankAccountNotificationCommand() { Id = account.Id, Name = account.Name });
 
             _logger.LogInformation("Create account with success");
             return account;

@@ -1,10 +1,10 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using Parameters.Application.Integration.Handler.BankAccount;
-using Parameters.Application.Notification.Command.BankAccount;
+using Parameters.Applicaiton.Notification.Command.FlowParameter;
+using Parameters.Application.Integration.Handler.FlowParameter;
 using Parameters.Helper.Events.IntegrationEventLog.Services;
 
-namespace Parameters.Application.Notification.Handler.BankAccount;
+namespace Parameters.Application.Notification.Handler.FlowParameter;
 
 public class CreateFlowParameterNotificationHandler : INotificationHandler<CreateFlowParameterNotificationCommand>
 {
@@ -21,7 +21,7 @@ public class CreateFlowParameterNotificationHandler : INotificationHandler<Creat
 
     public async Task Handle(CreateFlowParameterNotificationCommand notification, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Start notification create bank account in integration event");
+        _logger.LogInformation("Start notification create flow parameter in integration event");
 
         var @event = new CreateFlowParameterIntegrationHandler(_service, _loggerIntegration);
 
@@ -31,6 +31,6 @@ public class CreateFlowParameterNotificationHandler : INotificationHandler<Creat
             Name = notification.Name
         });
 
-        _logger.LogInformation("Finish notification create bank account in integration event");
+        _logger.LogInformation("Finish notification create flow parameter in integration event");
     }
 }

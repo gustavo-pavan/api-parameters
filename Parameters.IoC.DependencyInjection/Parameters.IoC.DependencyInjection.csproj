@@ -17,6 +17,7 @@
 		<ProjectReference Include="..\Parameters.Application.Notification.Handler\Parameters.Application.Notification.Handler.csproj" />
 		<ProjectReference Include="..\Parameters.Application.Request.Command\Parameters.Application.Request.Command.csproj" />
 		<ProjectReference Include="..\Parameters.Application.Request.Handler\Parameters.Application.Request.Handler.csproj" />
+		<ProjectReference Include="..\Parameters.Application.Request.Query\Parameters.Application.Request.Query.csproj" />
 		<ProjectReference Include="..\Parameters.Application.Request.Validation\Parameters.Application.Request.Validation.csproj" />
 		<ProjectReference Include="..\Parameters.Domain.Repository\Parameters.Domain.Repository.csproj" />
 		<ProjectReference Include="..\Parameters.Helper.Behavior\Parameters.Helper.Behavior.csproj" />

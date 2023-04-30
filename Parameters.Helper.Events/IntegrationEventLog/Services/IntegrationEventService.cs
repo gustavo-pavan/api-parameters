@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Parameters.Helper.Events.EventBus;
 using Parameters.Helper.Events.IntegrationEventLog.Context;
 using Parameters.Helper.Events.IntegrationEventLog.Enums;
 using System.Reflection;
@@ -9,7 +10,9 @@ namespace Parameters.Helper.Events.IntegrationEventLog.Services;
 
 public class IntegrationEventService : IIntegrationEventService, IDisposable
 {
-    public IntegrationEventService(IntegrationEventContext context)
+    private readonly SingletonTransaction _singletonTransaction;
+
+    public IntegrationEventService(IntegrationEventContext context, SingletonTransaction singletonTransaction)
     {
         _context = context;
 
@@ -17,6 +20,8 @@ public class IntegrationEventService : IIntegrationEventService, IDisposable
             .GetTypes()
             .Where(x => x.Name.Contains("Integration"))
             .ToList();
+
+        _singletonTransaction = singletonTransaction;
     }
 
     public async Task<IEnumerable<IntegrationEventEntity>> RetrieveEventLogsPendingToPublishAsync(
@@ -43,11 +48,11 @@ public class IntegrationEventService : IIntegrationEventService, IDisposable
         return new List<IntegrationEventEntity>();
     }
 
-    public Task SaveEventAsync(EntityIntegration @event, Guid transactionId)
+    public Task SaveEventAsync(EntityIntegration @event)
     {
-        if (Guid.Empty.Equals(transactionId)) throw new ArgumentNullException(nameof(transactionId));
+        if (Guid.Empty.Equals(_singletonTransaction.TransactionId)) throw new ArgumentNullException(nameof(_singletonTransaction.TransactionId));
 
-        var eventLog = new IntegrationEventEntity(@event, transactionId);
+        var eventLog = new IntegrationEventEntity(@event, _singletonTransaction.TransactionId);
         _context.IntegrationEventLogs.Add(eventLog);
         return Task.CompletedTask;
     }

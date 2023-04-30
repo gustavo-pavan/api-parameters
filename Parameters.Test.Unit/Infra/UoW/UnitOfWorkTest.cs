@@ -1,4 +1,5 @@
-﻿using Parameters.Helper.Events.IntegrationEventLog.Services;
+﻿using Parameters.Helper.Events.EventBus;
+using Parameters.Helper.Events.IntegrationEventLog.Services;
 using Parameters.Infra.Context.UoW;
 
 namespace Parameters.Test.Unit.Infra.UoW;

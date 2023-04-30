@@ -1,35 +1,28 @@
 using Microsoft.Extensions.Logging;
+using Parameters.Helper.Events.EventBus;
 using Parameters.Helper.Events.EventBus.Interfaces;
 
 namespace Parameters.Helper.Events.IntegrationEventLog.Services;
 
 public class ParameterIntegrationEventService : IParameterIntegrationEventService
 {
-    #region Properties
-
     private readonly IEvent _event;
     private readonly IIntegrationEventService _integrationEventService;
     private readonly ILogger<ParameterIntegrationEventService> _logger;
-
-    #endregion
-
-    #region Constructor
+    private readonly SingletonTransaction _singletonTransaction;
 
     public ParameterIntegrationEventService(IEvent @event, IIntegrationEventService integrationEventService,
-        ILogger<ParameterIntegrationEventService> logger)
+        ILogger<ParameterIntegrationEventService> logger, SingletonTransaction singletonTransaction)
     {
         _event = @event;
         _integrationEventService = integrationEventService;
         _logger = logger;
+        _singletonTransaction = singletonTransaction;
     }
 
-    #endregion
-
-    #region Method
-
-    public async Task PublishEventsThroughEventBusAsync(Guid transactionId)
+    public async Task PublishEventsThroughEventBusAsync()
     {
-        var pendingEvents = await _integrationEventService.RetrieveEventLogsPendingToPublishAsync(transactionId);
+        var pendingEvents = await _integrationEventService.RetrieveEventLogsPendingToPublishAsync(_singletonTransaction.TransactionId);
 
         try
         {
@@ -64,6 +57,4 @@ public class ParameterIntegrationEventService : IParameterIntegrationEventServic
             throw;
         }
     }
-
-    #endregion
 }

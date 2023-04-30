@@ -11,7 +11,7 @@ services:
     environment:
       - MongoSettings_Connection=mongodb://root:password123@mongodb:27017
       - MongoSettings_DatabaseName=PARAMETERS
-      - ConnectionStrings_Integration=Server=mssqldb,1433;Initial Catalog=Parameter;Persist Security Info=False;User ID=sa;Password=mssql1Ipw;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;
+      - IntegrationConnection=Server=mssqldb,1433;Initial Catalog=Parameter;Persist Security Info=False;User ID=sa;Password=mssql1Ipw;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;
       - RabbitMQConfiguration:HostName=rabbitmq
       - RabbitMQConfiguration:UserName=mqadmin
       - RabbitMQConfiguration:Password=rmbt1L2
@@ -40,7 +40,7 @@ services:
     ports:
       - '27017:27017'
     volumes:
-      - './Volumes/MongoDB:/data/db'
+      - '.\Volumes\mongoDB:/bitnami/mongodb'
     networks:
       - parameter-network
 
@@ -50,7 +50,7 @@ services:
      ports:
        - '1433:1433'
      volumes:
-       - './Volumes/mssql/data/:/var/lib/mssqlql/data'
+       - '.\Volumes\mssql\data:/var/opt/mssql/data'
      environment:
        - ACCEPT_EULA=Y
        - SA_PASSWORD=mssql1Ipw
@@ -67,8 +67,8 @@ services:
        - RABBITMQ_DEFAULT_USER=mqadmin
        - RABBITMQ_DEFAULT_PASS=rmbt1L2
     volumes:
-       - ./Volumes/rabbitmq/data/:/var/lib/rabbitmq
-       - ./Volumes/rabbitmq/log/:/var/log/rabbitmq
+       - .\Volumes\rabbitmq\data:/var/lib/rabbitmq
+       - .\Volumes\rabbitmq\log:/var/log/rabbitmq
     networks:
       - parameter-network
 

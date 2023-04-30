@@ -1,4 +1,6 @@
-﻿namespace Parameters.Application.Integration.Handler.BankAccount;
+﻿using Parameters.Helper.Events.EventBus;
+
+namespace Parameters.Application.Integration.Handler.BankAccount;
 
 public class CreateFlowParameterIntegrationHandler : IIntegrationEventHandler<CreateFlowParameterIntegrationCommand>
 {
@@ -17,7 +19,7 @@ public class CreateFlowParameterIntegrationHandler : IIntegrationEventHandler<Cr
         {
             _logger.LogInformation("Start integration event create account");
 
-            await _eventService.SaveEventAsync(@event, SingletonTransaction.TransactionId);
+            await _eventService.SaveEventAsync(@event);
 
             _logger.LogInformation("Finish integration event create account");
         }

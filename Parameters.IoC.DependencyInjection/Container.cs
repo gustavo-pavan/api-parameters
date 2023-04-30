@@ -3,6 +3,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.Configuration;
 using Parameters.Helper.Behavior;
+using Parameters.Helper.Events.EventBus;
 using Parameters.Helper.Events.EventRabbitMQ.Container;
 using Parameters.Helper.Events.IntegrationEventLog.Context;
 using Parameters.Helper.Events.IntegrationEventLog.Services;
@@ -21,6 +22,7 @@ public static class Container
             {
                 x.RegisterServicesFromAssemblies(Assembly.Load("Parameters.Application.Request.Command"),
                     Assembly.Load("Parameters.Application.Request.Handler"),
+                    Assembly.Load("Parameters.Application.Request.Query"),
                     Assembly.Load("Parameters.Applicaiton.Notification.Command"),
                     Assembly.Load("Parameters.Application.Notification.Handler"));
             }
@@ -38,6 +40,8 @@ public static class Container
         service.RegisterIntegrationEvents();
 
         service.RegisterRabbitMQ(service.BuildServiceProvider().GetService<IConfiguration>()!);
+
+        service.AddScoped<SingletonTransaction>();
     }
 
     private static void RegisterIntegrationEvents(this IServiceCollection services)

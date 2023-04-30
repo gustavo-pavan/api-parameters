@@ -11,7 +11,6 @@ public class UnitOfWork : IDisposable, IUnitOfWork
     private readonly IntegrationEventContext _integrationEventContext;
     private readonly IParameterIntegrationEventService _parameterIntegrationEventService;
 
-
     public UnitOfWork(IMongoContext mongoContext, ILogger<UnitOfWork> logger,
         IntegrationEventContext integrationEventContext,
         IParameterIntegrationEventService parameterIntegrationEventService)
@@ -86,7 +85,7 @@ public class UnitOfWork : IDisposable, IUnitOfWork
 
             _logger.LogInformation("Finish commit");
         }
-        catch (Exception e)
+        catch 
         {
             _logger.LogInformation("Rollback transaction");
             await RollbackAsync();
@@ -96,8 +95,7 @@ public class UnitOfWork : IDisposable, IUnitOfWork
             _logger.LogInformation("Dispose transaction");
             if (_session is not null)
             {
-                await _parameterIntegrationEventService.PublishEventsThroughEventBusAsync(SingletonTransaction
-                    .TransactionId);
+                await _parameterIntegrationEventService.PublishEventsThroughEventBusAsync();
                 _session?.Dispose();
                 _mongoContext?.Dispose();
             }

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using Parameters.Applicaiton.Notification.Command.BankAccount;
+using Parameters.Application.Integration.Command.BankAccount;
 using Parameters.Application.Integration.Handler.BankAccount;
 using Parameters.Helper.Events.IntegrationEventLog.Services;
 
@@ -8,11 +9,13 @@ namespace Parameters.Application.Notification.Handler.BankAccount;
 
 public class CreateBankAccountNotificationHandler : INotificationHandler<CreateBankAccountNotificationCommand>
 {
-    private readonly IIntegrationEventService _service;
     private readonly ILogger<CreateBankAccountNotificationHandler> _logger;
     private readonly ILogger<CreateBankAccountIntegrationHandler> _loggerIntegration;
+    private readonly IIntegrationEventService _service;
 
-    public CreateBankAccountNotificationHandler(IIntegrationEventService service, ILogger<CreateBankAccountNotificationHandler> logger, ILogger<CreateBankAccountIntegrationHandler> loggerIntegration)
+    public CreateBankAccountNotificationHandler(IIntegrationEventService service,
+        ILogger<CreateBankAccountNotificationHandler> logger,
+        ILogger<CreateBankAccountIntegrationHandler> loggerIntegration)
     {
         _service = service;
         _logger = logger;
@@ -25,7 +28,7 @@ public class CreateBankAccountNotificationHandler : INotificationHandler<CreateB
 
         var @event = new CreateBankAccountIntegrationHandler(_service, _loggerIntegration);
 
-        await @event.Handler(new()
+        await @event.Handler(new CreateBankAccountIntegrationCommand
         {
             Id = notification.Id,
             Name = notification.Name

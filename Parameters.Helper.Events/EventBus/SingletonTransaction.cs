@@ -3,6 +3,7 @@
 public class SingletonTransaction
 {
     private Guid _transactionId;
+
     public Guid TransactionId
     {
         get

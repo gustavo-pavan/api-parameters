@@ -17,7 +17,8 @@ public class DeleteBaseRepository<TBaseEntity> : IDeleteBaseRepository<TBaseEnti
         if (Guid.Empty.Equals(id))
             throw new OperationCanceledException($"Can't delete because {nameof(BaseEntity.Id)} is not valid!");
 
-        _mongoContext.AddCommand<TBaseEntity>(default, () => Collection.DeleteOneAsync(Builders<TBaseEntity>.Filter.Eq("_id", id)));
+        _mongoContext.AddCommand<TBaseEntity>(default,
+            () => Collection.DeleteOneAsync(Builders<TBaseEntity>.Filter.Eq("_id", id)));
         return Task.CompletedTask;
     }
 

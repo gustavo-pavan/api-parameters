@@ -1,6 +1,10 @@
+using System.Net.Sockets;
+using System.Text;
+using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Parameters.Helper.Events.EventBus;
 using Parameters.Helper.Events.EventBus.Entity;
 using Parameters.Helper.Events.EventBus.Interfaces;
 using Parameters.Helper.Events.EventRabbitMQ.Connection;
@@ -9,26 +13,21 @@ using Polly;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using RabbitMQ.Client.Exceptions;
-using System.Net.Sockets;
-using System.Text;
-using System.Text.Json;
-using EventBusManager = Parameters.Helper.Events.EventBus.EventBusManager;
-using IModel = RabbitMQ.Client.IModel;
 
 namespace Parameters.Helper.Events.EventRabbitMQ.Event;
 
 public class EventRabbitMq : IEvent, IDisposable
 {
+    private readonly IConfiguration _configuration;
+    private readonly IEventBusManager _eventBusManager;
+    private readonly ILogger<EventRabbitMq> _logger;
+    private readonly IRabbitMQConnection _rabbitMQConnection;
+    private readonly int _retryCount;
+    private readonly IServiceCollection _services;
     private readonly string BROKER_NAME = "";
     private readonly string TYPE_EXCHANGE = "";
-    private readonly IRabbitMQConnection _rabbitMQConnection;
-    private readonly ILogger<EventRabbitMq> _logger;
-    private readonly IEventBusManager _eventBusManager;
-    private readonly int _retryCount;
-    private string? _queueName;
     private IModel _consumerChannel;
-    private readonly IServiceCollection _services;
-    private readonly IConfiguration _configuration;
+    private string? _queueName;
 
 
     public EventRabbitMq(IRabbitMQConnection rabbitMQConnection, ILogger<EventRabbitMq> logger,
@@ -46,6 +45,96 @@ public class EventRabbitMq : IEvent, IDisposable
         _services = services;
         _consumerChannel = CreateConsumerChannel();
         _eventBusManager.OnEventRemoved += SubsManagerOnEventRemoved;
+    }
+
+    public void Dispose()
+    {
+        if (_consumerChannel != null) _consumerChannel.Dispose();
+
+        _eventBusManager.Clear();
+    }
+
+    public void Publish(IntegrationEvent @event)
+    {
+        if (!_rabbitMQConnection.IsConnected) _rabbitMQConnection.TryConnect();
+
+
+        var policy = Policy.Handle<BrokerUnreachableException>()
+            .Or<SocketException>()
+            .WaitAndRetry(_retryCount, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
+                (ex, time) =>
+                {
+                    _logger.LogWarning(ex, "Could not publish event: {EventId} after {Timeout}s ({ExceptionMessage})",
+                        @event.Id, $"{time.TotalSeconds:n1}", ex.Message);
+                });
+
+        var eventName = @event.GetType().Name;
+
+        _logger.LogTrace("Creating RabbitMQ channel to publish event: {EventId} ({EventName})", @event.Id, eventName);
+
+        using var channel = _rabbitMQConnection.CreateModel();
+        _logger.LogTrace("Declaring RabbitMQ exchange to publish event: {EventId}", @event.Id);
+
+        channel.ExchangeDeclare(BROKER_NAME, TYPE_EXCHANGE);
+
+        var body = JsonSerializer.SerializeToUtf8Bytes(@event, @event.GetType(), new JsonSerializerOptions
+        {
+            WriteIndented = true
+        });
+
+        policy.Execute(() =>
+        {
+            var properties = channel.CreateBasicProperties();
+            properties.DeliveryMode = 2; // persistent
+
+            _logger.LogTrace("Publishing event to RabbitMQ: {EventId}", @event.Id);
+
+            channel.BasicPublish(
+                BROKER_NAME,
+                eventName,
+                true,
+                properties,
+                body);
+        });
+    }
+
+    public void Subscribe<T, U>()
+        where T : IntegrationEvent
+        where U : IIntegrationEventHandler<T>
+    {
+        var eventName = _eventBusManager.GetEventKey<T>();
+
+        _logger.LogInformation("Subscribing to event {EventName} with {EventHandler}", eventName,
+            typeof(T).GetGenericTypeName());
+
+        DoInternalSubscription(eventName);
+        _eventBusManager.AddSubscription<T, U>();
+        StartBasicConsume();
+    }
+
+    public void SubscribeDynamic<T>(string @event) where T : IIntegrationEventDynamicHandler
+    {
+        _logger.LogInformation("Subscribing to dynamic event {EventName} with {EventHandler}", @event,
+            typeof(T).GetGenericTypeName());
+        DoInternalSubscription(@event);
+        _eventBusManager.AddSubscription<T>(@event);
+        StartBasicConsume();
+    }
+
+    public void Unsubscribe<T, U>()
+        where T : IIntegrationEventHandler<U>
+        where U : IntegrationEvent
+    {
+        var eventName = _eventBusManager.GetEventKey<T>();
+
+        _logger.LogInformation("Unsubscribing from event {EventName}", eventName);
+
+        _eventBusManager.RemoveSubscription<U, T>();
+    }
+
+    public void UnsubscribeDynamic<T>(string @event) where T : IIntegrationEventDynamicHandler
+    {
+        _eventBusManager.RemoveDynamicSubscription<T>(@event);
     }
 
     private void SubsManagerOnEventRemoved(object? sender, string e)
@@ -149,69 +238,18 @@ public class EventRabbitMq : IEvent, IDisposable
                     if (handler == null) continue;
                     var eventType = _eventBusManager.GetEventTypeByName(eventName);
                     var integrationEvent = JsonSerializer.Deserialize(message, eventType,
-                        new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                        new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
                     var concreteType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventType);
 
                     await Task.Yield();
                     await Task.FromResult(concreteType.GetMethod("Handle")
-                        ?.Invoke(handler, new object[] { integrationEvent! }));
+                        ?.Invoke(handler, new[] { integrationEvent! }));
                 }
         }
         else
         {
             _logger.LogWarning("No subscription for RabbitMQ event: {EventName}", eventName);
         }
-    }
-
-    public void Dispose()
-    {
-        if (_consumerChannel != null) _consumerChannel.Dispose();
-
-        _eventBusManager.Clear();
-    }
-
-    public void Publish(IntegrationEvent @event)
-    {
-        if (!_rabbitMQConnection.IsConnected) _rabbitMQConnection.TryConnect();
-
-
-        var policy = Policy.Handle<BrokerUnreachableException>()
-            .Or<SocketException>()
-            .WaitAndRetry(_retryCount, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
-                (ex, time) =>
-                {
-                    _logger.LogWarning(ex, "Could not publish event: {EventId} after {Timeout}s ({ExceptionMessage})",
-                        @event.Id, $"{time.TotalSeconds:n1}", ex.Message);
-                });
-
-        var eventName = @event.GetType().Name;
-
-        _logger.LogTrace("Creating RabbitMQ channel to publish event: {EventId} ({EventName})", @event.Id, eventName);
-
-        using var channel = _rabbitMQConnection.CreateModel();
-        _logger.LogTrace("Declaring RabbitMQ exchange to publish event: {EventId}", @event.Id);
-
-        channel.ExchangeDeclare(BROKER_NAME, TYPE_EXCHANGE);
-
-        var body = JsonSerializer.SerializeToUtf8Bytes(@event, @event.GetType(), new JsonSerializerOptions
-        {
-            WriteIndented = true
-        });
-
-        policy.Execute(() =>
-        {
-            var properties = channel.CreateBasicProperties();
-            properties.DeliveryMode = 2; // persistent
-
-            _logger.LogTrace("Publishing event to RabbitMQ: {EventId}", @event.Id);
-
-            channel.BasicPublish(
-                BROKER_NAME,
-                eventName,
-                true,
-                properties,
-                body);
-        });
     }
 
     private void DoInternalSubscription(string eventName)
@@ -225,44 +263,5 @@ public class EventRabbitMq : IEvent, IDisposable
                 BROKER_NAME,
                 eventName);
         }
-    }
-
-    public void Subscribe<T, U>()
-        where T : IntegrationEvent
-        where U : IIntegrationEventHandler<T>
-    {
-        var eventName = _eventBusManager.GetEventKey<T>();
-
-        _logger.LogInformation("Subscribing to event {EventName} with {EventHandler}", eventName,
-            typeof(T).GetGenericTypeName());
-
-        DoInternalSubscription(eventName);
-        _eventBusManager.AddSubscription<T, U>();
-        StartBasicConsume();
-    }
-
-    public void SubscribeDynamic<T>(string @event) where T : IIntegrationEventDynamicHandler
-    {
-        _logger.LogInformation("Subscribing to dynamic event {EventName} with {EventHandler}", @event,
-            typeof(T).GetGenericTypeName());
-        DoInternalSubscription(@event);
-        _eventBusManager.AddSubscription<T>(@event);
-        StartBasicConsume();
-    }
-
-    public void Unsubscribe<T, U>()
-        where T : IIntegrationEventHandler<U>
-        where U : IntegrationEvent
-    {
-        var eventName = _eventBusManager.GetEventKey<T>();
-
-        _logger.LogInformation("Unsubscribing from event {EventName}", eventName);
-
-        _eventBusManager.RemoveSubscription<U, T>();
-    }
-
-    public void UnsubscribeDynamic<T>(string @event) where T : IIntegrationEventDynamicHandler
-    {
-        _eventBusManager.RemoveDynamicSubscription<T>(@event);
     }
 }

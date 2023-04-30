@@ -5,7 +5,8 @@ public class DeleteBankAccountIntegrationHandler : IIntegrationEventHandler<Dele
     private readonly IIntegrationEventService _eventService;
     private readonly ILogger<DeleteBankAccountIntegrationHandler> _logger;
 
-    public DeleteBankAccountIntegrationHandler(IIntegrationEventService eventService, ILogger<DeleteBankAccountIntegrationHandler> logger)
+    public DeleteBankAccountIntegrationHandler(IIntegrationEventService eventService,
+        ILogger<DeleteBankAccountIntegrationHandler> logger)
     {
         _eventService = eventService;
         _logger = logger;

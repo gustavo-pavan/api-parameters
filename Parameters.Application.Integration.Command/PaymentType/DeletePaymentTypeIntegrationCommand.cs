@@ -3,5 +3,4 @@
 public class DeletePaymentTypeIntegrationCommand : IntegrationEvent
 {
     public Guid Id { get; set; }
-
 }

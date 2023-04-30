@@ -5,11 +5,11 @@ namespace Parameters.Infra.Context.UoW;
 
 public class UnitOfWork : IDisposable, IUnitOfWork
 {
+    private readonly IntegrationEventContext _integrationEventContext;
     private readonly ILogger<UnitOfWork> _logger;
     private readonly IMongoContext _mongoContext;
-    private IClientSessionHandle? _session;
-    private readonly IntegrationEventContext _integrationEventContext;
     private readonly IParameterIntegrationEventService _parameterIntegrationEventService;
+    private IClientSessionHandle? _session;
 
     public UnitOfWork(IMongoContext mongoContext, ILogger<UnitOfWork> logger,
         IntegrationEventContext integrationEventContext,
@@ -85,7 +85,7 @@ public class UnitOfWork : IDisposable, IUnitOfWork
 
             _logger.LogInformation("Finish commit");
         }
-        catch 
+        catch
         {
             _logger.LogInformation("Rollback transaction");
             await RollbackAsync();

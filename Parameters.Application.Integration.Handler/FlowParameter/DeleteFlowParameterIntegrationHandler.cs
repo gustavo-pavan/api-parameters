@@ -7,7 +7,8 @@ public class DeleteFlowParameterIntegrationHandler : IIntegrationEventHandler<De
     private readonly IIntegrationEventService _eventService;
     private readonly ILogger<DeleteFlowParameterIntegrationHandler> _logger;
 
-    public DeleteFlowParameterIntegrationHandler(IIntegrationEventService eventService, ILogger<DeleteFlowParameterIntegrationHandler> logger)
+    public DeleteFlowParameterIntegrationHandler(IIntegrationEventService eventService,
+        ILogger<DeleteFlowParameterIntegrationHandler> logger)
     {
         _eventService = eventService;
         _logger = logger;

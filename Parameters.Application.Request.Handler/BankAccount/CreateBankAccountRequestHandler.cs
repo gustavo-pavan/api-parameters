@@ -30,7 +30,7 @@ public class
             await _baseAccountCreateRepository.Execute(account);
 
             _logger.LogInformation("Send new notification to create account");
-            account.AddDomainEvent(new CreateBankAccountNotificationCommand() { Id = account.Id, Name = account.Name });
+            account.AddDomainEvent(new CreateBankAccountNotificationCommand { Id = account.Id, Name = account.Name });
 
             _logger.LogInformation("Create account with success");
             return account;

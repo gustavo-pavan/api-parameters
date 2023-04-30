@@ -1,5 +1,4 @@
 ﻿using Parameters.Application.Request.Command.PaymentType;
-using Parameters.Application.Request.Handler.PaymentType;
 using Parameters.Application.Request.Query.PaymentType;
 using Parameters.Infra.Repository.PaymentType;
 

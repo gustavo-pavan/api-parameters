@@ -9,15 +9,15 @@ public class MongoContext : IMongoContext
 
     private readonly IConfiguration _configuration;
 
-    private IMongoDatabase? _database;
-
     private readonly IMediator _mediator;
+
+    private IMongoDatabase? _database;
 
 
     public MongoContext(IConfiguration configuration, IMediator mediator)
     {
         _configuration = configuration;
-        _commands = new();
+        _commands = new List<IDictionary<object, Func<Task>>>();
         _mediator = mediator;
     }
 
@@ -65,7 +65,7 @@ public class MongoContext : IMongoContext
 
             foreach (var item in dict)
             {
-                var baseEntity = (item.Key as BaseEntity);
+                var baseEntity = item.Key as BaseEntity;
 
                 var domainEvents = baseEntity!.DomainEvents?.ToList();
 
@@ -76,7 +76,6 @@ public class MongoContext : IMongoContext
                 foreach (var domainEvent in domainEvents)
                     await _mediator.Publish(domainEvent, cancellation);
             }
-
         }
 
         return _commands.Count();

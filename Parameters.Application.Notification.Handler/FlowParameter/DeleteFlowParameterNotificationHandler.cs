@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using Parameters.Applicaiton.Notification.Command.FlowParameter;
+using Parameters.Application.Integration.Command.FlowParameter;
 using Parameters.Application.Integration.Handler.FlowParameter;
 using Parameters.Helper.Events.IntegrationEventLog.Services;
 
@@ -8,11 +9,13 @@ namespace Parameters.Application.Notification.Handler.FlowParameter;
 
 public class DeleteFlowParameterNotificationHandler : INotificationHandler<DeleteFlowParameterNotificationCommand>
 {
-    private readonly IIntegrationEventService _service;
     private readonly ILogger<DeleteFlowParameterNotificationHandler> _logger;
     private readonly ILogger<DeleteFlowParameterIntegrationHandler> _loggerIntegration;
+    private readonly IIntegrationEventService _service;
 
-    public DeleteFlowParameterNotificationHandler(IIntegrationEventService service, ILogger<DeleteFlowParameterNotificationHandler> logger, ILogger<DeleteFlowParameterIntegrationHandler> loggerIntegration)
+    public DeleteFlowParameterNotificationHandler(IIntegrationEventService service,
+        ILogger<DeleteFlowParameterNotificationHandler> logger,
+        ILogger<DeleteFlowParameterIntegrationHandler> loggerIntegration)
     {
         _service = service;
         _logger = logger;
@@ -25,7 +28,7 @@ public class DeleteFlowParameterNotificationHandler : INotificationHandler<Delet
 
         var @event = new DeleteFlowParameterIntegrationHandler(_service, _loggerIntegration);
 
-        await @event.Handler(new()
+        await @event.Handler(new DeleteFlowParameterIntegrationCommand
         {
             Id = notification.Id
         });

@@ -5,7 +5,8 @@ public class CreateBankAccountIntegrationHandler : IIntegrationEventHandler<Crea
     private readonly IIntegrationEventService _eventService;
     private readonly ILogger<CreateBankAccountIntegrationHandler> _logger;
 
-    public CreateBankAccountIntegrationHandler(IIntegrationEventService eventService, ILogger<CreateBankAccountIntegrationHandler> logger)
+    public CreateBankAccountIntegrationHandler(IIntegrationEventService eventService,
+        ILogger<CreateBankAccountIntegrationHandler> logger)
     {
         _eventService = eventService;
         _logger = logger;

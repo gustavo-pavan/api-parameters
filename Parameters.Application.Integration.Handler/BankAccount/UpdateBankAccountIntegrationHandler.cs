@@ -5,7 +5,8 @@ public class UpdateBankAccountIntegrationHandler : IIntegrationEventHandler<Upda
     private readonly IIntegrationEventService _eventService;
     private readonly ILogger<UpdateBankAccountIntegrationHandler> _logger;
 
-    public UpdateBankAccountIntegrationHandler(IIntegrationEventService eventService, ILogger<UpdateBankAccountIntegrationHandler> logger)
+    public UpdateBankAccountIntegrationHandler(IIntegrationEventService eventService,
+        ILogger<UpdateBankAccountIntegrationHandler> logger)
     {
         _eventService = eventService;
         _logger = logger;

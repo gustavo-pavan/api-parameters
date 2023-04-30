@@ -1,10 +1,11 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Parameters.Helper.Events.EventBus;
 using Parameters.Helper.Events.EventBus.Interfaces;
 using Parameters.Helper.Events.EventRabbitMQ.Connection;
+using Parameters.Helper.Events.EventRabbitMQ.Event;
 using RabbitMQ.Client;
-using EventBusManager = Parameters.Helper.Events.EventBus.EventBusManager;
 
 namespace Parameters.Helper.Events.EventRabbitMQ.Container;
 
@@ -47,11 +48,11 @@ public static class RegisterEvent
 
         var provider = services.BuildServiceProvider();
 
-        services.AddSingleton<IEvent, Event.EventRabbitMq>(sp =>
+        services.AddSingleton<IEvent, EventRabbitMq>(sp =>
         {
-            return new Event.EventRabbitMq(
+            return new EventRabbitMq(
                 provider.GetService<IRabbitMQConnection>()!,
-                provider.GetService<ILogger<Event.EventRabbitMq>>()!,
+                provider.GetService<ILogger<EventRabbitMq>>()!,
                 provider.GetService<IEventBusManager>()!,
                 configuration,
                 services

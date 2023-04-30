@@ -7,7 +7,8 @@ public class DeletePaymentTypeIntegrationHandler : IIntegrationEventHandler<Dele
     private readonly IIntegrationEventService _eventService;
     private readonly ILogger<DeletePaymentTypeIntegrationHandler> _logger;
 
-    public DeletePaymentTypeIntegrationHandler(IIntegrationEventService eventService, ILogger<DeletePaymentTypeIntegrationHandler> logger)
+    public DeletePaymentTypeIntegrationHandler(IIntegrationEventService eventService,
+        ILogger<DeletePaymentTypeIntegrationHandler> logger)
     {
         _eventService = eventService;
         _logger = logger;

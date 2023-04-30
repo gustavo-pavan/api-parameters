@@ -1,5 +1,4 @@
 ﻿using Parameters.Application.Request.Command.BankAccount;
-using Parameters.Application.Request.Handler.BankAccount;
 using Parameters.Application.Request.Query.BankAccount;
 using Parameters.Infra.Repository.BankAccount;
 

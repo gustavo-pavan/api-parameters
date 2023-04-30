@@ -10,8 +10,6 @@ public class IntegrationEventContext : DbContext
 {
     private readonly IConfiguration _configuration;
     private readonly ILogger<IntegrationEventContext> _logger;
-
-
 #pragma warning disable CS8618
     public IntegrationEventContext(DbContextOptions<IntegrationEventContext> options, IConfiguration configuration,
         ILogger<IntegrationEventContext> logger)

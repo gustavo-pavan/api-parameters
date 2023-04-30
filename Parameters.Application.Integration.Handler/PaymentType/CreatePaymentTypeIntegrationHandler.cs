@@ -7,7 +7,8 @@ public class CreatePaymentTypeIntegrationHandler : IIntegrationEventHandler<Crea
     private readonly IIntegrationEventService _eventService;
     private readonly ILogger<CreatePaymentTypeIntegrationHandler> _logger;
 
-    public CreatePaymentTypeIntegrationHandler(IIntegrationEventService eventService, ILogger<CreatePaymentTypeIntegrationHandler> logger)
+    public CreatePaymentTypeIntegrationHandler(IIntegrationEventService eventService,
+        ILogger<CreatePaymentTypeIntegrationHandler> logger)
     {
         _eventService = eventService;
         _logger = logger;

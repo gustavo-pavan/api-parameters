@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using Parameters.Applicaiton.Notification.Command.PaymentType;
+using Parameters.Application.Integration.Command.PaymentType;
 using Parameters.Application.Integration.Handler.PaymentType;
 using Parameters.Helper.Events.IntegrationEventLog.Services;
 
@@ -8,11 +9,13 @@ namespace Parameters.Application.Notification.Handler.PaymentType;
 
 public class DeletePaymentTypeNotificationHandler : INotificationHandler<DeletePaymentTypeNotificationCommand>
 {
-    private readonly IIntegrationEventService _service;
     private readonly ILogger<DeletePaymentTypeNotificationHandler> _logger;
     private readonly ILogger<DeletePaymentTypeIntegrationHandler> _loggerIntegration;
+    private readonly IIntegrationEventService _service;
 
-    public DeletePaymentTypeNotificationHandler(IIntegrationEventService service, ILogger<DeletePaymentTypeNotificationHandler> logger, ILogger<DeletePaymentTypeIntegrationHandler> loggerIntegration)
+    public DeletePaymentTypeNotificationHandler(IIntegrationEventService service,
+        ILogger<DeletePaymentTypeNotificationHandler> logger,
+        ILogger<DeletePaymentTypeIntegrationHandler> loggerIntegration)
     {
         _service = service;
         _logger = logger;
@@ -25,7 +28,7 @@ public class DeletePaymentTypeNotificationHandler : INotificationHandler<DeleteP
 
         var @event = new DeletePaymentTypeIntegrationHandler(_service, _loggerIntegration);
 
-        await @event.Handler(new()
+        await @event.Handler(new DeletePaymentTypeIntegrationCommand
         {
             Id = notification.Id
         });

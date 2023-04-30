@@ -4,7 +4,7 @@ namespace Parameters.Helper.Events.IntegrationEventLog.Utilities;
 
 public class ResilientTransaction
 {
-    private DbContext _context;
+    private readonly DbContext _context;
 
     private ResilientTransaction(DbContext context)
     {

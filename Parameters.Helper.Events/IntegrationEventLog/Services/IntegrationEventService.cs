@@ -1,8 +1,8 @@
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Parameters.Helper.Events.EventBus;
 using Parameters.Helper.Events.IntegrationEventLog.Context;
 using Parameters.Helper.Events.IntegrationEventLog.Enums;
-using System.Reflection;
 using EntityIntegration = Parameters.Helper.Events.EventBus.Entity.IntegrationEvent;
 using IntegrationEventEntity = Parameters.Helper.Events.IntegrationEventLog.Entity.IntegrationEventLogEntry;
 
@@ -10,7 +10,12 @@ namespace Parameters.Helper.Events.IntegrationEventLog.Services;
 
 public class IntegrationEventService : IIntegrationEventService, IDisposable
 {
+    private readonly IntegrationEventContext _context;
+
+    private readonly List<Type> _eventTypes;
     private readonly SingletonTransaction _singletonTransaction;
+
+    private volatile bool _disposed;
 
     public IntegrationEventService(IntegrationEventContext context, SingletonTransaction singletonTransaction)
     {
@@ -24,6 +29,12 @@ public class IntegrationEventService : IIntegrationEventService, IDisposable
         _singletonTransaction = singletonTransaction;
     }
 
+    public void Dispose()
+    {
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
+
     public async Task<IEnumerable<IntegrationEventEntity>> RetrieveEventLogsPendingToPublishAsync(
         Guid transactionId)
     {
@@ -33,24 +44,20 @@ public class IntegrationEventService : IIntegrationEventService, IDisposable
             .ToListAsync();
 
         if (result.Any())
-            try
-            {
-                var results = result.OrderBy(o => o.CreationDate)
-                    .Select(x => x.DeserializeJsonContent(_eventTypes.Find(p => p.Name == x.EventTypeShortName)!));
+        {
+            var results = result.OrderBy(o => o.CreationDate)
+                .Select(x => x.DeserializeJsonContent(_eventTypes.Find(p => p.Name == x.EventTypeShortName)!));
 
-                return results;
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
+            return results;
+        }
 
         return new List<IntegrationEventEntity>();
     }
 
     public Task SaveEventAsync(EntityIntegration @event)
     {
-        if (Guid.Empty.Equals(_singletonTransaction.TransactionId)) throw new ArgumentNullException(nameof(_singletonTransaction.TransactionId));
+        if (Guid.Empty.Equals(_singletonTransaction.TransactionId))
+            throw new ArgumentNullException(nameof(_singletonTransaction.TransactionId));
 
         var eventLog = new IntegrationEventEntity(@event, _singletonTransaction.TransactionId);
         _context.IntegrationEventLogs.Add(eventLog);
@@ -90,16 +97,4 @@ public class IntegrationEventService : IIntegrationEventService, IDisposable
             _context?.Dispose();
         _disposed = true;
     }
-
-    public void Dispose()
-    {
-        Dispose(true);
-        GC.SuppressFinalize(this);
-    }
-
-    private readonly IntegrationEventContext _context;
-
-    private readonly List<Type> _eventTypes;
-
-    private volatile bool _disposed;
 }

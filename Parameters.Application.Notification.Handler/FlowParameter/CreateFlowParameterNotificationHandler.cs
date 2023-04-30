@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using Parameters.Applicaiton.Notification.Command.FlowParameter;
+using Parameters.Application.Integration.Command.FlowParameter;
 using Parameters.Application.Integration.Handler.FlowParameter;
 using Parameters.Helper.Events.IntegrationEventLog.Services;
 
@@ -8,11 +9,13 @@ namespace Parameters.Application.Notification.Handler.FlowParameter;
 
 public class CreateFlowParameterNotificationHandler : INotificationHandler<CreateFlowParameterNotificationCommand>
 {
-    private readonly IIntegrationEventService _service;
     private readonly ILogger<CreateFlowParameterNotificationHandler> _logger;
     private readonly ILogger<CreateFlowParameterIntegrationHandler> _loggerIntegration;
+    private readonly IIntegrationEventService _service;
 
-    public CreateFlowParameterNotificationHandler(IIntegrationEventService service, ILogger<CreateFlowParameterNotificationHandler> logger, ILogger<CreateFlowParameterIntegrationHandler> loggerIntegration)
+    public CreateFlowParameterNotificationHandler(IIntegrationEventService service,
+        ILogger<CreateFlowParameterNotificationHandler> logger,
+        ILogger<CreateFlowParameterIntegrationHandler> loggerIntegration)
     {
         _service = service;
         _logger = logger;
@@ -25,7 +28,7 @@ public class CreateFlowParameterNotificationHandler : INotificationHandler<Creat
 
         var @event = new CreateFlowParameterIntegrationHandler(_service, _loggerIntegration);
 
-        await @event.Handler(new()
+        await @event.Handler(new CreateFlowParameterIntegrationCommand
         {
             Id = notification.Id,
             Name = notification.Name

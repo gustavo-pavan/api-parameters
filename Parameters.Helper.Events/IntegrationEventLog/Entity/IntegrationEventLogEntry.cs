@@ -23,14 +23,6 @@ public class IntegrationEventLogEntry
         TransactionId = transactionId.ToString();
     }
 
-    public IntegrationEventLogEntry DeserializeJsonContent(Type type)
-    {
-        IntegrationEvent =
-            (JsonSerializer.Deserialize(Payload, type, new JsonSerializerOptions { PropertyNameCaseInsensitive = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull })
-                as IntegrationEvent)!;
-        return this;
-    }
-
     public Guid EventId { get; }
 
     public string? EventTypeName { get; }
@@ -48,4 +40,16 @@ public class IntegrationEventLogEntry
     public string Payload { get; }
 
     public string TransactionId { get; }
+
+    public IntegrationEventLogEntry DeserializeJsonContent(Type type)
+    {
+        IntegrationEvent =
+            (JsonSerializer.Deserialize(Payload, type,
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                    })
+                as IntegrationEvent)!;
+        return this;
+    }
 }

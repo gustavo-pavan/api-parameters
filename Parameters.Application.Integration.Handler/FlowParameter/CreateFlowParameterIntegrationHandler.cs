@@ -7,7 +7,8 @@ public class CreateFlowParameterIntegrationHandler : IIntegrationEventHandler<Cr
     private readonly IIntegrationEventService _eventService;
     private readonly ILogger<CreateFlowParameterIntegrationHandler> _logger;
 
-    public CreateFlowParameterIntegrationHandler(IIntegrationEventService eventService, ILogger<CreateFlowParameterIntegrationHandler> logger)
+    public CreateFlowParameterIntegrationHandler(IIntegrationEventService eventService,
+        ILogger<CreateFlowParameterIntegrationHandler> logger)
     {
         _eventService = eventService;
         _logger = logger;

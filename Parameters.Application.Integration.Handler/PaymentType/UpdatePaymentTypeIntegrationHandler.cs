@@ -7,7 +7,8 @@ public class UpdatePaymentTypeIntegrationHandler : IIntegrationEventHandler<Upda
     private readonly IIntegrationEventService _eventService;
     private readonly ILogger<UpdatePaymentTypeIntegrationHandler> _logger;
 
-    public UpdatePaymentTypeIntegrationHandler(IIntegrationEventService eventService, ILogger<UpdatePaymentTypeIntegrationHandler> logger)
+    public UpdatePaymentTypeIntegrationHandler(IIntegrationEventService eventService,
+        ILogger<UpdatePaymentTypeIntegrationHandler> logger)
     {
         _eventService = eventService;
         _logger = logger;

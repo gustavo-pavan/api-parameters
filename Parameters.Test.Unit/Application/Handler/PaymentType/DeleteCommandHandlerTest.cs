@@ -18,8 +18,16 @@ public class DeleteCommandHandlerTest
 
         DeletePaymentTypeRepository repository = new(mongoContextMock.Object);
 
+        Mock<IGetByIdPaymentTypeRepository> getIdRepository = new();
+
+        getIdRepository.Setup(x => x.Execute(It.IsAny<Guid>())).ReturnsAsync(new PaymentTypeEntity(
+            _faker.Random.Guid(),
+            _faker.Name.FullName(),
+            _faker.Random.AlphaNumeric(400)
+        ));
+
         DeletePaymentTypeRequestCommandHandler paymentTypeRequestCommand = new(repository, mockLogger.Object,
-            new Mock<IGetByIdPaymentTypeRepository>().Object);
+            getIdRepository.Object);
 
         DeletePaymentTypeRequestCommand command = new()
         {

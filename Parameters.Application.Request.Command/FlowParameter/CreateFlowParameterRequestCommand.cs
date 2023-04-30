@@ -1,6 +1,8 @@
-﻿namespace Parameters.Application.Request.Command.FlowParameter;
+﻿using Parameters.Application.Request.Dto;
 
-public class CreateFlowParameterRequestCommand : IRequest<FlowParameterEntity>
+namespace Parameters.Application.Request.Command.FlowParameter;
+
+public class CreateFlowParameterRequestCommand : IRequest<FlowParameterDto>
 {
     public string Name { get; set; }
     public string Description { get; set; }

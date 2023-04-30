@@ -1,6 +1,8 @@
-﻿namespace Parameters.Application.Request.Command.BankAccount;
+﻿using Parameters.Application.Request.Dto;
 
-public class UpdateBankAccountRequestCommand : IRequest<BankAccountEntity>
+namespace Parameters.Application.Request.Command.BankAccount;
+
+public class UpdateBankAccountRequestCommand : IRequest<BankAccountDto>
 {
     public Guid Id { get; set; }
     public string Name { get; set; }

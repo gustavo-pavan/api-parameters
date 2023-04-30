@@ -61,6 +61,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Application.Noti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Application.Notification.Command", "Parameters.Application.Notification.Command\Parameters.Application.Notification.Command.csproj", "{C8B50C0A-E6DD-47F2-9225-D902DEDEEAF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Application.Request.Dto", "Parameters.Application.Request.Dto\Parameters.Application.Request.Dto.csproj", "{ECE86659-FB96-4739-BBA0-DEA4C9B33A0A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +145,10 @@ Global
 		{C8B50C0A-E6DD-47F2-9225-D902DEDEEAF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8B50C0A-E6DD-47F2-9225-D902DEDEEAF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8B50C0A-E6DD-47F2-9225-D902DEDEEAF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECE86659-FB96-4739-BBA0-DEA4C9B33A0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECE86659-FB96-4739-BBA0-DEA4C9B33A0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECE86659-FB96-4739-BBA0-DEA4C9B33A0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECE86659-FB96-4739-BBA0-DEA4C9B33A0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -169,6 +175,7 @@ Global
 		{7B1ADF98-E4CA-4E94-9789-FCE28A8FA589} = {E6C7AE5A-503B-4DC7-AE0E-23FD57B05521}
 		{1F2BF10A-CAC7-4E1B-9DFC-AB4F475F014A} = {56A0D590-04EB-4696-BCFB-02A84F5692B6}
 		{C8B50C0A-E6DD-47F2-9225-D902DEDEEAF7} = {56A0D590-04EB-4696-BCFB-02A84F5692B6}
+		{ECE86659-FB96-4739-BBA0-DEA4C9B33A0A} = {7B1ADF98-E4CA-4E94-9789-FCE28A8FA589}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EFD85995-8D4F-489B-B48F-65C8E0791B6D}

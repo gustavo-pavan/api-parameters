@@ -1,12 +1,13 @@
 ﻿using Parameters.Application.Notification.Command.FlowParameter;
 using Parameters.Application.Request.Command.FlowParameter;
+using Parameters.Application.Request.Dto;
 using Parameters.Domain.Entity.Enums;
 using Parameters.Domain.Repository.FlowParameter;
 
 namespace Parameters.Application.Request.Handler.FlowParameter;
 
 public class
-    UpdateFlowParameterCommandHandler : IRequestHandler<UpdateFlowParameterUpdateRequestCommand, FlowParameterEntity>
+    UpdateFlowParameterCommandHandler : IRequestHandler<UpdateFlowParameterUpdateRequestCommand, FlowParameterDto>
 {
     private readonly IUpdateFlowParameterRepository _updateFlowParameterRepository;
     private readonly ILogger<UpdateFlowParameterCommandHandler> _logger;
@@ -18,7 +19,7 @@ public class
         _logger = logger;
     }
 
-    public async Task<FlowParameterEntity> Handle(UpdateFlowParameterUpdateRequestCommand request,
+    public async Task<FlowParameterDto> Handle(UpdateFlowParameterUpdateRequestCommand request,
         CancellationToken cancellationToken)
     {
         try
@@ -35,7 +36,7 @@ public class
                 { Id = flowParameter.Id, Name = flowParameter.Name });
 
             _logger.LogInformation("Update flow with success");
-            return flowParameter;
+            return new(flowParameter);
         }
         catch (Exception e)
         {

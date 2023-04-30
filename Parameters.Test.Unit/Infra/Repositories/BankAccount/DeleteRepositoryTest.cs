@@ -11,7 +11,7 @@ public class DeleteRepositoryTest
 
         DeleteBankAccountRepository repository = new(mongoContextMock.Object);
 
-        var func = async () => await repository.Execute(Guid.Empty);
+        var func = async () => await repository.Execute(new BankAccountEntity(Guid.Empty, "", 0, ""));
 
         func.Should().ThrowAsync<ArgumentException>()
             .WithMessage($"Can't delete because {nameof(BaseEntity.Id)} is not valid!");

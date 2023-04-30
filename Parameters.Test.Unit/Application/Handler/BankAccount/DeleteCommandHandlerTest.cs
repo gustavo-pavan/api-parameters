@@ -19,8 +19,16 @@ public class DeleteCommandHandlerTest
 
         DeleteBankAccountRepository repository = new(mongoContextMock.Object);
 
-        DeleteBankAccountRequestCommandHandler bankAccountRequestCommand = new(repository, mockLogger.Object,
-            new Mock<IGetByIdBankAccountRepository>().Object);
+        Mock<IGetByIdBankAccountRepository> getIdRepository = new();
+
+        getIdRepository.Setup(x => x.Execute(It.IsAny<Guid>())).ReturnsAsync(new BankAccountEntity(
+            _faker.Random.Guid(),
+            _faker.Name.FullName(),
+            _faker.Random.Decimal(200),
+            _faker.Random.AlphaNumeric(400)
+            ));
+
+        DeleteBankAccountRequestCommandHandler bankAccountRequestCommand = new(repository, mockLogger.Object, getIdRepository.Object);
 
         DeleteBankAccountRequestCommand command = new()
         {

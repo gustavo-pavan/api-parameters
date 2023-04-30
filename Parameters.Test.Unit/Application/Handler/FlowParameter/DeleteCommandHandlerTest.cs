@@ -1,5 +1,6 @@
 ﻿using Parameters.Application.Request.Command.FlowParameter;
 using Parameters.Application.Request.Handler.FlowParameter;
+using Parameters.Domain.Entity.Enums;
 using Parameters.Domain.Repository.FlowParameter;
 using Parameters.Infra.Repository.FlowParameter;
 
@@ -18,8 +19,18 @@ public class DeleteCommandHandlerTest
 
         DeleteFlowParameterRepository repository = new(mongoContextMock.Object);
 
+        Mock<IGetByIdFlowParameterRepository> getIdRepository = new();
+
+        getIdRepository.Setup(x => x.Execute(It.IsAny<Guid>())).ReturnsAsync(new FlowParameterEntity(
+            _faker.Random.Guid(),
+            _faker.Name.FullName(),
+           FlowType.Credit,
+            _faker.Random.AlphaNumeric(400)
+        ));
+
+
         DeleteFlowParameterRequestCommandHandler flowParameterRequestCommand = new(repository, mockLogger.Object,
-            new Mock<IGetByIdFlowParameterRepository>().Object);
+            getIdRepository.Object);
 
         DeleteFlowParameterRequestCommand command = new()
         {

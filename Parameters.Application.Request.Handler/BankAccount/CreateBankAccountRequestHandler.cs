@@ -1,10 +1,11 @@
 ﻿using Parameters.Application.Notification.Command.BankAccount;
 using Parameters.Application.Request.Command.BankAccount;
+using Parameters.Application.Request.Dto;
 using Parameters.Domain.Repository.BankAccount;
 
 namespace Parameters.Application.Request.Handler.BankAccount;
 
-public class CreateBankAccountRequestHandler : IRequestHandler<CreateBankAccountRequestCommand, BankAccountEntity>
+public class CreateBankAccountRequestHandler : IRequestHandler<CreateBankAccountRequestCommand, BankAccountDto>
 {
     private readonly ICreateBankAccountRepository _createBankAccountRepository;
     private readonly ILogger<CreateBankAccountRequestHandler> _logger;
@@ -16,14 +17,13 @@ public class CreateBankAccountRequestHandler : IRequestHandler<CreateBankAccount
         _logger = logger;
     }
 
-    public async Task<BankAccountEntity> Handle(CreateBankAccountRequestCommand request,
+    public async Task<BankAccountDto> Handle(CreateBankAccountRequestCommand request,
         CancellationToken cancellationToken)
     {
         try
         {
             _logger.LogInformation("Start handler to create new account bank");
-            var account = new BankAccountEntity(request.Name, request.Balance,
-                request.Description);
+            var account = new BankAccountEntity(request.Name, request.Balance, request.Description);
 
             _logger.LogInformation("Execute transaction with database");
             await _createBankAccountRepository.Execute(account);
@@ -32,7 +32,7 @@ public class CreateBankAccountRequestHandler : IRequestHandler<CreateBankAccount
             account.AddDomainEvent(new CreateBankAccountNotificationCommand { Id = account.Id, Name = account.Name });
 
             _logger.LogInformation("Create account with success");
-            return account;
+            return new BankAccountDto(account);
         }
         catch (Exception e)
         {

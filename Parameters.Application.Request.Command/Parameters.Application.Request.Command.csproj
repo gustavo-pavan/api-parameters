@@ -11,6 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Parameters.Application.Request.Dto\Parameters.Application.Request.Dto.csproj" />
 		<ProjectReference Include="..\Parameters.Domain.Entity\Parameters.Domain.Entity.csproj" />
 	</ItemGroup>
 

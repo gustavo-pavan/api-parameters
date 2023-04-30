@@ -11,7 +11,7 @@ public class DeleteRepositoryTest
 
         DeleteFlowParameterRepository repository = new(mongoContextMock.Object);
 
-        var func = async () => await repository.Execute(Guid.Empty);
+        var func = async () => await repository.Execute(new FlowParameterEntity(Guid.Empty, null, null, null));
 
         func.Should().ThrowAsync<ArgumentException>()
             .WithMessage($"Can't delete because {nameof(BaseEntity.Id)} is not valid!");

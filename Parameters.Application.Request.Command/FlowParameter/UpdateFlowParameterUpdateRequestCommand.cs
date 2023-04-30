@@ -1,6 +1,8 @@
-﻿namespace Parameters.Application.Request.Command.FlowParameter;
+﻿using Parameters.Application.Request.Dto;
 
-public class UpdateFlowParameterUpdateRequestCommand : IRequest<FlowParameterEntity>
+namespace Parameters.Application.Request.Command.FlowParameter;
+
+public class UpdateFlowParameterUpdateRequestCommand : IRequest<FlowParameterDto>
 {
     public Guid Id { get; set; }
     public string Name { get; set; }

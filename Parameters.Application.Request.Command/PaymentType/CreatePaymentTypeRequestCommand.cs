@@ -1,6 +1,8 @@
-﻿namespace Parameters.Application.Request.Command.PaymentType;
+﻿using Parameters.Application.Request.Dto;
 
-public class CreatePaymentTypeRequestCommand : IRequest<PaymentTypeEntity>
+namespace Parameters.Application.Request.Command.PaymentType;
+
+public class CreatePaymentTypeRequestCommand : IRequest<PaymentTypeDto>
 {
     public string Name { get; set; }
     public string Description { get; set; }

@@ -1,6 +1,8 @@
-﻿namespace Parameters.Application.Request.Command.BankAccount;
+﻿using Parameters.Application.Request.Dto;
 
-public class CreateBankAccountRequestCommand : IRequest<BankAccountEntity>
+namespace Parameters.Application.Request.Command.BankAccount;
+
+public class CreateBankAccountRequestCommand : IRequest<BankAccountDto>
 {
     public string Name { get; set; }
     public string Description { get; set; }

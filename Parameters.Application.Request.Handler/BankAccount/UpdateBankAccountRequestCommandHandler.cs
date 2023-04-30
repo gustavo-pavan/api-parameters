@@ -1,11 +1,12 @@
 ﻿using Parameters.Application.Notification.Command.BankAccount;
 using Parameters.Application.Request.Command.BankAccount;
+using Parameters.Application.Request.Dto;
 using Parameters.Domain.Repository.BankAccount;
 
 namespace Parameters.Application.Request.Handler.BankAccount;
 
 public class
-    UpdateBankAccountRequestCommandHandler : IRequestHandler<UpdateBankAccountRequestCommand, BankAccountEntity>
+    UpdateBankAccountRequestCommandHandler : IRequestHandler<UpdateBankAccountRequestCommand, BankAccountDto>
 {
     private readonly IUpdateBankAccountRepository _updateBankAccountRepository;
     private readonly ILogger<UpdateBankAccountRequestCommandHandler> _logger;
@@ -17,7 +18,7 @@ public class
         _logger = logger;
     }
 
-    public async Task<BankAccountEntity> Handle(UpdateBankAccountRequestCommand request,
+    public async Task<BankAccountDto> Handle(UpdateBankAccountRequestCommand request,
         CancellationToken cancellationToken)
     {
         try
@@ -33,7 +34,7 @@ public class
             account.AddDomainEvent(new UpdateBankAccountNotificationCommand { Id = account.Id, Name = account.Name });
 
             _logger.LogInformation("Update account with success");
-            return account;
+            return new(account);
         }
         catch (Exception e)
         {

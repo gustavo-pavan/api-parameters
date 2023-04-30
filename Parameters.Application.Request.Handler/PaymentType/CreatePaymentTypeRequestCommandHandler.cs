@@ -1,11 +1,12 @@
 ﻿using Parameters.Application.Notification.Command.PaymentType;
 using Parameters.Application.Request.Command.PaymentType;
+using Parameters.Application.Request.Dto;
 using Parameters.Domain.Repository.PaymentType;
 
 namespace Parameters.Application.Request.Handler.PaymentType;
 
 public class
-    CreatePaymentTypeRequestCommandHandler : IRequestHandler<CreatePaymentTypeRequestCommand, PaymentTypeEntity>
+    CreatePaymentTypeRequestCommandHandler : IRequestHandler<CreatePaymentTypeRequestCommand, PaymentTypeDto>
 {
     private readonly ILogger<CreatePaymentTypeRequestCommandHandler> _logger;
     private readonly ICreatePaymentTypeRepository _createPaymentTypeRepository;
@@ -17,7 +18,7 @@ public class
         _logger = logger;
     }
 
-    public async Task<PaymentTypeEntity> Handle(CreatePaymentTypeRequestCommand request,
+    public async Task<PaymentTypeDto> Handle(CreatePaymentTypeRequestCommand request,
         CancellationToken cancellationToken)
     {
         try
@@ -33,7 +34,7 @@ public class
                 { Id = paymentType.Id, Name = paymentType.Name });
 
             _logger.LogInformation("Create payment type with success");
-            return paymentType;
+            return new(paymentType);
         }
         catch (Exception e)
         {

@@ -17,8 +17,12 @@ public class UpdateBaseRepository<TBaseEntity> : IUpdateBaseRepository<TBaseEnti
         if (Guid.Empty.Equals(entity.Id))
             throw new ArgumentException($"Can't update because {nameof(BaseEntity.Id)} is not valid!");
 
-        _mongoContext.AddCommand(entity, () =>
-            Collection.ReplaceOneAsync(Builders<TBaseEntity>.Filter.Eq("_id", entity.Id), entity));
+        _mongoContext.AddCommand(entity, async () =>
+            {
+                var result = await Collection.ReplaceOneAsync(Builders<TBaseEntity>.Filter.Eq("_id", entity.Id), entity);
+                return result.IsModifiedCountAvailable && result.ModifiedCount > 0;
+
+            });
         return Task.CompletedTask;
     }
 

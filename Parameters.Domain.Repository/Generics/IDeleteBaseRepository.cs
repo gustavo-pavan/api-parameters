@@ -2,5 +2,5 @@
 
 public interface IDeleteBaseRepository<in TBaseEntity> : IDisposable where TBaseEntity : BaseEntity
 {
-    Task Execute(Guid id);
+    Task Execute(TBaseEntity entity);
 }

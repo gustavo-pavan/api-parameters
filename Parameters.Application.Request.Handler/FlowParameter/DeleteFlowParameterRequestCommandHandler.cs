@@ -26,9 +26,11 @@ public class DeleteFlowParameterRequestCommandHandler : IRequestHandler<DeleteFl
         {
             _logger.LogInformation("Start handler to delete flow");
             _logger.LogInformation("Execute transaction with database");
-            await _deleteFlowParameterRepository.Execute(request.Id);
-
             var flowParameter = await _getByIdFlowParameterRepository.Execute(request.Id);
+
+            if (flowParameter == null) throw new ArgumentException("Entity not exist!");
+
+            await _deleteFlowParameterRepository.Execute(flowParameter);
 
             _logger.LogInformation("Send new notification to delete parameter");
             flowParameter?.AddDomainEvent(new DeleteFlowParameterNotificationCommand() { Id = flowParameter.Id });

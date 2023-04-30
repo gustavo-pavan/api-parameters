@@ -1,5 +1,6 @@
 ﻿using Parameters.Application.Notification.Command.PaymentType;
 using Parameters.Application.Request.Command.PaymentType;
+using Parameters.Domain.Entity;
 using Parameters.Domain.Repository.PaymentType;
 
 namespace Parameters.Application.Request.Handler.PaymentType;
@@ -28,8 +29,10 @@ public class DeletePaymentTypeRequestCommandHandler : IRequestHandler<DeletePaym
 
             var paymentType = await _getByIdPaymentTypeRepository.Execute(request.Id);
 
+            if (paymentType == null) throw new ArgumentException("Entity not exist!");
+
             _logger.LogInformation("Execute transaction with database");
-            await _deletePaymentTypeRepository.Execute(request.Id);
+            await _deletePaymentTypeRepository.Execute(paymentType!);
 
             _logger.LogInformation("Send new notification to delete payment type");
             paymentType?.AddDomainEvent(new DeletePaymentTypeNotificationCommand { Id = paymentType.Id });

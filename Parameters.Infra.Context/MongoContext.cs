@@ -5,7 +5,7 @@ namespace Parameters.Infra.Context;
 
 public class MongoContext : IMongoContext
 {
-    private readonly List<IDictionary<object, Func<Task>>> _commands;
+    private readonly List<IDictionary<object, object>> _commands;
 
     private readonly IConfiguration _configuration;
 
@@ -17,7 +17,7 @@ public class MongoContext : IMongoContext
     public MongoContext(IConfiguration configuration, IMediator mediator)
     {
         _configuration = configuration;
-        _commands = new List<IDictionary<object, Func<Task>>>();
+        _commands = new List<IDictionary<object, object>>();
         _mediator = mediator;
     }
 
@@ -46,9 +46,9 @@ public class MongoContext : IMongoContext
         GC.SuppressFinalize(this);
     }
 
-    public void AddCommand<TEntity>(TEntity entity, Func<Task> func) where TEntity : BaseEntity
+    public void AddCommand<TEntity>(TEntity entity, Func<Task<bool>> func) where TEntity : BaseEntity
     {
-        _commands.Add(new Dictionary<object, Func<Task>>
+        _commands.Add(new Dictionary<object, object>
         {
             { entity, func }
         });
@@ -60,25 +60,32 @@ public class MongoContext : IMongoContext
 
         foreach (var dict in commandTask)
         {
-            foreach (var item in dict.Values)
-                await Task.Run(item);
-
             foreach (var item in dict)
             {
-                var baseEntity = item.Key as BaseEntity;
+                if (item.Value is not Func<Task<bool>> func) continue;
 
-                var domainEvents = baseEntity!.DomainEvents?.ToList();
+                var result = Task.Run(func, cancellation).Result;
 
-                if (domainEvents == null) continue;
-
-                baseEntity?.ClearDomainEvents();
-
-                foreach (var domainEvent in domainEvents)
-                    await _mediator.Publish(domainEvent, cancellation);
+                if (result)
+                    await PublishEvent(cancellation, item.Key);
             }
         }
 
         return _commands.Count();
+    }
+
+    private async Task PublishEvent(CancellationToken cancellation, object item)
+    {
+        var baseEntity = item as BaseEntity;
+
+        var domainEvents = baseEntity!.DomainEvents?.ToList();
+
+        if (domainEvents == null) return;
+
+        baseEntity?.ClearDomainEvents();
+
+        foreach (var domainEvent in domainEvents)
+            await _mediator.Publish(domainEvent, cancellation);
     }
 
     public IMongoCollection<T> GetCollection<T>(string collectionName)

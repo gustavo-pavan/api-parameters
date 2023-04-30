@@ -12,13 +12,17 @@ public class DeleteBaseRepository<TBaseEntity> : IDeleteBaseRepository<TBaseEnti
 
     public IMongoCollection<TBaseEntity> Collection { get; }
 
-    public Task Execute(Guid id)
+    public Task Execute(TBaseEntity entity)
     {
-        if (Guid.Empty.Equals(id))
+        if (Guid.Empty.Equals(entity.Id))
             throw new OperationCanceledException($"Can't delete because {nameof(BaseEntity.Id)} is not valid!");
 
-        _mongoContext.AddCommand<TBaseEntity>(default,
-            () => Collection.DeleteOneAsync(Builders<TBaseEntity>.Filter.Eq("_id", id)));
+        _mongoContext.AddCommand<TBaseEntity>(entity, async () =>
+            {
+                var result = await Collection.DeleteOneAsync(Builders<TBaseEntity>.Filter.Eq("_id", entity.Id));
+                return result.DeletedCount > 0;
+            });
+
         return Task.CompletedTask;
     }
 

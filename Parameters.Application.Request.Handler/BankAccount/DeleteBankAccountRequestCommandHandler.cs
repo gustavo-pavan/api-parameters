@@ -1,5 +1,6 @@
 ﻿using Parameters.Application.Notification.Command.BankAccount;
 using Parameters.Application.Request.Command.BankAccount;
+using Parameters.Domain.Entity;
 using Parameters.Domain.Repository.BankAccount;
 
 namespace Parameters.Application.Request.Handler.BankAccount;
@@ -29,8 +30,10 @@ public class DeleteBankAccountRequestCommandHandler : IRequestHandler<DeleteBank
             _logger.LogInformation("Get user in database");
             var entity = await _getByIdBankAccountRepository.Execute(request.Id);
 
+            if (entity == null) throw new ArgumentException("Entity not exist!");
+
             _logger.LogInformation("Execute transaction with database");
-            await _deleteBankAccountRepository.Execute(request.Id);
+            await _deleteBankAccountRepository.Execute(entity);
 
             _logger.LogInformation("Send new notification to delete account");
             entity?.AddDomainEvent(new DeleteBankAccountNotificationCommand { Id = request.Id });

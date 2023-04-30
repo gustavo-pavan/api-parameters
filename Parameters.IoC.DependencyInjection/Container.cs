@@ -23,7 +23,7 @@ public static class Container
                 x.RegisterServicesFromAssemblies(Assembly.Load("Parameters.Application.Request.Command"),
                     Assembly.Load("Parameters.Application.Request.Handler"),
                     Assembly.Load("Parameters.Application.Request.Query"),
-                    Assembly.Load("Parameters.Applicaiton.Notification.Command"),
+                    Assembly.Load("Parameters.Application.Notification.Command"),
                     Assembly.Load("Parameters.Application.Notification.Handler"));
             }
         );

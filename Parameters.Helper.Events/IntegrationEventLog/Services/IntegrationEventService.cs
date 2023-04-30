@@ -1,8 +1,7 @@
-using System.Reflection;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using Parameters.Helper.Events.IntegrationEventLog.Context;
 using Parameters.Helper.Events.IntegrationEventLog.Enums;
+using System.Reflection;
 using EntityIntegration = Parameters.Helper.Events.EventBus.Entity.IntegrationEvent;
 using IntegrationEventEntity = Parameters.Helper.Events.IntegrationEventLog.Entity.IntegrationEventLogEntry;
 
@@ -14,9 +13,9 @@ public class IntegrationEventService : IIntegrationEventService, IDisposable
     {
         _context = context;
 
-        _eventTypes = Assembly.Load("Parameters.Application.Request.Command")
+        _eventTypes = Assembly.Load("Parameters.Application.Integration.Command")
             .GetTypes()
-            .Where(x => x.Name.Contains("IntegrationEvent"))
+            .Where(x => x.Name.Contains("Integration"))
             .ToList();
     }
 

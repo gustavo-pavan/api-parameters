@@ -31,30 +31,38 @@ public class ParameterIntegrationEventService : IParameterIntegrationEventServic
     {
         var pendingEvents = await _integrationEventService.RetrieveEventLogsPendingToPublishAsync(transactionId);
 
-        if (pendingEvents.Any())
-            foreach (var pendingEvent in pendingEvents)
-            {
-                _logger.LogInformation("Publishing integration event: {IntegrationEventId}", pendingEvent.EventId);
-
-                try
+        try
+        {
+            if (pendingEvents.Any())
+                foreach (var pendingEvent in pendingEvents)
                 {
-                    _logger.LogInformation("Mark event in progress event - ({event})", pendingEvent.EventId);
-                    await _integrationEventService.MarkEventAsInProgressAsync(pendingEvent.EventId);
+                    _logger.LogInformation("Publishing integration event: {IntegrationEventId}", pendingEvent.EventId);
 
-                    _event.Publish(pendingEvent.IntegrationEvent);
+                    try
+                    {
+                        _logger.LogInformation("Mark event in progress event - ({event})", pendingEvent.EventId);
+                        await _integrationEventService.MarkEventAsInProgressAsync(pendingEvent.EventId);
 
-                    _logger.LogInformation("Mark event in published event - ({event})", pendingEvent.EventId);
-                    await _integrationEventService.MarkEventAsPublishedAsync(pendingEvent.EventId);
+                        _event.Publish(pendingEvent.IntegrationEvent);
+
+                        _logger.LogInformation("Mark event in published event - ({event})", pendingEvent.EventId);
+                        await _integrationEventService.MarkEventAsPublishedAsync(pendingEvent.EventId);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex,
+                            "Exception publishing integration event: {IntegrationEventId} --- Exception: {ex}",
+                            pendingEvent.EventId, ex.Message);
+                        await _integrationEventService.MarkEventAsFailedAsync(pendingEvent.EventId);
+                        throw new Exception(ex.Message);
+                    }
                 }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex,
-                        "Exception publishing integration event: {IntegrationEventId} --- Exception: {ex}",
-                        pendingEvent.EventId, ex.Message);
-                    await _integrationEventService.MarkEventAsFailedAsync(pendingEvent.EventId);
-                    throw new Exception(ex.Message);
-                }
-            }
+        }
+        catch (Exception e)
+        {
+
+            throw;
+        }
     }
 
     #endregion

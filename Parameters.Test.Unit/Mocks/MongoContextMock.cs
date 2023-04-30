@@ -2,7 +2,7 @@
 
 public class MongoContextMock
 {
-    public static Mock<IMongoContext> Mock<T>(IEnumerable<T> accounts)
+    public static Mock<IMongoContext> Mock<T>(IEnumerable<T> accounts) where T : BaseEntity
     {
         var cursorMock = new Mock<IAsyncCursor<T>>();
         var mongoContextMock = new Mock<IMongoContext>();
@@ -24,7 +24,7 @@ public class MongoContextMock
                 It.IsAny<FindOptions<T, T>>(), It.IsAny<CancellationToken>()))
             .ReturnsAsync(cursorMock.Object);
 
-        mongoContextMock.Setup(x => x.AddCommand(It.IsAny<Func<Task>>()));
+        mongoContextMock.Setup(x => x.AddCommand<T>(It.IsAny<T>(), It.IsAny<Func<Task>>()));
 
         mongoContextMock.Setup(x => x.GetCollection<T>(It.IsAny<string>()))
             .Returns(mongoCollectionMock.Object);

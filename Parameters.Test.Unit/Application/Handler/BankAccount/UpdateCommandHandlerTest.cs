@@ -11,7 +11,7 @@ public class UpdateCommandHandlerTest
     [Fact]
     public async Task Should_Update_Account()
     {
-        var mockLogger = new Mock<ILogger<CreateBankAccountRequestCommandHandler>>();
+        var mockLogger = new Mock<ILogger<CreateBankAccountRequestHandler>>();
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity>());
 
@@ -35,7 +35,7 @@ public class UpdateCommandHandlerTest
     [Fact]
     public void Should_Throw_Exception_Update_Account()
     {
-        var mockLogger = new Mock<ILogger<CreateBankAccountRequestCommandHandler>>();
+        var mockLogger = new Mock<ILogger<CreateBankAccountRequestHandler>>();
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity>());
 

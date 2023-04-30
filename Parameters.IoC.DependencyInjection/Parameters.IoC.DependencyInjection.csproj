@@ -13,6 +13,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Parameters.Applicaiton.Notification.Command\Parameters.Applicaiton.Notification.Command.csproj" />
+		<ProjectReference Include="..\Parameters.Application.Notification.Handler\Parameters.Application.Notification.Handler.csproj" />
 		<ProjectReference Include="..\Parameters.Application.Request.Command\Parameters.Application.Request.Command.csproj" />
 		<ProjectReference Include="..\Parameters.Application.Request.Handler\Parameters.Application.Request.Handler.csproj" />
 		<ProjectReference Include="..\Parameters.Application.Request.Validation\Parameters.Application.Request.Validation.csproj" />

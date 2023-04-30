@@ -1,16 +1,17 @@
-﻿using Parameters.Application.Request.Command.BankAccount;
+﻿using Parameters.Application.Notification.Command.BankAccount;
+using Parameters.Application.Request.Command.BankAccount;
 using Parameters.Domain.Repository.BankAccount;
 
 namespace Parameters.Application.Request.Handler.BankAccount;
 
 public class
-    CreateBankAccountRequestCommandHandler : IRequestHandler<CreateBankAccountRequestCommand, BankAccountEntity>
+    CreateBankAccountRequestHandler : IRequestHandler<CreateBankAccountRequestCommand, BankAccountEntity>
 {
     private readonly IBaseAccountCreateRepository _baseAccountCreateRepository;
-    private readonly ILogger<CreateBankAccountRequestCommandHandler> _logger;
+    private readonly ILogger<CreateBankAccountRequestHandler> _logger;
 
-    public CreateBankAccountRequestCommandHandler(IBaseAccountCreateRepository baseAccountCreateRepository,
-        ILogger<CreateBankAccountRequestCommandHandler> logger)
+    public CreateBankAccountRequestHandler(IBaseAccountCreateRepository baseAccountCreateRepository,
+        ILogger<CreateBankAccountRequestHandler> logger)
     {
         _baseAccountCreateRepository = baseAccountCreateRepository;
         _logger = logger;
@@ -27,6 +28,9 @@ public class
 
             _logger.LogInformation("Execute transaction with database");
             await _baseAccountCreateRepository.Execute(account);
+
+            _logger.LogInformation("Send new notification to create account");
+            account.AddDomainEvent(new CreateFlowParameterNotificationCommand() { Id = account.Id, Name = account.Name });
 
             _logger.LogInformation("Create account with success");
             return account;

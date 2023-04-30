@@ -26,7 +26,7 @@ public class IntegrationEventContext : DbContext
         _logger.LogInformation("Init method configure integration event context");
 
         if (!optionsBuilder.IsConfigured)
-            optionsBuilder.UseSqlServer(_configuration["ConnectionStrings:Integration"],
+            optionsBuilder.UseSqlServer(_configuration["ConnectionStrings_Integration"],
                 b => b.MigrationsAssembly("Parameters.Helper.Events"));
 
         base.OnConfiguring(optionsBuilder);

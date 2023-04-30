@@ -9,7 +9,7 @@ public class UnitOfWorkTest
     public async Task Should_Return_Status_True()
     {
         var contextMock = new Mock<IMongoContext>();
-        contextMock.Setup(x => x.SaveChanges())
+        contextMock.Setup(x => x.SaveChanges(It.IsAny<CancellationToken>()))
             .ReturnsAsync(2);
 
         var sessionMock = new Mock<IClientSessionHandle>();

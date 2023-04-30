@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="BankAccount\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Parameters.Application.Integration.Command\Parameters.Application.Integration.Command.csproj" />
     <ProjectReference Include="..\Parameters.Helper.Events\Parameters.Helper.Events.csproj" />
     <ProjectReference Include="..\Parameters.Infra.Context\Parameters.Infra.Context.csproj" />

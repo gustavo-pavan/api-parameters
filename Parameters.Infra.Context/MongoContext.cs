@@ -1,17 +1,24 @@
-﻿namespace Parameters.Infra.Context;
+﻿using MediatR;
+using Parameters.Domain.Entity;
+
+namespace Parameters.Infra.Context;
 
 public class MongoContext : IMongoContext
 {
-    private readonly List<Func<Task>> _commands;
+    private readonly List<IDictionary<object, Func<Task>>> _commands;
 
     private readonly IConfiguration _configuration;
 
     private IMongoDatabase? _database;
 
-    public MongoContext(IConfiguration configuration)
+    private readonly IMediator _mediator;
+
+
+    public MongoContext(IConfiguration configuration, IMediator mediator)
     {
         _configuration = configuration;
-        _commands = new List<Func<Task>>();
+        _commands = new();
+        _mediator = mediator;
     }
 
     private Task<IClientSessionHandle>? Session { get; set; }
@@ -39,15 +46,38 @@ public class MongoContext : IMongoContext
         GC.SuppressFinalize(this);
     }
 
-    public void AddCommand(Func<Task> func)
+    public void AddCommand<TEntity>(TEntity entity, Func<Task> func) where TEntity : BaseEntity
     {
-        _commands.Add(func);
+        _commands.Add(new Dictionary<object, Func<Task>>
+        {
+            { entity, func }
+        });
     }
 
-    public async Task<int> SaveChanges()
+    public async Task<int> SaveChanges(CancellationToken cancellation = new())
     {
-        var commandTask = _commands.Select(x => x());
-        await Task.WhenAll(commandTask);
+        var commandTask = _commands.Select(x => x);
+
+        foreach (var dict in commandTask)
+        {
+            foreach (var item in dict.Values)
+                await Task.Run(item);
+
+            foreach (var item in dict)
+            {
+                var baseEntity = (item.Key as BaseEntity);
+
+                var domainEvents = baseEntity!.DomainEvents?.ToList();
+
+                if (domainEvents == null) continue;
+
+                baseEntity?.ClearDomainEvents();
+
+                foreach (var domainEvent in domainEvents)
+                    await _mediator.Publish(domainEvent, cancellation);
+            }
+
+        }
 
         return _commands.Count();
     }

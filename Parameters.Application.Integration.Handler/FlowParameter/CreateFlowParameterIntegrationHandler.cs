@@ -1,17 +1,17 @@
 ﻿namespace Parameters.Application.Integration.Handler.BankAccount;
 
-public class CreateBankAccountHandler : IIntegrationEventHandler<CreateBankAccountCommand>
+public class CreateFlowParameterIntegrationHandler : IIntegrationEventHandler<CreateFlowParameterIntegrationCommand>
 {
     private readonly IIntegrationEventService _eventService;
-    private readonly ILogger<CreateBankAccountHandler> _logger;
+    private readonly ILogger<CreateFlowParameterIntegrationHandler> _logger;
 
-    public CreateBankAccountHandler(IIntegrationEventService eventService, ILogger<CreateBankAccountHandler> logger)
+    public CreateFlowParameterIntegrationHandler(IIntegrationEventService eventService, ILogger<CreateFlowParameterIntegrationHandler> logger)
     {
         _eventService = eventService;
         _logger = logger;
     }
 
-    public async Task Handler(CreateBankAccountCommand @event)
+    public async Task Handler(CreateFlowParameterIntegrationCommand @event)
     {
         try
         {

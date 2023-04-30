@@ -7,10 +7,10 @@ public class
     UpdateBankAccountRequestCommandHandler : IRequestHandler<UpdateBankAccountRequestCommand, BankAccountEntity>
 {
     private readonly IBaseAccountUpdateRepository _baseAccountUpdateRepository;
-    private readonly ILogger<CreateBankAccountRequestCommandHandler> _logger;
+    private readonly ILogger<CreateBankAccountRequestHandler> _logger;
 
     public UpdateBankAccountRequestCommandHandler(IBaseAccountUpdateRepository baseAccountUpdateRepository,
-        ILogger<CreateBankAccountRequestCommandHandler> logger)
+        ILogger<CreateBankAccountRequestHandler> logger)
     {
         _baseAccountUpdateRepository = baseAccountUpdateRepository;
         _logger = logger;

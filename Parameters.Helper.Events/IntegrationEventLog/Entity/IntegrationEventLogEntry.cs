@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Parameters.Helper.Events.EventBus.Entity;
 using Parameters.Helper.Events.IntegrationEventLog.Enums;
 
@@ -25,7 +26,7 @@ public class IntegrationEventLogEntry
     public IntegrationEventLogEntry DeserializeJsonContent(Type type)
     {
         IntegrationEvent =
-            (JsonSerializer.Deserialize(Payload, type, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })
+            (JsonSerializer.Deserialize(Payload, type, new JsonSerializerOptions { PropertyNameCaseInsensitive = true, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull })
                 as IntegrationEvent)!;
         return this;
     }

@@ -86,7 +86,7 @@ public class UnitOfWork : IDisposable, IUnitOfWork
 
             _logger.LogInformation("Finish commit");
         }
-        catch
+        catch (Exception e)
         {
             _logger.LogInformation("Rollback transaction");
             await RollbackAsync();

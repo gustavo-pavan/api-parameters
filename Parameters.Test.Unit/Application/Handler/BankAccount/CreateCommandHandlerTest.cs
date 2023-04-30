@@ -11,13 +11,13 @@ public class CreateCommandHandlerTest
     [Fact]
     public async Task Should_Create_Account()
     {
-        var mockLogger = new Mock<ILogger<CreateBankAccountRequestCommandHandler>>();
+        var mockLogger = new Mock<ILogger<CreateBankAccountRequestHandler>>();
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity>());
 
         BaseAccountCreateRepository repository = new(mongoContextMock.Object);
 
-        CreateBankAccountRequestCommandHandler bankAccountRequestCommand = new(repository, mockLogger.Object);
+        CreateBankAccountRequestHandler bankAccountRequestCommand = new(repository, mockLogger.Object);
 
         CreateBankAccountRequestCommand command = new()
         {
@@ -34,13 +34,13 @@ public class CreateCommandHandlerTest
     [Fact]
     public void Should_Throw_Exception_Create_Account()
     {
-        var mockLogger = new Mock<ILogger<CreateBankAccountRequestCommandHandler>>();
+        var mockLogger = new Mock<ILogger<CreateBankAccountRequestHandler>>();
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity>());
 
         BaseAccountCreateRepository repository = new(mongoContextMock.Object);
 
-        CreateBankAccountRequestCommandHandler bankAccountRequestCommand = new(repository, mockLogger.Object);
+        CreateBankAccountRequestHandler bankAccountRequestCommand = new(repository, mockLogger.Object);
 
         CreateBankAccountRequestCommand command = new()
         {

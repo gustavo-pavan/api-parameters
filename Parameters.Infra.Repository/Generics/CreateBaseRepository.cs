@@ -22,7 +22,7 @@ public class CreateBaseRepository<TBaseEntity> : ICreateBaseRepository<TBaseEnti
 
         props?.SetValue(entity, Guid.NewGuid(), null);
 
-        _mongoContext.AddCommand(() => Collection.InsertOneAsync(entity));
+        _mongoContext.AddCommand(entity, () => Collection.InsertOneAsync(entity));
         return Task.CompletedTask;
     }
 

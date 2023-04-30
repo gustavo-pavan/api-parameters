@@ -20,7 +20,9 @@ public static class Container
         service.AddMediatR(x =>
             {
                 x.RegisterServicesFromAssemblies(Assembly.Load("Parameters.Application.Request.Command"),
-                    Assembly.Load("Parameters.Application.Request.Handler"));
+                    Assembly.Load("Parameters.Application.Request.Handler"),
+                    Assembly.Load("Parameters.Applicaiton.Notification.Command"),
+                    Assembly.Load("Parameters.Application.Notification.Handler"));
             }
         );
 

@@ -11,8 +11,7 @@ services:
     environment:
       - MongoSettings_Connection=mongodb://root:password123@mongodb:27017
       - MongoSettings_DatabaseName=PARAMETERS
-      - ConnectionStrings:Integration=Server=mssql,1433;Initial Catalog=Catalog;
-      - User ID=sa;Password=mssql1Ipw;
+      - ConnectionStrings_Integration=Server=mssqldb,1433;Initial Catalog=Parameter;Persist Security Info=False;User ID=sa;Password=mssql1Ipw;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;
       - RabbitMQConfiguration:HostName=rabbitmq
       - RabbitMQConfiguration:UserName=mqadmin
       - RabbitMQConfiguration:Password=rmbt1L2
@@ -22,8 +21,12 @@ services:
       - RabbitMQConfiguration:QUEUE_NAME=parameter_mqueue
     depends_on:
       - mongodb
+      - mssqldb
+      - rabbitmq
     links:
       - mongodb
+      - mssqldb
+      - rabbitmq
 
   mongodb:
     container_name: mongo
@@ -41,7 +44,7 @@ services:
     networks:
       - parameter-network
 
-  mssql:
+  mssqldb:
      image: 'mcr.microsoft.com/mssql/server:2019-latest'
      container_name: mssql
      ports:

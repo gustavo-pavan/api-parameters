@@ -18,7 +18,7 @@ public class GetCommandHandlerTest
             new(Guid.NewGuid(), _faker.Name.FullName(), _faker.Random.AlphaNumeric(400))
         });
 
-        PaymentTypeGetRepository repository = new(mongoContextMock.Object);
+        GetPaymentTypeRepository repository = new(mongoContextMock.Object);
 
         GetPaymentTypeRequestCommandHandler paymentTypeRequestCommand = new(repository, mockLogger.Object);
 

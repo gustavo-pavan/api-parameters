@@ -1,4 +1,5 @@
-﻿using Parameters.Application.Request.Command.FlowParameter;
+﻿using Parameters.Application.Notification.Command.FlowParameter;
+using Parameters.Application.Request.Command.FlowParameter;
 using Parameters.Domain.Entity.Enums;
 using Parameters.Domain.Repository.FlowParameter;
 
@@ -7,27 +8,31 @@ namespace Parameters.Application.Request.Handler.FlowParameter;
 public class
     CreateFlowParameterRequestCommandHandler : IRequestHandler<CreateFlowParameterRequestCommand, FlowParameterEntity>
 {
-    private readonly IFlowParameterCreateRepository _flowParameterCreateRepository;
+    private readonly ICreateFlowParameterRepository _createFlowParameterRepository;
     private readonly ILogger<CreateFlowParameterRequestCommandHandler> _logger;
 
-    public CreateFlowParameterRequestCommandHandler(IFlowParameterCreateRepository flowParameterCreateRepository,
+    public CreateFlowParameterRequestCommandHandler(ICreateFlowParameterRepository createFlowParameterRepository,
         ILogger<CreateFlowParameterRequestCommandHandler> logger)
     {
-        _flowParameterCreateRepository = flowParameterCreateRepository;
+        _createFlowParameterRepository = createFlowParameterRepository;
         _logger = logger;
     }
 
-    public async Task<FlowParameterEntity> Handle(CreateFlowParameterRequestCommand flowParameterRequest,
+    public async Task<FlowParameterEntity> Handle(CreateFlowParameterRequestCommand request,
         CancellationToken cancellationToken)
     {
         try
         {
             _logger.LogInformation("Start handler to create new flow");
-            var flowParameter = new FlowParameterEntity(flowParameterRequest.Name,
-                FlowEnumeration.FromValue<FlowType>(flowParameterRequest.FlowType), flowParameterRequest.Description);
+            var flowParameter = new FlowParameterEntity(request.Name,
+                FlowEnumeration.FromValue<FlowType>(request.FlowType), request.Description);
 
             _logger.LogInformation("Execute transaction with database");
-            await _flowParameterCreateRepository.Execute(flowParameter);
+            await _createFlowParameterRepository.Execute(flowParameter);
+
+            _logger.LogInformation("Send new notification to create flow parameter");
+            flowParameter.AddDomainEvent(new CreateFlowParameterNotificationCommand
+                { Id = flowParameter.Id, Name = flowParameter.Name });
 
             _logger.LogInformation("Create flow with success");
             return flowParameter;

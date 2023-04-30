@@ -49,7 +49,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Application.Inte
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{C14F5EA8-232E-4A94-97D2-B1BCBFD36A87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Application.Request.Query", "Parameters.Application.Request.Query\Parameters.Application.Request.Query.csproj", "{E18CB786-CB05-40E3-9008-46624DF45B57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Application.Request.Query", "Parameters.Application.Request.Query\Parameters.Application.Request.Query.csproj", "{E18CB786-CB05-40E3-9008-46624DF45B57}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notification", "Notification", "{56A0D590-04EB-4696-BCFB-02A84F5692B6}"
 EndProject
@@ -57,9 +57,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Request", "Request", "{7B1ADF98-E4CA-4E94-9789-FCE28A8FA589}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Application.Notification.Handler", "Parameters.Application.Notification.Handler\Parameters.Application.Notification.Handler.csproj", "{1F2BF10A-CAC7-4E1B-9DFC-AB4F475F014A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Application.Notification.Handler", "Parameters.Application.Notification.Handler\Parameters.Application.Notification.Handler.csproj", "{1F2BF10A-CAC7-4E1B-9DFC-AB4F475F014A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parameters.Applicaiton.Notification.Command", "Parameters.Applicaiton.Notification.Command\Parameters.Applicaiton.Notification.Command.csproj", "{C8B50C0A-E6DD-47F2-9225-D902DEDEEAF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parameters.Application.Notification.Command", "Parameters.Application.Notification.Command\Parameters.Application.Notification.Command.csproj", "{C8B50C0A-E6DD-47F2-9225-D902DEDEEAF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

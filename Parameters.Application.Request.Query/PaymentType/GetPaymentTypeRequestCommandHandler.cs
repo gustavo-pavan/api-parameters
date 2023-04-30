@@ -8,12 +8,12 @@ public class
         IEnumerable<PaymentTypeEntity>>
 {
     private readonly ILogger<GetPaymentTypeRequestCommandHandler> _logger;
-    private readonly IPaymentTypeGetRepository _paymentTypeGetRepository;
+    private readonly IGetPaymentTypeRepository _getPaymentTypeRepository;
 
-    public GetPaymentTypeRequestCommandHandler(IPaymentTypeGetRepository paymentTypeGetRepository,
+    public GetPaymentTypeRequestCommandHandler(IGetPaymentTypeRepository getPaymentTypeRepository,
         ILogger<GetPaymentTypeRequestCommandHandler> logger)
     {
-        _paymentTypeGetRepository = paymentTypeGetRepository;
+        _getPaymentTypeRepository = getPaymentTypeRepository;
         _logger = logger;
     }
 
@@ -24,7 +24,7 @@ public class
         {
             _logger.LogInformation("Start handler to get payment type");
             _logger.LogInformation("Execute transaction with database");
-            var result = await _paymentTypeGetRepository.Execute();
+            var result = await _getPaymentTypeRepository.Execute();
 
             _logger.LogInformation("Get payments type lows with success");
             return result;

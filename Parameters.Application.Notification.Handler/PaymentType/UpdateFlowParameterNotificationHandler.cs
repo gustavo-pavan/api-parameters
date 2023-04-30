@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using Parameters.Applicaiton.Notification.Command.PaymentType;
 using Parameters.Application.Integration.Command.PaymentType;
 using Parameters.Application.Integration.Handler.PaymentType;
+using Parameters.Application.Notification.Command.PaymentType;
 using Parameters.Helper.Events.IntegrationEventLog.Services;
 
 namespace Parameters.Application.Notification.Handler.PaymentType;

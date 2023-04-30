@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Parameters.Applicaiton.Notification.Command\Parameters.Applicaiton.Notification.Command.csproj" />
     <ProjectReference Include="..\Parameters.Application.Integration.Handler\Parameters.Application.Integration.Handler.csproj" />
+    <ProjectReference Include="..\Parameters.Application.Notification.Command\Parameters.Application.Notification.Command.csproj" />
     <ProjectReference Include="..\Parameters.Helper.Events\Parameters.Helper.Events.csproj" />
   </ItemGroup>
 

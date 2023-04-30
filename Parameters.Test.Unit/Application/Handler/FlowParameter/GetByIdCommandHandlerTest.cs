@@ -18,7 +18,7 @@ public class GetByIdCommandHandlerTest
             _faker.Random.AlphaNumeric(400));
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity> { flowParameter });
 
-        FlowParameterGetByIdRepository repository = new(mongoContextMock.Object);
+        GetByIdFlowParameterRepository repository = new(mongoContextMock.Object);
 
         GetByIdFlowParameterRequestCommandHandler flowParameterRequestCommand = new(repository, mockLogger.Object);
 

@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using Parameters.Applicaiton.Notification.Command.BankAccount;
 using Parameters.Application.Integration.Command.BankAccount;
 using Parameters.Application.Integration.Handler.BankAccount;
+using Parameters.Application.Notification.Command.BankAccount;
 using Parameters.Helper.Events.IntegrationEventLog.Services;
 
 namespace Parameters.Application.Notification.Handler.BankAccount;

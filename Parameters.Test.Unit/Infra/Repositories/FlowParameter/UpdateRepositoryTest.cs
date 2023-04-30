@@ -15,7 +15,7 @@ public class UpdateRepositoryTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity> { flowParameter });
 
-        FlowParameterUpdateRepository repository = new(mongoContextMock.Object);
+        UpdateFlowParameterRepository repository = new(mongoContextMock.Object);
 
         var func = async () => await repository.Execute(flowParameter);
 

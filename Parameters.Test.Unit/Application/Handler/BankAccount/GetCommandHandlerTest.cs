@@ -18,7 +18,7 @@ public class GetCommandHandlerTest
             new(Guid.NewGuid(), _faker.Name.FullName(), _faker.Random.Decimal(200), _faker.Random.AlphaNumeric(400))
         });
 
-        BaseAccountGetRepository repository = new(mongoContextMock.Object);
+        GetBankAccountRepository repository = new(mongoContextMock.Object);
 
         GetBankAccountRequestCommandHandler bankAccountRequestCommand = new(repository, mockLogger.Object);
 

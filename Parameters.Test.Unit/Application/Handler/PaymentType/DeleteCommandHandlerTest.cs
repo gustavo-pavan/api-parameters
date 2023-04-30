@@ -1,5 +1,6 @@
 ﻿using Parameters.Application.Request.Command.PaymentType;
 using Parameters.Application.Request.Handler.PaymentType;
+using Parameters.Domain.Repository.PaymentType;
 using Parameters.Infra.Repository.PaymentType;
 
 namespace Parameters.Test.Unit.Application.Handler.PaymentType;
@@ -15,9 +16,10 @@ public class DeleteCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<PaymentTypeEntity>());
 
-        PaymentTypeDeleteRepository repository = new(mongoContextMock.Object);
+        DeletePaymentTypeRepository repository = new(mongoContextMock.Object);
 
-        DeletePaymentTypeRequestCommandHandler paymentTypeRequestCommand = new(repository, mockLogger.Object);
+        DeletePaymentTypeRequestCommandHandler paymentTypeRequestCommand = new(repository, mockLogger.Object,
+            new Mock<IGetByIdPaymentTypeRepository>().Object);
 
         DeletePaymentTypeRequestCommand command = new()
         {
@@ -36,9 +38,10 @@ public class DeleteCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<PaymentTypeEntity>());
 
-        PaymentTypeDeleteRepository repository = new(mongoContextMock.Object);
+        DeletePaymentTypeRepository repository = new(mongoContextMock.Object);
 
-        DeletePaymentTypeRequestCommandHandler paymentTypeRequestCommand = new(repository, mockLogger.Object);
+        DeletePaymentTypeRequestCommandHandler paymentTypeRequestCommand = new(repository, mockLogger.Object,
+            new Mock<IGetByIdPaymentTypeRepository>().Object);
 
         DeletePaymentTypeRequestCommand command = new();
 

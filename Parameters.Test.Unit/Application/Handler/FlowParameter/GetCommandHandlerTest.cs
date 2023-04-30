@@ -20,7 +20,7 @@ public class GetCommandHandlerTest
                 _faker.Random.AlphaNumeric(400))
         });
 
-        FlowParameterGetRepository repository = new(mongoContextMock.Object);
+        GetFlowParameterRepository repository = new(mongoContextMock.Object);
 
         GetRequestFlowParameterCommandHandler requestFlowParameterCommand = new(repository, mockLogger.Object);
 

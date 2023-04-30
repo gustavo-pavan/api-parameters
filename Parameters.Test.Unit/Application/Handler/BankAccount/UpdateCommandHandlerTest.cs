@@ -11,11 +11,11 @@ public class UpdateCommandHandlerTest
     [Fact]
     public async Task Should_Update_Account()
     {
-        var mockLogger = new Mock<ILogger<CreateBankAccountRequestHandler>>();
+        var mockLogger = new Mock<ILogger<UpdateBankAccountRequestCommandHandler>>();
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity>());
 
-        BaseAccountUpdateRepository repository = new(mongoContextMock.Object);
+        UpdateBankAccountRepository repository = new(mongoContextMock.Object);
 
         UpdateBankAccountRequestCommandHandler bankAccountRequestCommand = new(repository, mockLogger.Object);
 
@@ -35,11 +35,11 @@ public class UpdateCommandHandlerTest
     [Fact]
     public void Should_Throw_Exception_Update_Account()
     {
-        var mockLogger = new Mock<ILogger<CreateBankAccountRequestHandler>>();
+        var mockLogger = new Mock<ILogger<UpdateBankAccountRequestCommandHandler>>();
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity>());
 
-        BaseAccountUpdateRepository repository = new(mongoContextMock.Object);
+        UpdateBankAccountRepository repository = new(mongoContextMock.Object);
 
         UpdateBankAccountRequestCommandHandler bankAccountRequestCommand = new(repository, mockLogger.Object);
 

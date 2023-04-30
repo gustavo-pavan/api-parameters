@@ -7,13 +7,13 @@ public class
     GetByIdFlowParameterRequestCommandHandler : IRequestHandler<GetByIdFlowParameterRequestCommand, FlowParameterEntity
         ?>
 {
-    private readonly IFlowParameterGetByIdRepository _flowParameterGetByIdRepository;
+    private readonly IGetByIdFlowParameterRepository _getByIdFlowParameterRepository;
     private readonly ILogger<GetByIdFlowParameterRequestCommandHandler> _logger;
 
-    public GetByIdFlowParameterRequestCommandHandler(IFlowParameterGetByIdRepository flowParameterGetByIdRepository,
+    public GetByIdFlowParameterRequestCommandHandler(IGetByIdFlowParameterRepository getByIdFlowParameterRepository,
         ILogger<GetByIdFlowParameterRequestCommandHandler> logger)
     {
-        _flowParameterGetByIdRepository = flowParameterGetByIdRepository;
+        _getByIdFlowParameterRepository = getByIdFlowParameterRepository;
         _logger = logger;
     }
 
@@ -24,7 +24,7 @@ public class
         {
             _logger.LogInformation("Start handler to get flow");
             _logger.LogInformation("Execute transaction with database");
-            var result = await _flowParameterGetByIdRepository.Execute(flowParameterRequest.Id);
+            var result = await _getByIdFlowParameterRepository.Execute(flowParameterRequest.Id);
 
             _logger.LogInformation("Get flow with success");
             return result;

@@ -12,7 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Parameters.Applicaiton.Notification.Command\Parameters.Applicaiton.Notification.Command.csproj" />
+		<ProjectReference Include="..\Parameters.Application.Notification.Command\Parameters.Application.Notification.Command.csproj" />
 		<ProjectReference Include="..\Parameters.Application.Request.Command\Parameters.Application.Request.Command.csproj" />
 		<ProjectReference Include="..\Parameters.Domain.Entity\Parameters.Domain.Entity.csproj" />
 		<ProjectReference Include="..\Parameters.Domain.Repository\Parameters.Domain.Repository.csproj" />

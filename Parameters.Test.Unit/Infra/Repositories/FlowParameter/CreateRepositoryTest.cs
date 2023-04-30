@@ -15,7 +15,7 @@ public class CreateRepositoryTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity> { flowParameter });
 
-        FlowParameterCreateRepository repository = new(mongoContextMock.Object);
+        CreateFlowParameterRepository repository = new(mongoContextMock.Object);
 
         await repository.Execute(flowParameter);
         flowParameter.Id.Should().Be(flowParameter.Id);
@@ -29,7 +29,7 @@ public class CreateRepositoryTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity> { account });
 
-        FlowParameterCreateRepository repository = new(mongoContextMock.Object);
+        CreateFlowParameterRepository repository = new(mongoContextMock.Object);
 
         var func = async () => await repository.Execute(account);
 

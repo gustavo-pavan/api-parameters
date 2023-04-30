@@ -14,7 +14,7 @@ public class CreateRepositoryTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity> { account });
 
-        BaseAccountCreateRepository repository = new(mongoContextMock.Object);
+        CreateBankAccountRepository repository = new(mongoContextMock.Object);
 
         await repository.Execute(account);
         account.Id.Should().Be(account.Id);
@@ -28,7 +28,7 @@ public class CreateRepositoryTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity> { account });
 
-        BaseAccountCreateRepository repository = new(mongoContextMock.Object);
+        CreateBankAccountRepository repository = new(mongoContextMock.Object);
 
         var func = async () => await repository.Execute(account);
 

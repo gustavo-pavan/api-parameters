@@ -1,4 +1,5 @@
-﻿using Parameters.Application.Request.Command.BankAccount;
+﻿using Parameters.Application.Notification.Command.BankAccount;
+using Parameters.Application.Request.Command.BankAccount;
 using Parameters.Domain.Repository.BankAccount;
 
 namespace Parameters.Application.Request.Handler.BankAccount;
@@ -6,27 +7,30 @@ namespace Parameters.Application.Request.Handler.BankAccount;
 public class
     UpdateBankAccountRequestCommandHandler : IRequestHandler<UpdateBankAccountRequestCommand, BankAccountEntity>
 {
-    private readonly IBaseAccountUpdateRepository _baseAccountUpdateRepository;
-    private readonly ILogger<CreateBankAccountRequestHandler> _logger;
+    private readonly IUpdateBankAccountRepository _updateBankAccountRepository;
+    private readonly ILogger<UpdateBankAccountRequestCommandHandler> _logger;
 
-    public UpdateBankAccountRequestCommandHandler(IBaseAccountUpdateRepository baseAccountUpdateRepository,
-        ILogger<CreateBankAccountRequestHandler> logger)
+    public UpdateBankAccountRequestCommandHandler(IUpdateBankAccountRepository updateBankAccountRepository,
+        ILogger<UpdateBankAccountRequestCommandHandler> logger)
     {
-        _baseAccountUpdateRepository = baseAccountUpdateRepository;
+        _updateBankAccountRepository = updateBankAccountRepository;
         _logger = logger;
     }
 
-    public async Task<BankAccountEntity> Handle(UpdateBankAccountRequestCommand bankAccountRequest,
+    public async Task<BankAccountEntity> Handle(UpdateBankAccountRequestCommand request,
         CancellationToken cancellationToken)
     {
         try
         {
             _logger.LogInformation("Start handler to update account bank");
-            var account = new BankAccountEntity(bankAccountRequest.Id, bankAccountRequest.Name,
-                bankAccountRequest.Balance, bankAccountRequest.Description);
+            var account = new BankAccountEntity(request.Id, request.Name,
+                request.Balance, request.Description);
 
             _logger.LogInformation("Execute transaction with database");
-            await _baseAccountUpdateRepository.Execute(account);
+            await _updateBankAccountRepository.Execute(account);
+
+            _logger.LogInformation("Send new notification to update account");
+            account.AddDomainEvent(new UpdateBankAccountNotificationCommand { Id = account.Id, Name = account.Name });
 
             _logger.LogInformation("Update account with success");
             return account;

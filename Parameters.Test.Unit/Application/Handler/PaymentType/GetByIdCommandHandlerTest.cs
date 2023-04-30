@@ -15,7 +15,7 @@ public class GetByIdCommandHandlerTest
         PaymentTypeEntity paymentType = new(Guid.NewGuid(), _faker.Name.FullName(), _faker.Random.AlphaNumeric(400));
         var mongoContextMock = MongoContextMock.Mock(new List<PaymentTypeEntity> { paymentType });
 
-        PaymentTypeGetByIdRepository repository = new(mongoContextMock.Object);
+        GetByIdPaymentTypeRepository repository = new(mongoContextMock.Object);
 
         GetByIdPaymentTypeRequestCommandHandler paymentTypeRequestCommand = new(repository, mockLogger.Object);
 

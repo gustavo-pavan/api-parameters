@@ -1,5 +1,7 @@
 ﻿using Parameters.Application.Request.Command.BankAccount;
 using Parameters.Application.Request.Handler.BankAccount;
+using Parameters.Domain.Repository.BankAccount;
+using Parameters.Domain.Repository.FlowParameter;
 using Parameters.Infra.Repository.BankAccount;
 
 namespace Parameters.Test.Unit.Application.Handler.BankAccount;
@@ -15,9 +17,10 @@ public class DeleteCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity>());
 
-        BaseAccountDeleteRepository repository = new(mongoContextMock.Object);
+        DeleteBankAccountRepository repository = new(mongoContextMock.Object);
 
-        DeleteBankAccountRequestCommandHandler bankAccountRequestCommand = new(repository, mockLogger.Object);
+        DeleteBankAccountRequestCommandHandler bankAccountRequestCommand = new(repository, mockLogger.Object,
+            new Mock<IGetByIdBankAccountRepository>().Object);
 
         DeleteBankAccountRequestCommand command = new()
         {
@@ -36,9 +39,10 @@ public class DeleteCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity>());
 
-        BaseAccountDeleteRepository repository = new(mongoContextMock.Object);
+        DeleteBankAccountRepository repository = new(mongoContextMock.Object);
 
-        DeleteBankAccountRequestCommandHandler bankAccountRequestCommand = new(repository, mockLogger.Object);
+        DeleteBankAccountRequestCommandHandler bankAccountRequestCommand = new(repository, mockLogger.Object,
+            new Mock<IGetByIdBankAccountRepository>().Object);
 
         DeleteBankAccountRequestCommand command = new();
 

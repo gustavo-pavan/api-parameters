@@ -14,7 +14,7 @@ public class UpdateRepositoryTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<BankAccountEntity> { account });
 
-        BaseAccountUpdateRepository repository = new(mongoContextMock.Object);
+        UpdateBankAccountRepository repository = new(mongoContextMock.Object);
 
         var func = async () => await repository.Execute(account);
 

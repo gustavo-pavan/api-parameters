@@ -1,4 +1,5 @@
-﻿using Parameters.Application.Request.Command.PaymentType;
+﻿using Parameters.Application.Notification.Command.PaymentType;
+using Parameters.Application.Request.Command.PaymentType;
 using Parameters.Domain.Repository.PaymentType;
 
 namespace Parameters.Application.Request.Handler.PaymentType;
@@ -7,25 +8,29 @@ public class
     UpdatePaymentTypeRequestCommandHandler : IRequestHandler<UpdatePaymentTypeRequestCommand, PaymentTypeEntity>
 {
     private readonly ILogger<UpdatePaymentTypeRequestCommandHandler> _logger;
-    private readonly IPaymentTypeUpdateRepository _paymentTypeUpdateRepository;
+    private readonly IUpdatePaymentTypeRepository _updatePaymentTypeRepository;
 
-    public UpdatePaymentTypeRequestCommandHandler(IPaymentTypeUpdateRepository paymentTypeUpdateRepository,
+    public UpdatePaymentTypeRequestCommandHandler(IUpdatePaymentTypeRepository updatePaymentTypeRepository,
         ILogger<UpdatePaymentTypeRequestCommandHandler> logger)
     {
-        _paymentTypeUpdateRepository = paymentTypeUpdateRepository;
+        _updatePaymentTypeRepository = updatePaymentTypeRepository;
         _logger = logger;
     }
 
-    public async Task<PaymentTypeEntity> Handle(UpdatePaymentTypeRequestCommand paymentTypeRequest,
+    public async Task<PaymentTypeEntity> Handle(UpdatePaymentTypeRequestCommand request,
         CancellationToken cancellationToken)
     {
         try
         {
             _logger.LogInformation("Start handler to update payment");
-            var paymentType = new PaymentTypeEntity(paymentTypeRequest.Id, paymentTypeRequest.Name,
-                paymentTypeRequest.Description);
+            var paymentType = new PaymentTypeEntity(request.Id, request.Name,
+                request.Description);
             _logger.LogInformation("Execute transaction with database");
-            await _paymentTypeUpdateRepository.Execute(paymentType);
+            await _updatePaymentTypeRepository.Execute(paymentType);
+
+            _logger.LogInformation("Send new notification to update payment type");
+            paymentType.AddDomainEvent(new UpdatePaymentTypeNotificationCommand
+                { Id = paymentType.Id, Name = paymentType.Name });
 
             _logger.LogInformation("Update payment with success");
             return paymentType;

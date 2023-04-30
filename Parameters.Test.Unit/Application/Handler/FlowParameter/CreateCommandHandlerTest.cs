@@ -15,7 +15,7 @@ public class CreateCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity>());
 
-        FlowParameterCreateRepository repository = new(mongoContextMock.Object);
+        CreateFlowParameterRepository repository = new(mongoContextMock.Object);
 
         CreateFlowParameterRequestCommandHandler flowParameterRequestCommand = new(repository, mockLogger.Object);
 
@@ -38,7 +38,7 @@ public class CreateCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity>());
 
-        FlowParameterCreateRepository repository = new(mongoContextMock.Object);
+        CreateFlowParameterRepository repository = new(mongoContextMock.Object);
 
         CreateFlowParameterRequestCommandHandler flowParameterRequestCommand = new(repository, mockLogger.Object);
 

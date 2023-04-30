@@ -1,5 +1,6 @@
 ﻿using Parameters.Application.Request.Command.FlowParameter;
 using Parameters.Application.Request.Handler.FlowParameter;
+using Parameters.Domain.Repository.FlowParameter;
 using Parameters.Infra.Repository.FlowParameter;
 
 namespace Parameters.Test.Unit.Application.Handler.FlowParameter;
@@ -15,9 +16,10 @@ public class DeleteCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity>());
 
-        FlowParameterDeleteRepository repository = new(mongoContextMock.Object);
+        DeleteFlowParameterRepository repository = new(mongoContextMock.Object);
 
-        DeleteFlowParameterRequestCommandHandler flowParameterRequestCommand = new(repository, mockLogger.Object);
+        DeleteFlowParameterRequestCommandHandler flowParameterRequestCommand = new(repository, mockLogger.Object,
+            new Mock<IGetByIdFlowParameterRepository>().Object);
 
         DeleteFlowParameterRequestCommand command = new()
         {
@@ -36,9 +38,10 @@ public class DeleteCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<FlowParameterEntity>());
 
-        FlowParameterDeleteRepository repository = new(mongoContextMock.Object);
+        DeleteFlowParameterRepository repository = new(mongoContextMock.Object);
 
-        DeleteFlowParameterRequestCommandHandler flowParameterRequestCommand = new(repository, mockLogger.Object);
+        DeleteFlowParameterRequestCommandHandler flowParameterRequestCommand = new(repository, mockLogger.Object,
+            new Mock<IGetByIdFlowParameterRepository>().Object);
 
         DeleteFlowParameterRequestCommand command = new();
 

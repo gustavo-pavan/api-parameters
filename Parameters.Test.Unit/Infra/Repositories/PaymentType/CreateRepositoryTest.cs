@@ -13,7 +13,7 @@ public class CreateRepositoryTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<PaymentTypeEntity> { paymentType });
 
-        PaymentTypeCreateRepository repository = new(mongoContextMock.Object);
+        CreatePaymentTypeRepository repository = new(mongoContextMock.Object);
 
         await repository.Execute(paymentType);
         paymentType.Id.Should().Be(paymentType.Id);
@@ -27,7 +27,7 @@ public class CreateRepositoryTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<PaymentTypeEntity> { paymentType });
 
-        PaymentTypeCreateRepository repository = new(mongoContextMock.Object);
+        CreatePaymentTypeRepository repository = new(mongoContextMock.Object);
 
         var func = async () => await repository.Execute(paymentType);
 

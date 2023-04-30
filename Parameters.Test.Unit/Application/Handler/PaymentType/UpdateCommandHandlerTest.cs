@@ -15,7 +15,7 @@ public class UpdateCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<PaymentTypeEntity>());
 
-        PaymentTypeUpdateRepository repository = new(mongoContextMock.Object);
+        UpdatePaymentTypeRepository repository = new(mongoContextMock.Object);
 
         UpdatePaymentTypeRequestCommandHandler paymentTypeRequestCommand = new(repository, mockLogger.Object);
 
@@ -38,7 +38,7 @@ public class UpdateCommandHandlerTest
 
         var mongoContextMock = MongoContextMock.Mock(new List<PaymentTypeEntity>());
 
-        PaymentTypeUpdateRepository repository = new(mongoContextMock.Object);
+        UpdatePaymentTypeRepository repository = new(mongoContextMock.Object);
 
         UpdatePaymentTypeRequestCommandHandler paymentTypeRequestCommand = new(repository, mockLogger.Object);
 

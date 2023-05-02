@@ -31,7 +31,8 @@ public class CreateFlowParameterNotificationHandler : INotificationHandler<Creat
         await @event.Handler(new CreateFlowParameterIntegrationCommand
         {
             Id = notification.Id,
-            Name = notification.Name
+            Name = notification.Name,
+            FlowType = notification.FlowType,
         });
 
         _logger.LogInformation("Finish notification create flow parameter in integration event");

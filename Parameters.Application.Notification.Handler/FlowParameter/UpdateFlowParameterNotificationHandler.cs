@@ -31,7 +31,8 @@ public class UpdateFlowParameterNotificationHandler : INotificationHandler<Updat
         await @event.Handler(new UpdateFlowParameterIntegrationCommand
         {
             Id = notification.Id,
-            Name = notification.Name
+            Name = notification.Name,
+            FlowType = notification.FlowType
         });
 
         _logger.LogInformation("Finish notification update flow parameter in integration event");

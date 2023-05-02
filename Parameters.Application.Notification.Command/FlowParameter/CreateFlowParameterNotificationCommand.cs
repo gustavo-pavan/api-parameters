@@ -6,4 +6,5 @@ public class CreateFlowParameterNotificationCommand : INotification
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
+    public int FlowType { get; set; }
 }

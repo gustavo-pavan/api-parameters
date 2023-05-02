@@ -33,7 +33,7 @@ public class
 
             _logger.LogInformation("Send new notification to update flow parameter");
             flowParameter?.AddDomainEvent(new UpdateFlowParameterNotificationCommand
-                { Id = flowParameter.Id, Name = flowParameter.Name });
+                { Id = flowParameter.Id, Name = flowParameter.Name , FlowType = flowParameter.FlowType.Id });
 
             _logger.LogInformation("Update flow with success");
             return new(flowParameter);

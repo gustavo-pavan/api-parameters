@@ -22,7 +22,7 @@ public static class InitializeMigration
                     .SqlQueryRaw<int>(@$"
                         SELECT COUNT(T.schema_id) as [VALUE] FROM sys.tables AS T
                          INNER JOIN sys.schemas AS S ON T.schema_id = S.schema_id
-                         WHERE T.Name = '{nameof(IntegrationEventContext)}'").FirstOrDefault();
+                         WHERE T.Name = 'IntegrationEventLog'").FirstOrDefault();
 
                 if (result == default(int))
                 {

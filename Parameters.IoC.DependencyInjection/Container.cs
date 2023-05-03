@@ -49,5 +49,6 @@ public static class Container
         services.AddDbContext<IntegrationEventContext>();
         services.AddTransient(typeof(IParameterIntegrationEventService), typeof(ParameterIntegrationEventService));
         services.AddTransient(typeof(IIntegrationEventService), typeof(IntegrationEventService));
+        services.InitializeDatabase();
     }
 }

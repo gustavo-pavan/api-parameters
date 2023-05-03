@@ -31,7 +31,12 @@ public class
             await _updateBankAccountRepository.Execute(account);
 
             _logger.LogInformation("Send new notification to update account");
-            account.AddDomainEvent(new UpdateBankAccountNotificationCommand { Id = account.Id, Name = account.Name });
+            account.AddDomainEvent(new UpdateBankAccountNotificationCommand
+            {
+                Id = account.Id,
+                Name = account.Name,
+                Balance = account.Balance
+            });
 
             _logger.LogInformation("Update account with success");
             return new(account);

@@ -31,7 +31,8 @@ public class UpdateBankAccountNotificationHandler : INotificationHandler<UpdateB
         await @event.Handler(new UpdateBankAccountIntegrationCommand
         {
             Id = notification.Id,
-            Name = notification.Name
+            Name = notification.Name,
+            Balance = notification.Balance,
         });
 
         _logger.LogInformation("Finish notification update bank account in integration event");

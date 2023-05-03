@@ -29,7 +29,12 @@ public class CreateBankAccountRequestHandler : IRequestHandler<CreateBankAccount
             await _createBankAccountRepository.Execute(account);
 
             _logger.LogInformation("Send new notification to create account");
-            account.AddDomainEvent(new CreateBankAccountNotificationCommand { Id = account.Id, Name = account.Name });
+            account.AddDomainEvent(new CreateBankAccountNotificationCommand
+            {
+                Id = account.Id,
+                Name = account.Name,
+                Balance = account.Balance
+            });
 
             _logger.LogInformation("Create account with success");
             return new BankAccountDto(account);

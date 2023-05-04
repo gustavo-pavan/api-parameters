@@ -56,7 +56,6 @@ jobs:
         with:
           # token: ${{ secrets.PAT }}
           commit-message: Update report
-          committer: Update report
           signoff: false
           branch: example-patches
           delete-branch: true

@@ -43,6 +43,7 @@ jobs:
   #     run: dotnet test --no-build --verbosity normal ./Parameters.sln
       
   pull-request:
+    runs-on: ubuntu-latest
     name: Create pull request
     uses: peter-evans/create-pull-request@v4
     with:

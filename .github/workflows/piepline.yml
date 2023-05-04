@@ -44,11 +44,12 @@ jobs:
       
   pull-request:
     runs-on: ubuntu-latest
-    name: Create pull request
-    uses: peter-evans/create-pull-request@v4
-    with:
-      commit-message: '.NET code metrics, automated pull request.'
-      branch: dev
+    steps:
+     - name: Create pull request
+     - uses: peter-evans/create-pull-request@v4
+       with:
+        commit-message: '.NET code metrics, automated pull request.'
+        branch: dev
     # needs: [tests, build]
     # runs-on: ubuntu-latest
     # steps:

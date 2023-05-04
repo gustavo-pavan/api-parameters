@@ -57,7 +57,7 @@ jobs:
           # token: ${{ secrets.PAT }}
           commit-message: Update report
           committer: Update report
-          author: gustavo
+          author: gustavopavang@gmail.com
           signoff: false
           branch: example-patches
           delete-branch: true

@@ -69,8 +69,3 @@ jobs:
             automated pr
           assignees: gustavo
           reviewers: gustavo
-          team-reviewers: |
-            developers
-            qa-team
-          milestone: 1
-          draft: false

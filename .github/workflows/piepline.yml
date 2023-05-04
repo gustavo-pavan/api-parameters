@@ -67,5 +67,3 @@ jobs:
           labels: |
             report
             automated pr
-          assignees: gustavo
-          reviewers: gustavo

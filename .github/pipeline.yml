@@ -69,7 +69,7 @@ jobs:
           commit-message: Create pull request ${{ steps.branch-name.outputs.current_branch }} into dev
           signoff: false
           branch: ${{steps.branch-name.outputs.current_branch}}
-          base: main
+          base: homolog
           title: Create pull request ${{ steps.branch-name.outputs.current_branch }}
           body: |
             Create pull request
